@@ -1,0 +1,28 @@
+    <mvc:View
+        height="100%"
+        controllerName="hs.fulda.customer.management.controller.App"
+        xmlns="sap.m"
+        xmlns:l="sap.ui.layout"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:core="sap.ui.core">
+        <Page title="Customer Management"
+              class="sapUiContentPadding" >
+            <headerContent>
+                <Button icon="sap-icon://add" press="onAddCampaign" />
+            </headerContent>
+            <l:VerticalLayout width="100%" >
+                <l:content>
+                            <List id="campaignList" headerText="Campaigns" >
+                                  <!-- binding="{/ProductCollection}" -->
+                            </List>
+             </l:content>
+             </l:VerticalLayout>
+             <footer>
+                <Toolbar>
+                    <content>
+
+                    </content>
+                </Toolbar>
+             </footer>
+        </Page>
+    </mvc:View>
