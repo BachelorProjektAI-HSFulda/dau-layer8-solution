@@ -16,7 +16,6 @@ sap.ui.define([
         init: function(){
             this._oCampaignList = this.getView().byId("campaignList");
             this._oCampaignList.setNoDataText("Please create a campaign");
-
         },
 
         /*
