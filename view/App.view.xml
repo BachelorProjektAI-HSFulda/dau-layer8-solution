@@ -12,7 +12,7 @@
             </headerContent>
             <l:VerticalLayout width="100%" >
                 <l:content>
-                            <List id="campaignList" headerText="Campaigns" >
+                            <List id="campaignList" headerText="Campaign" >
                                   <!-- binding="{/ProductCollection}" -->
                             </List>
              </l:content>
