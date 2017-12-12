@@ -1,0 +1,169 @@
+    <mvc:View
+        height="100%"
+        controllerName="hs.fulda.customer.management.controller.Settings"
+        xmlns="sap.m"
+        xmlns:l="sap.ui.layout"
+	    xmlns:form="sap.ui.layout.form"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:core="sap.ui.core">
+        <NavContainer
+			id="navContainerSettings"
+			width="100%"
+			height="100%"
+			class="navContainerControl sapUiSmallMarginBottom">
+            <!--
+                Main Setting Page
+            -->
+            <Page id="pageSettings"
+                title="Settings"
+                class="sapUiContentPadding"
+                showNavButton="true"
+                navButtonPress="onPageBack" >
+                <headerContent>
+
+                </headerContent>
+            <!--(optional_top_nav)<subHeader>
+                    <Toolbar>
+                        <ToolbarSpacer/>
+                        <SegmentedButton selectedKey="General">
+                            <items>
+                                <SegmentedButtonItem text="General" key="field1" />
+                                <SegmentedButtonItem text="Network" key="field2" />
+                                <SegmentedButtonItem text="App" key="field3" />
+                            </items>
+                        </SegmentedButton>
+                        <ToolbarSpacer/>
+                    </Toolbar>
+		      </subHeader>-->
+                <l:VerticalLayout width="100%" >
+                    <l:content>
+                        <List>
+                            <StandardListItem
+                                title="General"
+                                description="General Settings"
+                                type="Navigation"
+                                press="onGeneralPressed"
+                                >
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="pageGeneralSettings" />
+                                </customData>
+                            </StandardListItem>
+                            <StandardListItem
+                                title="App"
+                                description="Beschreibender Text für Appeinstellungen"
+                                type="Navigation"
+                                press="onAppPressed"
+                                >
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="pageAppSettings" />
+                                </customData>
+                            </StandardListItem>
+                            <StandardListItem
+                                title="Network"
+                                description="Syncronisation, Proxy, Mobile Data, Accounts"
+                                type="Navigation"
+                                press="onNetworkPressed"
+                                >
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="pageNetworkSettings" />
+                                </customData>
+                            </StandardListItem>
+                        </List>
+                 </l:content>
+                 </l:VerticalLayout>
+            </Page>
+            <!--
+                General Setting Page
+            -->
+            <Page id="pageGeneralSettings"
+                title="General"
+                class="sapUiContentPadding">
+                <customHeader>
+                    <Bar>
+                    <contentLeft>
+                    <Button icon="sap-icon://nav-back" press="onPageBack">
+                        <customData>
+                            <core:CustomData
+                                key="target"
+                                value="pageSettings" />
+                        </customData>
+                    </Button>
+                    </contentLeft>
+                    </Bar>
+                </customHeader>
+                <content>
+                    <l:VerticalLayout width="100%" >
+                    <l:content>
+                        <!--
+                            GeneralsettingContent
+                        -->
+                    </l:content>
+                    </l:VerticalLayout>
+                </content>
+            </Page>
+            <!--
+                App Setting Page
+            -->
+            <Page id="pageAppSettings"
+                title="App"
+                class="sapUiContentPadding">
+                <customHeader>
+                    <Bar>
+                    <contentLeft>
+                    <Button icon="sap-icon://nav-back" press="onPageBack">
+                        <customData>
+                            <core:CustomData
+                                key="target"
+                                value="pageSettings" />
+                        </customData>
+                    </Button>
+                    </contentLeft>
+                    </Bar>
+                </customHeader>
+                <content>
+                    <l:VerticalLayout width="100%" >
+                    <l:content>
+                        <!--
+                            AppsettingContent
+                        -->
+                    </l:content>
+                    </l:VerticalLayout>
+                </content>
+            </Page>
+            <!--
+                Network Setting Page
+            -->
+            <Page id="pageNetworkSettings"
+                title="Centered Title"
+                class="sapUiContentPadding">
+                <customHeader>
+                    <Bar>
+                    <contentLeft>
+                    <Button icon="sap-icon://nav-back" press="onPageBack">
+                        <customData>
+                            <core:CustomData
+                                key="target"
+                                value="pageSettings" />
+                        </customData>
+                    </Button>
+                    </contentLeft>
+                    </Bar>
+                </customHeader>
+                <content>
+                   <l:VerticalLayout width="100%" >
+                    <l:content>
+                        <!--
+                            NetworksettingContent
+                        -->
+                    </l:content>
+                    </l:VerticalLayout>
+                </content>
+            </Page>
+        </NavContainer>
+    </mvc:View>
