@@ -2,10 +2,11 @@ sap.ui.define([
     "hs/fulda/customer/management/controller/BaseController",
     "jquery.sap.global",
     "sap/m/Button",
-	"sap/m/Dialog",
+    "sap/m/Dialog",
     "sap/m/Input",
-	"sap/m/Text",
-    "sap/ui/model/json/JSONModel"
+    "sap/m/Text",
+    "sap/ui/model/json/JSONModel",
+
 ], function (BaseController, JQuery, Button, Dialog, Input, Text, JSONModel) {
     "use strict";
 
@@ -22,6 +23,31 @@ sap.ui.define([
             oRouter.getRoute("Customer").attachPatternMatched(this._onObjectMatched, this);
 
             this._oItemTemplate = this.getView().byId("columnListItemCustomer").clone();
+        },
+
+        /**
+         * Adds a customer in the app
+         */
+        onAddCustomer: function (oEvent) {
+            if (!navCon) {
+                var navCon = this.getView().byId("navContainerCustomerList");
+            }
+            var target = oEvent.getSource().data("target");
+            if (target) {
+                var animation = "show";
+                navCon.to(this.getView().byId(target), animation);
+            } else {
+                navCon.back();
+            }
+        },
+
+        /**
+         * Adds a customer in the app
+         */
+        onRatingChanged: function (oEvent) {
+            var ratingbla = this.getView().byId("inputCustomerRating");
+            alert(ratingbla.getValue());
+            //ratingbla.setValue(3);
         },
 
         /**
@@ -162,9 +188,15 @@ sap.ui.define([
             } else {
                 var aCustomer = oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
             }
+
             aCustomer.push(oNewCustomerData);
+            var customerList = this.getView().byId("customerList");
+            //customerList.bindElement("/Campaigns/" + this.iCampaignId + "/Customer");
+            //customerList.addItem(oNewCustomerData);
+           
             console.log(oModel);
-            var bResponse = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
+            var bResponse = oModel.setProperty("/Campaigns/" + this.iCampaignId + "/Customer", aCustomer);
+            oModel.setProperty("/Customers", aCustomer);
             if(bResponse === true){
                 this.onCustomerCreateSuccess(sCustomerName);
             } else {

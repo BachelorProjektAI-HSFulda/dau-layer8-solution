@@ -22,8 +22,8 @@
                             <Title id="customerTitle" />
                         </contentMiddle>
                         <contentRight>
-                            <Button icon="sap-icon://camera" press="onTakePhoto" />
-                            <Button icon="sap-icon://add" press="onAddCustomerManual">
+                            <Button icon="sap-icon://camera" press="onTakePhoto"  />
+                            <Button icon="sap-icon://add" press="onAddCustomer">
                                 <customData>
                                     <core:CustomData
                                         key="target"
@@ -35,7 +35,7 @@
                 </customHeader>
                 <l:VerticalLayout width="100%" >
                     <l:content>
-                        <List id="customerList" headerText="Customer" >
+                        <List id="customerList" headerText="Customer" items="{/Customers}">
                                 <!-- items="{/Customer}" binding="{/ProductCollection}" -->
                             <items>
                                 <StandardListItem
@@ -72,6 +72,9 @@
                                    class="sapUiSmallMarginTop sapUiTinyMarginBottom"
                                    tooltip="{i18n>customerCompany}" />
 							<Input id="inputCustomerCompany" placeholder="Enter customer company" />
+                              <Label text="Rating" labelFor="inputCustomerRating"/>
+                              <RatingIndicator id="inputCustomerRating" change="onRatingChanged" maxValue="5" class="sapUiSmallMarginBottom" value="4" iconSize="32px" tooltip="" />
+                              
                         </form:SimpleForm>
                     </VBox>
                 </l:Grid>
