@@ -12,14 +12,13 @@
 			height="100%"
 			class="navContainerControl sapUiSmallMarginBottom">
             <Page id="pageShowCampaigns"
-                  title="Customer Management"
+                  title="{i18n>campaignHeaderTitle}"
                   class="sapUiContentPadding" >
                 <headerContent>
 
                     <Button
                         icon="sap-icon://settings"
                         press="handleSettingsPressed" />
-
                     <Button
                         icon="sap-icon://add"
                         press="onTest" />
@@ -27,10 +26,10 @@
                 </headerContent>
                 <l:VerticalLayout width="100%" >
                     <l:content>
-                        <List id="campaignList" headerText="Campaign" items="{/Campaigns}">
+                        <List id="campaignList" items="{/Campaigns}">
                             <headerToolbar>
                                 <Toolbar>
-                                    <Title text="Products" level="H2" />
+                                    <Title text="{i18n>campaignTitle}" level="H2" />
                                     <ToolbarSpacer />
                                     <Button icon="sap-icon://add" press="onAddCampaign" >
                                         <customData>
@@ -60,22 +59,38 @@
                  </footer>
             </Page>
             <Page id="pageAddCampaign"
-                  title="Create Campaign"
+                  title="{i18n>createCampaignPageTitle}"
                   class="sapUiContentPadding" >
                 <headerContent>
 
                 </headerContent>
                 <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
                     <VBox>
+                        <MessageStrip
+                            id="statusErrorCreateCampaign"
+				            text="{i18n>messageStripErrorMessage}"
+				            type="Error"
+				            showIcon="true"
+                            showCloseButton="true"
+				            class="sapUiMediumMarginBottom">
+			            </MessageStrip>
+                        <MessageStrip
+                            id="statusInformationCreateCampaign"
+				            text="{i18n>messageStripInformationValidData}"
+				            type="Warning"
+				            customIcon="sap-icon://message-information"
+                            showCloseButton="true"
+				            class="sapUiMediumMarginBottom">
+			            </MessageStrip>
                         <form:SimpleForm id="formCreateCampaign" title="Create Campaign">
                             <Label text="{i18n>campaignName}"
                                    class="sapUiSmallMarginTop sapUiTinyMarginBottom"
-                                   tooltip="Campaign Name" />
-							<Input id="inputCampaignName" placeholder="Enter campaign name" />
-						    <Label text="Campaign Description"
+                                   tooltip="{i18n>campaignName}" />
+							<Input id="inputCampaignName" placeholder="{i18n>createCampaignPlaceholderName}" />
+						    <Label text="{i18n>campaignDescription}"
                                    class="sapUiSmallMarginTop sapUiTinyMarginBottom"
-                                   tooltip="Campaign Description" />
-							<Input id="inputCampaignDesc" placeholder="Enter campaign description" />
+                                   tooltip="{i18n>campaignDescription}" />
+							<Input id="inputCampaignDesc" placeholder="{i18n>createCampaignPlaceholderDescr}" />
                         </form:SimpleForm>
                     </VBox>
                 </l:Grid>
@@ -84,7 +99,7 @@
                         <content>
                             <ToolbarSpacer/>
                             <Button type="Accept"
-                                    text="Save"
+                                    text="{i18n>campaignBtnSave}"
                                     icon="sap-icon://save"
                                     press="onSaveCampaign">
                                 <customData>
@@ -94,7 +109,7 @@
                                 </customData>
                             </Button>
                             <Button type="Reject"
-                                    text="Cancel"
+                                    text="{i18n>campaignBtnCancel}"
                                     icon="sap-icon://cancel"
                                     press="onAddCampaign">
                                 <customData>

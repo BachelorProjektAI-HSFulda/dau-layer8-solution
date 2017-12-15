@@ -47,7 +47,7 @@ sap.ui.define([
             fileEntry.createWriter(fnSuccess, fnError);
         };
 
-        DataManager.writeFile = function(fileEntry, dataObj) {
+        DataManager.writeFile = function(fileEntry, dataObj, fnSuccess, fnError) {
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function (fileWriter) {
 
@@ -99,9 +99,6 @@ sap.ui.define([
                 var reader = new FileReader();
 
                 reader.onloadend = function() {
-//                    console.log("Successful file read: " + this.result);
-//                    console.log("full Path: "+ fileEntry.fullPath +": "+ this.result);
-//                    //displayFileData(fileEntry.fullPath + ": " + this.result);
                     fnSuccess(fileEntry.fullPath, this.result);
                 };
                 reader.readAsText(file);
