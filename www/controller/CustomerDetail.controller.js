@@ -29,11 +29,6 @@ sap.ui.define([
         _onObjectMatched: function(oEvent){
             //this.iCampaignId = oEvent.getParameter("arguments").CampaignId-1;
             this.itemBindingPath = "/Campaigns/"+this.iCampaignId+"/Customer";
-
-            this.getView().byId("customerList").bindAggregation("items", {
-                path: this.itemBindingPath,
-                template: this._oItemTemplate
-            });
         }
 	});
 });

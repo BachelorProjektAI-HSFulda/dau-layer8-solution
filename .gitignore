@@ -6,8 +6,8 @@
 .vs
 *.user
 bin
-/platforms/*
+/platforms/
 package.json
-/ios/*
+/ios/
 ios
 platforms

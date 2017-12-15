@@ -66,15 +66,31 @@
                 </headerContent>
                 <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
                     <VBox>
+                        <MessageStrip
+                            id="statusErrorCreateCampaign"
+				            text="{i18n>messageStripErrorMessage}"
+				            type="Error"
+				            showIcon="true"
+                            showCloseButton="true"
+				            class="sapUiMediumMarginBottom">
+			            </MessageStrip>
+                        <MessageStrip
+                            id="statusInformationCreateCampaign"
+				            text="{i18n>messageStripInformationValidData}"
+				            type="Warning"
+				            customIcon="sap-icon://message-information"
+                            showCloseButton="true"
+				            class="sapUiMediumMarginBottom">
+			            </MessageStrip>
                         <form:SimpleForm id="formCreateCampaign" title="Create Campaign">
                             <Label text="{i18n>campaignName}"
                                    class="sapUiSmallMarginTop sapUiTinyMarginBottom"
                                    tooltip="{i18n>campaignName}" />
-							<Input id="inputCampaignName" placeholder="Enter campaign name" />
+							<Input id="inputCampaignName" placeholder="{i18n>createCampaignPlaceholderName}" />
 						    <Label text="{i18n>campaignDescription}"
                                    class="sapUiSmallMarginTop sapUiTinyMarginBottom"
                                    tooltip="{i18n>campaignDescription}" />
-							<Input id="inputCampaignDesc" placeholder="Enter campaign description" />
+							<Input id="inputCampaignDesc" placeholder="{i18n>createCampaignPlaceholderDescr}" />
                         </form:SimpleForm>
                     </VBox>
                 </l:Grid>

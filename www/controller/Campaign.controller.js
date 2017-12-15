@@ -34,6 +34,9 @@ sap.ui.define([
          * Adds a campaign in the app
          */
         onAddCampaign: function(oEvent){
+            this.getView().byId("statusErrorCreateCampaign").setVisible(false);
+            this.getView().byId("statusInformationCreateCampaign").setVisible(false);
+
             if(!navCon){
                 var navCon = this.getView().byId("navContainerCampaignList");
             }
@@ -51,7 +54,6 @@ sap.ui.define([
 			var oRouter = this.getRouter();
             var sPath = oItem.getBindingContext().getPath();
             var object = oItem.getModel().getProperty(sPath);
-            console.log(object.CampaignId);
 
 			oRouter.navTo("Customer", {
 				CampaignId: object.CampaignId
@@ -59,14 +61,14 @@ sap.ui.define([
         },
 
         onSaveCampaign: function(oEvent){
-            var iCampaignCount = this.getView().byId("campaignList").getBinding("items").getLength()+1;
+            var iCampaignId = this.getView().byId("campaignList").getBinding("items").getLength()+1;
 
             if(!oModel){
                 var oModel = this.getView().getModel();
             }
 
             var oNewCampaignData = {
-                    "CampaignId" : iCampaignCount,
+                    "CampaignId" : iCampaignId,
                     "CampaignName" : "",
                     "Description" : ""
             };
@@ -81,43 +83,35 @@ sap.ui.define([
             }
             var sCampaignDesc = oInputCampaignDesc.getValue();
 
-            // Check if the entries are valid
-            if(sCampaignName === null ||
-               sCampaignName === undefined ||
-               sCampaignName === ""){
-                this.getView().byId("inputCampaignName").setValueState(sap.ui.core.ValueState.Error);
-				this.getView().byId("inputCampaignName").setValueStateText(this.getResourceBundle().getText("campaignNameNotValid"));
+            if(sCampaignName === null || sCampaignName === undefined || sCampaignName === ""  ||
+                sCampaignDesc === null || sCampaignDesc === undefined || sCampaignDesc === ""){
+                this.getView().byId("statusInformationCreateCampaign").setVisible(true);
             } else {
-                this.getView().byId("inputCampaignName").setValueState(sap.ui.core.ValueState.None);
+                // Set data
                 oNewCampaignData.CampaignName = sCampaignName;
-            }
-            // Check if the entries are valid
-            if(sCampaignDesc === null ||
-               sCampaignDesc === undefined ||
-               sCampaignDesc === ""){
-                this.getView().byId("inputCampaignDesc").setValueState(sap.ui.core.ValueState.Error);
-				this.getView().byId("inputCampaignDesc").setValueStateText(this.getResourceBundle().getText("campaignDescNotValid"));
-            } else {
-                this.getView().byId("inputCampaignDesc").setValueState(sap.ui.core.ValueState.None);
                 oNewCampaignData.Description = sCampaignDesc;
-            }
 
-            if(!oModel.getProperty("/Campaigns")){
-                var bValueSet = oModel.setProperty("/Campaigns");
-                if(bValueSet === true){
-                    var aCampaigns = [];
+                if(!oModel.getProperty("/Campaigns")){
+                    console.log("else -- set Prop");
+                    var bValueSet = oModel.setProperty("/Campaigns");
+
+                    if(bValueSet === true){
+                        var aCampaigns = [];
+                    }
+                } else {
+                    console.log("else -- get Prop");
+                    var aCampaigns = oModel.getProperty("/Campaigns");
                 }
-            } else {
-                var aCampaigns = oModel.getProperty("/Campaigns");
-            }
-
-            aCampaigns.push(oNewCampaignData);
-
-            var bResponse = oModel.setProperty("/Campaigns", aCampaigns);
-            if(bResponse === true){
-                this.onCampaignCreateSuccess(sCampaignName);
-            } else {
-                console.log("error");
+                // Push data to array
+                aCampaigns.push(oNewCampaignData);
+                // Check status
+                var bResponse = oModel.setProperty("/Campaigns", aCampaigns);
+                // Error handling
+                if(bResponse === true){
+                    this.onCampaignCreateSuccess(sCampaignName);
+                } else {
+                    this.getView().byId("statusErrorCreateCampaign").setVisible(true);
+                }
             }
         },
 
