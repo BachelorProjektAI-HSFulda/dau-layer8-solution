@@ -6,6 +6,7 @@
 .vs
 *.user
 bin
+platforms
 /platforms/**
 /platforms/ios/**
 /platforms/ios/www**
