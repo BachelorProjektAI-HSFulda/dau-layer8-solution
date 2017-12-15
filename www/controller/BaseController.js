@@ -152,7 +152,6 @@ sap.ui.define([
             console.log(oEvent);
         },
 
-        on
 
         /**
 		 *
