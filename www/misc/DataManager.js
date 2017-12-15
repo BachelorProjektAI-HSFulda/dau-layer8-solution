@@ -47,7 +47,7 @@ sap.ui.define([
             fileEntry.createWriter(fnSuccess, fnError);
         };
 
-        DataManager.writeFile = function(fileEntry, dataObj) {
+        DataManager.writeFile = function(fileEntry, dataObj, fnSuccess, fnError) {
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function (fileWriter) {
 
@@ -82,21 +82,27 @@ sap.ui.define([
             });
         };
 
-        DataManager.readFile = function(fileEntry) {
+        DataManager.readFile = function(fileEntry, fnSuccess, fnError) {
 
-            var fnOnErrorReadFile = function(){
-                console.log("Error read file");
-            };
+//            var fnOnErrorReadFile = function(){
+//                console.log("Error read file");
+//            };
+
+//            fileEntry.file(function (file) {
+//                var reader = new FileReader();
+//
+//                reader.onloadend = fnSuccess;
+//                reader.readAsText(file);
+//            }, fnError);
 
             fileEntry.file(function (file) {
                 var reader = new FileReader();
 
                 reader.onloadend = function() {
-                    console.log("Successful file read: " + this.result);
-                    displayFileData(fileEntry.fullPath + ": " + this.result);
+                    fnSuccess(fileEntry.fullPath, this.result);
                 };
                 reader.readAsText(file);
-            }, fnOnErrorReadFile);
+            }, fnError);
         };
 
         return DataManager;

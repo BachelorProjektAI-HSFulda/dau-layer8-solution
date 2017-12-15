@@ -69,10 +69,12 @@ sap.ui.define([
             var sCreateFile = this.getFileCreate();
 
             if(sCreateFile === "true"){
-                this.dataManager.getFileWriter(fileEntry, $.proxy(this.onGetFileWriterSuccess, this), $.proxy(this.onGetFileWriterError, this));
+                console.log("get File Success -- Create File");
+                this.dataManager.getFileWriter(fileEntry, $.proxy(this.onGetFileWriterSuccess, this), $.proxy(this.onGetFileWriterError, this), data);
             } else {
+                console.log("get File Success -- Read File");
                 // Read File
-                this.dataManager.createPersistentFile(fileEntry, $.proxy(this.onCreateFileSuccess, this), $.proxy(this.onCreateFileError, this), data);
+                this.dataManager.readFile(fileEntry, $.proxy(this.onReadFileSuccess, this), $.proxy(this.onReadFileError, this));
             }
 
         },
@@ -81,8 +83,8 @@ sap.ui.define([
 		 *
 		 */
         getFileError: function(oEvent){
-
             if(oEvent.code === 1){
+                console.log("get File Error -- request New File");
                 this.requestNewFileSystem();
             } else if(oEvent.code === 4){
                 MessageToast.show("File not readable");
@@ -131,6 +133,26 @@ sap.ui.define([
             console.log("onCreateFileError");
             console.log(oEvent);
         },
+
+        /**
+		 *
+		 */
+        onReadFileSuccess: function(sFullPath, sResult) {
+            console.log("onReadFileSuccess");
+            console.log(sResult);
+            console.log(sFullPath);
+
+        },
+
+        /**
+		 *
+		 */
+        onReadFileError: function(oEvent){
+            console.log("onReadFileError");
+            console.log(oEvent);
+        },
+
+        on
 
         /**
 		 *

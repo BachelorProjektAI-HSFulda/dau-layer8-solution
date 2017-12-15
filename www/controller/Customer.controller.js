@@ -96,8 +96,45 @@ sap.ui.define([
 
         },
 
-        onTakePhoto: function(){
-            MessageToast.show("onTakePhoto");
+        onCapturePhoto: function(oEvent){
+            if(!navCon){
+                var navCon = this.getView().byId("navContainerCustomerList");
+            }
+            var target = oEvent.getSource().data("target");
+
+            if(!oPage){
+                var oPage = this.getView().byId(target);
+            }
+
+            // Photo Area
+            var myPhotoArea = '<div heigth="100%" width="100%" id="videoArea"></div>';
+            var myhtml = new sap.ui.core.HTML();
+            myhtml.setContent(myPhotoArea);
+            oPage.addContent(myhtml);
+
+			if (target) {
+				var animation = "show";
+				navCon.to(this.getView().byId(target), animation);
+			} else {
+				navCon.back();
+			}
+
+            //navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1});
+            var oCamera = navigator.camera;
+            oCamera.getPicture(this.onCaptureSuccess, this.onCaptureError, { quality: 10, destinationType: oCamera.DestinationType.DATA_URL });
+        },
+
+        onCaptureSuccess: function(){
+            var i, path, len;
+            for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                path = mediaFiles[i].fullPath;
+                console.log(path);
+                // do something interesting with the file
+            }
+        },
+
+        onCaptureError: function(e){
+            console.log("capture error: "+JSON.stringify(e));
         },
 
         /**

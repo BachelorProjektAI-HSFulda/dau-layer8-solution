@@ -82,21 +82,30 @@ sap.ui.define([
             });
         };
 
-        DataManager.readFile = function(fileEntry) {
+        DataManager.readFile = function(fileEntry, fnSuccess, fnError) {
 
-            var fnOnErrorReadFile = function(){
-                console.log("Error read file");
-            };
+//            var fnOnErrorReadFile = function(){
+//                console.log("Error read file");
+//            };
+
+//            fileEntry.file(function (file) {
+//                var reader = new FileReader();
+//
+//                reader.onloadend = fnSuccess;
+//                reader.readAsText(file);
+//            }, fnError);
 
             fileEntry.file(function (file) {
                 var reader = new FileReader();
 
                 reader.onloadend = function() {
-                    console.log("Successful file read: " + this.result);
-                    displayFileData(fileEntry.fullPath + ": " + this.result);
+//                    console.log("Successful file read: " + this.result);
+//                    console.log("full Path: "+ fileEntry.fullPath +": "+ this.result);
+//                    //displayFileData(fileEntry.fullPath + ": " + this.result);
+                    fnSuccess(fileEntry.fullPath, this.result);
                 };
                 reader.readAsText(file);
-            }, fnOnErrorReadFile);
+            }, fnError);
         };
 
         return DataManager;

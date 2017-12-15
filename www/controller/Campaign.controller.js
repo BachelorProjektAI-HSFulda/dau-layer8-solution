@@ -17,6 +17,12 @@ sap.ui.define([
         onInit: function(){
             // Set style class cozy
             this.getView().addStyleClass("cozy");
+            document.addEventListener("pause", this.saveData, false);
+        },
+
+        saveData: function(){
+            console.log(this);
+            console.log(this.getView());
         },
 
         onTest: function(){

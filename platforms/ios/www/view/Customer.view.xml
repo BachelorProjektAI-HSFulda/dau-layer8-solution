@@ -22,7 +22,13 @@
                             <Title id="customerTitle" />
                         </contentMiddle>
                         <contentRight>
-                            <Button icon="sap-icon://camera" press="onTakePhoto" />
+                            <Button icon="sap-icon://camera" press="onCapturePhoto">
+                                <customData>
+                                    <core:CustomData
+                                         key="target"
+                                         value="pageCapturePhoto" />
+                                </customData>
+                            </Button>
                             <Button icon="sap-icon://add" press="onAddCustomerManual">
                                 <customData>
                                     <core:CustomData
@@ -99,6 +105,24 @@
                                          value="pageShowCustomer" />
                                 </customData>
                             </Button>
+                        </content>
+                    </Toolbar>
+                 </footer>
+            </Page>
+            <Page id="pageCapturePhoto"
+                  title="Capture Photo">
+                <l:VerticalLayout width="100%" >
+                    <l:content>
+<!--
+                        <core:HTML heigth="100%" content="&lt;div&gt;&lt;/div&gt;">
+                        </core:HTML>
+-->
+                    </l:content>
+                </l:VerticalLayout>
+                    <footer>
+                    <Toolbar>
+                        <content>
+                            <Button text="take Photo"/>
                         </content>
                     </Toolbar>
                  </footer>
