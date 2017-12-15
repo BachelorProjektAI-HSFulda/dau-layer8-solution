@@ -3,32 +3,61 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"hs/fulda/customer/management/misc/DataManager",
 	"sap/ui/model/json/JSONModel",
-	'sap/m/MessageBox',
-    'sap/m/MessageToast'
+	"sap/m/MessageBox",
+    "sap/m/MessageToast"
 ], function(Controller, History, DataManager, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 	return Controller.extend("hs.fulda.customer.management.controller.BaseController", {
         dataManager: DataManager,
-
+        /**
+         * Is called after the event "onDeviceReady" is called from cordova
+         * Only in this case the cordova container is ready
+         */
         requestFile: function(){
-            MessageToast.show("on Device Ready - Base Controller");
-            //this.requestFileSystem();
+            //MessageToast.show("on Device Ready - Base Controller");
+            this.requestFileSystem();
         },
-
+        /**
+		 * Request File System to read/create a file
+         * @public
+		 */
         requestFileSystem: function(){
             console.log("requestFileSystem");
             this.setFileCreate("false");
             this.dataManager.requestFileSystem($.proxy(this.onRequestFileSystemSuccess, this), $.proxy(this.onRequestFileSystemError, this));
         },
 
-        requestNewFileSystem: function(){
+         requestNewFileSystem: function(){
             console.log("requestNewFileSystem");
             this.setFileCreate("true");
             this.dataManager.requestFileSystem($.proxy(this.onRequestNewFileSystemSuccess, this), $.proxy(this.onRequestFileSystemError, this));
         },
 
         /**
-		 *
+		 * Success handler for method: requestileSystem
+         * @public
+		 */
+        onRequestFileSystemSuccess: function(fileSystem){
+            console.log("onRequestFileSystemSuccess:");
+            var mParameters = {
+                create: false,
+                exclusive: false
+            };
+            // Read File from File System
+            this.dataManager.getFile(fileSystem, $.proxy(this.getFileSuccess, this), $.proxy(this.getFileError, this), mParameters);
+        },
+
+        /**
+		 * Error handler for method: requestFileSystem
+         * @public
+		 */
+        onRequestFileSystemError: function(oEvent){
+            MessageToast.show("onRequestFileSystemError");
+            console.log(oEvent);
+        },
+        /**
+		 * Success Handler for method: requestNewFileSystem
+         * @public
 		 */
         onRequestNewFileSystemSuccess: function(fileSystem){
             console.log("onRequestNewFileSystemSuccess:");
@@ -39,52 +68,29 @@ sap.ui.define([
             };
             this.dataManager.getFile(fileSystem, $.proxy(this.getFileSuccess, this), $.proxy(this.getFileError, this), mParameters);
         },
-
-        /**
-		 *
-		 */
-        onRequestFileSystemSuccess: function(fileSystem){
-            console.log("onRequestFileSystemSuccess:");
-
-            var mParameters = {
-                create: false,
-                exclusive: false
-            };
-
-            this.dataManager.getFile(fileSystem, $.proxy(this.getFileSuccess, this), $.proxy(this.getFileError, this), mParameters);
-        },
-
-        /**
-		 *
-		 */
-        onRequestFileSystemError: function(oEvent){
-            MessageToast.show("onRequestFileSystemError");
-            console.log(oEvent);
-        },
-
-        /**
-		 *
+       /**
+		 * Success handler for read file success
+         * @public
 		 */
         getFileSuccess: function(fileEntry){
             var sCreateFile = this.getFileCreate();
 
             if(sCreateFile === "true"){
-                console.log("get File Success -- Create File");
-                this.dataManager.getFileWriter(fileEntry, $.proxy(this.onGetFileWriterSuccess, this), $.proxy(this.onGetFileWriterError, this), data);
+                // Create and write new File
+                this.dataManager.writeFile(fileEntry, $.proxy(this.onCreateFileSuccess, this), $.proxy(this.onCreateFileError, this), $.proxy(this.onReadFileError, this));
             } else {
-                console.log("get File Success -- Read File");
                 // Read File
                 this.dataManager.readFile(fileEntry, $.proxy(this.onReadFileSuccess, this), $.proxy(this.onReadFileError, this));
             }
-
         },
-
         /**
-		 *
+		 * Error handler that handles file errors
+         * In case of event 1 the file was not found
+         * on the file system and it is called a method to create a new one
+         * @public
 		 */
         getFileError: function(oEvent){
             if(oEvent.code === 1){
-                console.log("get File Error -- request New File");
                 this.requestNewFileSystem();
             } else if(oEvent.code === 4){
                 MessageToast.show("File not readable");
@@ -95,70 +101,54 @@ sap.ui.define([
             }
         },
 
-        onGetFileWriterSuccess: function(fileWriter){
-            console.log("onGetFileWriterSuccess");
-            console.log(fileWriter);
-
-            var data = "{}";
-
-            // File writer success function
-            fileWriter.onwriteend = function() {
-                console.log("Successful file write...");
-            };
-
-            // File Writer error function
-            fileWriter.onerror = function (e) {
-                console.log("Failed file write: " + e.toString());
-            };
-
-            fileWriter.write(data);
-
-        },
-
-        onGetFileWriterError: function(){
-            console.log("onCreateFileWriterError");
+        /**
+		 *
+		 */
+        onCreateFileSuccess: function(sFullPath, sResult) {
+            console.log("onCreateFileSuccess");
+            console.log(sResult);
+            console.log(sFullPath);
+            this._setModel(sResult);
         },
 
         /**
 		 *
 		 */
-        onCreateFileSuccess: function(fileEntry) {
-            console.log("fileEntry is file?" + fileEntry.isFile.toString());
-        },
-
-        /**
-		 *
-		 */
-        onCreateFileError: function(oEvent){
+        onCreateFileError: function(){
             console.log("onCreateFileError");
-            console.log(oEvent);
         },
 
         /**
-		 *
+		 * Success handler for read file success
+         * @public
 		 */
         onReadFileSuccess: function(sFullPath, sResult) {
             console.log("onReadFileSuccess");
             console.log(sResult);
             console.log(sFullPath);
-
+            this._setModel(sResult);
         },
 
         /**
-		 *
+		 * Error handler for read file success
+         * @public
 		 */
-        onReadFileError: function(oEvent){
+        onReadFileError: function(){
             console.log("onReadFileError");
-            console.log(oEvent);
         },
-
-
         /**
-		 *
-		 */
-        onResolveSuccess: function(fileEntry) {
-            console.log(fileEntry);
-            console.log(fileEntry.name);
+         * Method to parse the retrieved json data and
+         * publishes the event to bind the data
+         * @private
+         */
+        _setModel: function(oData){
+            // Parse retrieved JSON
+            var json = JSON.parse(oData);
+            // Publish event and pass json data to the views to set the model on the component
+            // Do not set the model here to the component, it is to early so that the data
+            // gets displayed on the view
+            var oEventBus = sap.ui.getCore().getEventBus();
+            oEventBus.publish("DataSetToModel", "DataReceived", json);
         },
 
         /**

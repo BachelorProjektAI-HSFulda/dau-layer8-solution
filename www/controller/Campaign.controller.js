@@ -3,10 +3,8 @@ sap.ui.define([
     "jquery.sap.global",
     "sap/m/Button",
 	"sap/m/Dialog",
-	"sap/m/Text",
-    "sap/m/MessageToast",
-    "sap/m/MessageBox"
-], function (BaseController, JQuery, Button, Dialog, Text) {
+    "sap/ui/model/json/JSONModel",
+], function (BaseController, JQuery, Button, Dialog, JSONModel) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.Campaign", {
@@ -18,6 +16,9 @@ sap.ui.define([
             // Set style class cozy
             this.getView().addStyleClass("cozy");
             document.addEventListener("pause", this.saveData, false);
+
+            var oEventBus = sap.ui.getCore().getEventBus();
+            oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
         },
 
         saveData: function(){
@@ -132,6 +133,17 @@ sap.ui.define([
             navCon.to(this.getView().byId("pageShowCampaigns"), animation);
             this.getView().byId("inputCampaignName").setValue("");
             this.getView().byId("inputCampaignDesc").setValue("");
+        },
+
+        _refresh: function(ChannelId, EventId, json){
+            console.log(json);
+            var oModel = new JSONModel();
+            // Set data to the model
+            oModel.setData(json);
+            // Assign the model object to the SAPUI5 core
+			this.getOwnerComponent().setModel(oModel);
+            // Set Binding mode
+            this.getOwnerComponent().getModel().setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
         }
 	});
 });

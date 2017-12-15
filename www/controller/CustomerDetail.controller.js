@@ -20,6 +20,7 @@ sap.ui.define([
             oRouter.getRoute("CustomerDetail").attachPatternMatched(this._onObjectMatched, this);
 
             this._oItemTemplate = this.getView().byId("columnListItemCustomer").clone();
+
         },
 
         /**
