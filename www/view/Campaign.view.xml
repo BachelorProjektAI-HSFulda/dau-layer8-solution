@@ -13,6 +13,8 @@
 			class="navContainerControl sapUiSmallMarginBottom">
             <Page id="pageShowCampaigns"
                   title="{i18n>campaignHeaderTitle}"
+                  showNavButton="true"
+                  navButtonPress="onNavBack"
                   class="sapUiContentPadding" >
                 <headerContent>
 

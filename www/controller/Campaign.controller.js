@@ -4,7 +4,8 @@ sap.ui.define([
     "sap/m/Button",
 	"sap/m/Dialog",
     "sap/ui/model/json/JSONModel",
-], function (BaseController, JQuery, Button, Dialog, JSONModel) {
+    "sap/ui/core/routing/History",
+], function (BaseController, JQuery, Button, Dialog, JSONModel, History) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.Campaign", {
@@ -134,7 +135,6 @@ sap.ui.define([
         },
 
         _refresh: function(sChannelId, sEventId, json){
-            console.log(json);
             var oModel = new JSONModel();
             // Set data to the model
             oModel.setData(json);

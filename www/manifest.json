@@ -57,8 +57,13 @@
 		"controlAggregation": "pages"
 	  },
 	  "routes": [
-		{
+        	{
 		  "pattern": "",
+		  "name": "Login",
+		  "target": "Login"
+		},
+		{
+		  "pattern": "Campaign",
 		  "name": "Campaign",
 		  "target": "Campaign"
 		},
@@ -80,6 +85,9 @@
 
 	  ],
 	  "targets": {
+         "Login": {
+		  "viewName": "Login"
+		},
 		"Campaign": {
 		  "viewName": "Campaign"
 		},
