@@ -15,15 +15,9 @@ sap.ui.define([
         onInit: function(){
             // Set style class cozy
             this.getView().addStyleClass("cozy");
-            document.addEventListener("pause", this.saveData, false);
-
+            // Subscribe to event bus
             var oEventBus = sap.ui.getCore().getEventBus();
             oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
-        },
-
-        saveData: function(){
-            console.log(this);
-            console.log(this.getView());
         },
 
         onTest: function(){
@@ -93,14 +87,12 @@ sap.ui.define([
                 oNewCampaignData.Description = sCampaignDesc;
 
                 if(!oModel.getProperty("/Campaigns")){
-                    console.log("else -- set Prop");
                     var bValueSet = oModel.setProperty("/Campaigns");
 
                     if(bValueSet === true){
                         var aCampaigns = [];
                     }
                 } else {
-                    console.log("else -- get Prop");
                     var aCampaigns = oModel.getProperty("/Campaigns");
                 }
                 // Push data to array
@@ -125,17 +117,17 @@ sap.ui.define([
 
         onCampaignCreateSuccess: function(sCampaignName){
             var navCon = this.getView().byId("navContainerCampaignList");
-//            var sText = this.getResourceBundle().getText("campaignCreateSuccess");
-//            var msg = sText.replace("&", sCampaignName);
-//			MessageToast.show(msg);
-
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
+            // Nav back to list page
             var animation = "show";
             navCon.to(this.getView().byId("pageShowCampaigns"), animation);
             this.getView().byId("inputCampaignName").setValue("");
             this.getView().byId("inputCampaignDesc").setValue("");
         },
 
-        _refresh: function(ChannelId, EventId, json){
+        _refresh: function(sChannelId, sEventId, json){
             console.log(json);
             var oModel = new JSONModel();
             // Set data to the model

@@ -40,16 +40,20 @@ sap.ui.define([
             fileSystem.root.getFile("mce.txt", mParameters, fnSuccess, fnError);
         };
 
-        DataManager.createPersistentFile = function(fileEntry, fnSuccess, fnError, data){
-            //this.writeFile(fileEntry, data);
-        };
+//        DataManager.createPersistentFile = function(fileEntry, fnSuccess, fnError, data){
+//            //this.writeFile(fileEntry, data);
+//        };
 
         DataManager.writeFile = function(fileEntry, fnSuccess, fnError, fnErrorReadFile, dataObj) {
 
             fileEntry.createWriter(function (fileWriter) {
 
-                fileWriter.onwriteend = function() {
-                    this.readFile(fileEntry, fnSuccess, fnErrorReadFile);
+                fileWriter.onwriteend = function(fileEntry) {
+                    if(!dataObj){
+                        this.readFile(fileEntry, fnSuccess, fnErrorReadFile);
+                    } else {
+                        fnSuccess(fileEntry);
+                    }
                 };
 
                 fileWriter.onerror = function (e) {
@@ -58,10 +62,13 @@ sap.ui.define([
 
                 // If data object is not passed in
                 if (!dataObj) {
-                    var dataObj = '{ "Campaigns" : [{"CampaignId": "1","CampaignName": "CeBit 2017"}]}';
+                    dataObj = '{ "Campaigns" : [{"CampaignId": "1","CampaignName": "CeBit 2017"}]}';
                 }
+                console.log("Data Manager");
+                console.log(dataObj);
                 fileWriter.write(dataObj);
-            });        };
+            });
+        };
 
         DataManager.readFile = function(fileEntry, fnSuccess, fnError) {
 
@@ -76,7 +83,6 @@ sap.ui.define([
         };
 
         return DataManager;
-
 });
 
 
