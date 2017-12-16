@@ -3,22 +3,21 @@
     xmlns:l="sap.ui.layout"
     xmlns:core="sap.ui.core">
     <Dialog
-        cancel="onCloseDialog"
         title="Edit Campaign"
-        ok="onDialogOk">
+        class="sapUiContentPadding">
        <Panel width="auto" class="sapUiResponsiveMargin">
-            <headerToolbar>
-                <Toolbar height="3rem">
-                    <Title text="Panel with picture"/>
-                </Toolbar>
-            </headerToolbar>
             <content>
                 <Label text="Campaign Name" />
                 <Input value="{CampaignName}" />
                 <Label text="Description" />
                 <Input value="{Description}" />
-            </content>
+        </content>
+        <beginButton>
+            <Button type="Accept"
+                    text="Save"
+                    icon="sap-icon://save"
+                    press="onSaveCampaign" />
+        </beginButton>
         </Panel>
-
     </Dialog>
 </core:FragmentDefinition>
