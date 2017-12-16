@@ -12,9 +12,13 @@ platforms/*
 /platforms/ios/www/controller/Campaign.controller.js
 /platforms/ios/www/controller/BaseController.js
 <<<<<<< HEAD
+<<<<<<< HEAD
 .vs
 *.user
 bin
+=======
+/platforms/ios/www/Component.js
+>>>>>>> BusinessCardApp/master
 =======
 /platforms/ios/www/Component.js
 >>>>>>> BusinessCardApp/master
