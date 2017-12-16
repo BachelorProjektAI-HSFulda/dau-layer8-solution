@@ -84,6 +84,15 @@ sap.ui.define([
 			this.editDialog.open();
         },
 
+        onSaveCampaign: function(sCampaignName){
+            var navCon = this.getView().byId("navContainerCampaignList");
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
+            // Nav back to list page
+            this.editDialog.close();
+        },
+
          /**
          *
          */
