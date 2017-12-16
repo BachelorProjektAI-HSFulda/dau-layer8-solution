@@ -1,16 +1,14 @@
 <core:FragmentDefinition
     xmlns="sap.m"
-    xmlns:l="sap.ui.layout"
     xmlns:core="sap.ui.core">
     <Dialog
         title="Edit Campaign"
         class="sapUiContentPadding">
-       <Panel width="auto" class="sapUiResponsiveMargin">
-            <content>
-                <Label text="Campaign Name" />
-                <Input value="{CampaignName}" />
-                <Label text="Description" />
-                <Input value="{Description}" />
+        <content>
+            <Label text="Campaign Name" />
+            <Input value="{CampaignName}" />
+            <Label text="Description" />
+            <Input value="{Description}" />
         </content>
         <beginButton>
             <Button type="Accept"
@@ -18,6 +16,5 @@
                     icon="sap-icon://save"
                     press="onSaveCampaign" />
         </beginButton>
-        </Panel>
     </Dialog>
 </core:FragmentDefinition>
