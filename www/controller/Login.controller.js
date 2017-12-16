@@ -15,6 +15,9 @@ sap.ui.define([
             this.getView().addStyleClass("cozy");
             var oEventBus = sap.ui.getCore().getEventBus();
             oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
+            // Set Icons
+            this.getView().byId("flexBoxAppTitle").addStyleClass("flexBoxAppTitle");
+
         },
          /**
          *

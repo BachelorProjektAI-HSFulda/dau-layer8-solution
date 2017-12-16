@@ -8,20 +8,64 @@
     xmlns:core="sap.ui.core">
     <Page
         title="{i18n>loginPageTitle}"
-		class="sapUiContentPadding">
-        <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
+		class="marginBoxContent">
+        <content>
+            <FlexBox
+                alignItems="Start"
+                justifyContent="Center">
+                <items>
+                    <core:Icon
+                        src="sap-icon://customer-view"
+                        class="AppIcon"
+                        color="#031E48" >
+                    </core:Icon>
+                </items>
+            </FlexBox>
+             <FlexBox
+                id="flexBoxAppTitle"
+                alignItems="Start"
+                justifyContent="Center">
+                <items>
+                   <Label id="appTitleLbl"
+                          class="appTitle"
+                          width="100%"
+                          text="Customer Management" />
+                </items>
+            </FlexBox>
+            <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
                 <VBox>
-                    <Button text="Google" />
-                    <Button text="Facebook" />
+                <ObjectListItem
+                        class="googleLoginBtn"
+                        title="{i18n>googleLoginBtn}"
+                        icon="./images/google-icon.png"
+                        intro="Log-in with Google"/>
+                <ObjectListItem
+                        class="facebookLoginBtn"
+                        title="{i18n>facebookLoginBtn}"
+                        icon="./images/facebook-icon.png"
+                        intro="Log-in with Facebook"/>
+    <!--
+                <Button class="googleLoginBtn"
+                        id="googleLogin"
+                        width="60%"
+                        text="{i18n>googleLoginBtn}"
+                        icon="./images/google-icon.png" />
+                <Button class="facebookLoginBtn"
+                        id="facebookLogin"
+                        width="60%"
+                        text="{i18n>facebookLoginBtn}"
+                        icon="./images/facebook-icon.png" />
+    -->
                 </VBox>
             </l:Grid>
-            <footer>
-                <Toolbar>
-                    <ToolbarSpacer/>
-                    <Button text="Test Btn Campaign"
-                            icon="sap-icon://navigation-right-arrow"
-                            press="navToCampaignView" />
-                </Toolbar>
-            </footer>
+        </content>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="Test Btn Campaign"
+                        icon="sap-icon://navigation-right-arrow"
+                        press="navToCampaignView" />
+            </Toolbar>
+        </footer>
     </Page>
 </mvc:View>
