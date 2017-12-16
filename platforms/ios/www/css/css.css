@@ -11,7 +11,6 @@
     font-size: 120px;
 };
 
-.appTitle {
-    color: #4CAF50;
-    font-family: fantasy;
+.flexBoxAppTitle {
+    margin-bottom: 20px;
 }
