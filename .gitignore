@@ -3,9 +3,6 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 /node_modules/
-.vs
-*.user
-bin
 platforms
 /platforms/**
 /platforms/ios/**
@@ -13,3 +10,6 @@ platforms
 /platforms/ios/www/view/Campaign.view.xml
 /platforms/ios/www/controller/Campaign.controller.js
 /platforms/ios/www/controller/BaseController.js
+.vs
+*.user
+bin
