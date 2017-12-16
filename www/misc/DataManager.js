@@ -37,12 +37,8 @@ sap.ui.define([
 
         DataManager.getFile = function(fileSystem, fnSuccess, fnError, mParameters){
             // BusinessCardAppData6
-            fileSystem.root.getFile("mce.txt", mParameters, fnSuccess, fnError);
+            fileSystem.root.getFile("AppData.txt", mParameters, fnSuccess, fnError);
         };
-
-//        DataManager.createPersistentFile = function(fileEntry, fnSuccess, fnError, data){
-//            //this.writeFile(fileEntry, data);
-//        };
 
         DataManager.writeFile = function(fileEntry, fnSuccess, fnError, fnErrorReadFile, dataObj) {
 
@@ -62,10 +58,8 @@ sap.ui.define([
 
                 // If data object is not passed in
                 if (!dataObj) {
-                    dataObj = '{ "Campaigns" : [{"CampaignId": "1","CampaignName": "CeBit 2017"}]}';
+                    dataObj = '{}';
                 }
-                console.log("Data Manager");
-                console.log(dataObj);
                 fileWriter.write(dataObj);
             });
         };

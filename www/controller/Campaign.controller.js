@@ -56,7 +56,13 @@ sap.ui.define([
         },
 
         onSaveCampaign: function(oEvent){
-            var iCampaignId = this.getView().byId("campaignList").getBinding("items").getLength()+1;
+            var iCampaignId;
+
+            if(!this.getView().byId("campaignList").getBinding("items").getLength()){
+                iCampaignId = 1;
+            } else {
+                iCampaignId = this.getView().byId("campaignList").getBinding("items").getLength()+1;
+            }
 
             if(!oModel){
                 var oModel = this.getView().getModel();
