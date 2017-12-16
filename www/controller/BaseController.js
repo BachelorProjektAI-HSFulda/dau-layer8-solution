@@ -212,7 +212,15 @@ sap.ui.define([
 		 * @public
 		 */
         onNavBack: function(){
-            window.history.back();
+            var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+            console.log(oHistory);
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = this.getRouter();
+				oRouter.navTo("Login");
+			}
         },
         /**
          * Lifecycle method to free objects on close of the app

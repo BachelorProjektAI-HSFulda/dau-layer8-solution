@@ -1,0 +1,27 @@
+<mvc:View
+    height="100%"
+    controllerName="hs.fulda.customer.management.controller.Login"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+    <Page
+        title="{i18n>loginPageTitle}"
+		class="sapUiContentPadding">
+        <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
+                <VBox>
+                    <Button text="Google" />
+                    <Button text="Facebook" />
+                </VBox>
+            </l:Grid>
+            <footer>
+                <Toolbar>
+                    <ToolbarSpacer/>
+                    <Button text="Test Btn Campaign"
+                            icon="sap-icon://navigation-right-arrow"
+                            press="navToCampaignView" />
+                </Toolbar>
+            </footer>
+    </Page>
+</mvc:View>

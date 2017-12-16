@@ -1,10 +1,8 @@
 sap.ui.define([
     "hs/fulda/customer/management/controller/BaseController",
     "jquery.sap.global",
-    "sap/m/Button",
-	"sap/m/Dialog",
     "sap/ui/model/json/JSONModel",
-], function (BaseController, JQuery) {
+], function (BaseController, JQuery, JSONModel) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.Login", {
@@ -15,7 +13,8 @@ sap.ui.define([
         onInit: function(){
             // Set style class cozy
             this.getView().addStyleClass("cozy");
-
+            var oEventBus = sap.ui.getCore().getEventBus();
+            oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
         },
          /**
          *
@@ -35,6 +34,22 @@ sap.ui.define([
             auth2.signOut().then(function () {
               console.log('User signed out.');
             });
+        },
+
+        navToCampaignView: function(){
+            var oRouter = this.getRouter();
+            console.log(oRouter);
+            oRouter.navTo("Campaign");
+        },
+
+        _refresh: function(sChannelId, sEventId, json){
+            var oModel = new JSONModel();
+            // Set data to the model
+            oModel.setData(json);
+            // Assign the model object to the SAPUI5 core
+			this.getOwnerComponent().setModel(oModel);
+            // Set Binding mode
+            this.getOwnerComponent().getModel().setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
         }
 	});
 });
