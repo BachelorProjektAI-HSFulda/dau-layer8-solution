@@ -6,66 +6,126 @@
     xmlns:form="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Page
-        title="{i18n>loginPageTitle}"
-		class="marginBoxContent">
-        <content>
-            <FlexBox
-                alignItems="Start"
-                justifyContent="Center">
-                <items>
-                    <core:Icon
-                        src="sap-icon://customer-view"
-                        class="AppIcon"
-                        color="#031E48" >
-                    </core:Icon>
-                </items>
-            </FlexBox>
-             <FlexBox
-                id="flexBoxAppTitle"
-                alignItems="Start"
-                justifyContent="Center">
-                <items>
-                   <Label id="appTitleLbl"
-                          class="appTitle"
-                          width="100%"
-                          text="Customer Management" />
-                </items>
-            </FlexBox>
-            <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
-                <VBox>
-                <ObjectListItem
-                        class="googleLoginBtn"
-                        title="{i18n>googleLoginBtn}"
-                        icon="./images/google-icon.png"
-                        intro="Log-in with Google"/>
-                <ObjectListItem
-                        class="facebookLoginBtn"
-                        title="{i18n>facebookLoginBtn}"
-                        icon="./images/facebook-icon.png"
-                        intro="Log-in with Facebook"/>
-    <!--
-                <Button class="googleLoginBtn"
-                        id="googleLogin"
-                        width="60%"
-                        text="{i18n>googleLoginBtn}"
-                        icon="./images/google-icon.png" />
-                <Button class="facebookLoginBtn"
-                        id="facebookLogin"
-                        width="60%"
-                        text="{i18n>facebookLoginBtn}"
-                        icon="./images/facebook-icon.png" />
-    -->
+    <NavContainer
+        id="navContainerLoginPage"
+        width="100%"
+        height="100%"
+        class="navContainerControl sapUiSmallMarginBottom">
+        <Page
+            title="{i18n>loginPageTitle}"
+            id="startPage"
+            class="marginBoxContent">
+            <content>
+                <FlexBox
+                    alignItems="Start"
+                    justifyContent="Center">
+                    <items>
+                        <core:Icon
+                            src="sap-icon://customer-view"
+                            class="AppIcon"
+                            color="#031E48" >
+                        </core:Icon>
+                    </items>
+                </FlexBox>
+                 <FlexBox
+                    id="flexBoxAppTitle"
+                    alignItems="Start"
+                    justifyContent="Center">
+                    <items>
+                       <Label id="appTitleLbl"
+                              class="appTitle"
+                              width="100%"
+                              text="Customer Management" />
+                    </items>
+                </FlexBox>
+                <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
+                    <VBox>
+                    <ObjectListItem
+                            class="googleLoginBtn"
+                            title="{i18n>googleLoginBtn}"
+                            icon="./images/google-icon.png"
+                            intro="Log-in with Google"
+                            type="Active"
+                            press="navToLoginView">
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="loginPage" />
+                                </customData>
+                        </ObjectListItem>
+                    <ObjectListItem
+                            class="facebookLoginBtn"
+                            title="{i18n>facebookLoginBtn}"
+                            icon="./images/facebook-icon.png"
+                            intro="Log-in with Facebook"
+                            type="Active"
+                            press="navToLoginView">
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="loginPage" />
+                                </customData>
+                        </ObjectListItem>
+        <!--
+                    <Button class="googleLoginBtn"
+                            id="googleLogin"
+                            width="60%"
+                            text="{i18n>googleLoginBtn}"
+                            icon="./images/google-icon.png" />
+                    <Button class="facebookLoginBtn"
+                            id="facebookLogin"
+                            width="60%"
+                            text="{i18n>facebookLoginBtn}"
+                            icon="./images/facebook-icon.png" />
+        -->
+                    </VBox>
+                </l:Grid>
+            </content>
+            <footer>
+                <Toolbar>
+                    <ToolbarSpacer/>
+                    <Button text="Test Btn Campaign"
+                            icon="sap-icon://navigation-right-arrow"
+                            press="navToCampaignView" />
+                </Toolbar>
+            </footer>
+        </Page>
+        <Page id="loginPage"
+              class="marginBoxContent">
+                <customHeader>
+                    <Bar>
+                        <contentLeft>
+                            <Button icon="sap-icon://nav-back" press="onPageBack">
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="startPage" />
+                                </customData>
+                            </Button>
+                        </contentLeft>
+                    </Bar>
+                </customHeader>
+            <content>
+                <VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
+                    <items>
+                        <Input id="uid" placeholder="User ID"></Input>
+                        <Input id="pasw" placeholder="Password" type="Password"></Input>
+                        <Button width="12rem" text="Login" type="Emphasized" press="onLoginPressed"></Button>
+                    </items>
                 </VBox>
-            </l:Grid>
-        </content>
-        <footer>
-            <Toolbar>
-                <ToolbarSpacer/>
-                <Button text="Test Btn Campaign"
-                        icon="sap-icon://navigation-right-arrow"
-                        press="navToCampaignView" />
-            </Toolbar>
-        </footer>
-    </Page>
+            </content>
+            <footer >
+                <Toolbar>
+    <!--
+                    <contentleft>
+                        <Text text="GoogleLogin"></Text>
+                    </contentleft>
+                    <contentRight>
+                        <Text text="FacebookLogin"></Text>
+                    </contentRight>
+    -->
+                </Toolbar>
+            </footer>
+         </Page>
+    </NavContainer>
 </mvc:View>

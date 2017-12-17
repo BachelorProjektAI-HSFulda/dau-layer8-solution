@@ -222,6 +222,7 @@ sap.ui.define([
 				oRouter.navTo("Login");
 			}
         },
+
         /**
          * Lifecycle method to free objects on close of the app
          * @private

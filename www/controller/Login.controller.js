@@ -19,9 +19,27 @@ sap.ui.define([
             this.getView().byId("flexBoxAppTitle").addStyleClass("flexBoxAppTitle");
 
         },
+
          /**
-         *
-         */
+          *
+          */
+        navToLoginView: function(oEvent){
+            var navCon = this.getView().byId("navContainerLoginPage");
+            var target = oEvent.getSource().data("target");
+            if (target) {
+                var animation = "show";
+                navCon.to(this.getView().byId(target), animation);
+            } else {
+                navCon.back();
+            }
+        },
+        onLoginPressed: function(oEvent){
+
+        },
+
+         /**
+          *
+          */
         onSignIn: function(googleUser) {
           var profile = googleUser.getBasicProfile();
           console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -53,6 +71,22 @@ sap.ui.define([
 			this.getOwnerComponent().setModel(oModel);
             // Set Binding mode
             this.getOwnerComponent().getModel().setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+        },
+
+        onPageBack: function(oEvent){
+            var sID = oEvent.getId();
+            if (sID !== "navButtonPress") {
+                if (!navCon) {
+                    var navCon = this.getView().byId("navContainerLoginPage");
+                }
+                var target = oEvent.getSource().data("target");
+                if (target) {
+                    var animation = "show";
+                    navCon.to(this.getView().byId(target), animation);
+                }
+            } else {
+                this.onNavBack();
+            }
         }
 	});
 });
