@@ -19,7 +19,7 @@
                             <Button icon="sap-icon://edit" press="onEdit" />
                         </contentLeft>
                         <contentMiddle>
-                            <Title id="customerTitle" />
+                            <Title id="customerTitle" text="{CampaignName}"/>
                         </contentMiddle>
                         <contentRight>
                             <Button icon="sap-icon://camera" press="onCapturePhoto">

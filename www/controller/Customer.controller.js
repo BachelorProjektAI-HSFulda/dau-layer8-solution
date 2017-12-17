@@ -31,12 +31,15 @@ sap.ui.define([
         _onObjectMatched: function(oEvent){
             this.iCampaignId = oEvent.getParameter("arguments").CampaignId-1;
             this.itemBindingPath = "/Campaigns/"+ this.iCampaignId +"/Customer";
-            // Read actual campaign object
-            var oCampaign = this.getView().getModel().getProperty("/Campaigns/"+this.iCampaignId);
-            // Get the title from the object
-            var sTitle = oCampaign.CampaignName;
-            // Set the header title
-            this.getView().byId("customerTitle").setText(sTitle);
+            // Bind Campaign Name
+            this.getView().byId("customerTitle").bindElement("/Campaigns/"+this.iCampaignId);
+//            // Read actual campaign object
+//            var oCampaign = this.getView().getModel().getProperty("/Campaigns/"+this.iCampaignId);
+//            // Get the title from the object
+//            var sTitle = oCampaign.CampaignName;
+//            // Set the header title
+//            this.getView().byId("customerTitle").setText(sTitle);
+            // Bind Customer List
             this.getView().byId("customerList").bindAggregation("items", {
                 path: this.itemBindingPath,
                 template: this._oItemTemplate
@@ -91,6 +94,7 @@ sap.ui.define([
             this.saveData(JSONData);
             // Nav back to list page
             this.editDialog.close();
+            this.getOwnerComponent().getModel().refresh(true);
         },
 
          /**
