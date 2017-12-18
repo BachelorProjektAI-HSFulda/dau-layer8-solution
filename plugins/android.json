@@ -1,15 +1,20 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "config_munge": {
-        "files": {}
-    },
-    "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        }
-    },
-    "dependent_plugins": {}
+    "cordova-plugin-facebook": {
+      "FACEBOOK_APP_ID": "313753335786008",
+      "FACEBOOK_DISPLAY_NAME": "BusinessCardApp",
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    }
+  },
+  "dependent_plugins": {}
 }
