@@ -17,15 +17,30 @@ sap.ui.define([
             oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
             // Set Icons
             this.getView().byId("flexBoxAppTitle").addStyleClass("flexBoxAppTitle");
-
         },
 
-         /**
-          *
-          */
+        /**
+         *
+         */
         navToLoginView: function(oEvent){
+
+            var sProvider = oEvent.getSource().data("provider");
+            switch(sProvider) {
+                case "google":
+                    this.getView().byId("pageLoginProviderTitle").setText(this.getResourceBundle().getText("loginPageGoogleTitle"));
+                    this.getView().byId("loginProviderImage").setSrc("./images/google-icon.png");
+                    break;
+                case "facebook":
+                    this.getView().byId("pageLoginProviderTitle").setText(this.getResourceBundle().getText("loginPageFacebookTitle"));
+                    this.getView().byId("loginProviderImage").setSrc("./images/facebook-icon.png");
+                    break;
+                default:
+                    console.log("failure login provider");
+            }
+
             var navCon = this.getView().byId("navContainerLoginPage");
             var target = oEvent.getSource().data("target");
+
             if (target) {
                 var animation = "show";
                 navCon.to(this.getView().byId(target), animation);
@@ -33,13 +48,42 @@ sap.ui.define([
                 navCon.back();
             }
         },
-        onLoginPressed: function(oEvent){
 
+        /**
+         *
+         */
+        onLoginPressed: function(oEvent){
+            // Read input values
+            var sUserName = this.getView().byId("idUserName").getValue();
+            var sPassword = this.getView().byId("idPassword").getValue();
+            console.log(sUserName);
+            console.log(sPassword);
+
+            CordovaFacebook.login({
+                permissions: ['email', 'user_likes'],
+                onSuccess: function(result) {
+                    console.log(result);
+                    if(result.declined.length > 0) {
+                        alert("The User declined something!");
+                    } else {
+                        var oRouter = this.getRouter();
+                        console.log(oRouter);
+                        oRouter.navTo("Campaign");
+                    }
+                },
+                onFailure: function(result) {
+                    if(result.cancelled) {
+                        alert("The user doesn't like my app");
+                    } else if(result.error) {
+                        alert("There was an error:" + result.errorLocalized);
+                    }
+                }
+            });
         },
 
-         /**
-          *
-          */
+        /**
+         *
+         */
         onSignIn: function(googleUser) {
           var profile = googleUser.getBasicProfile();
           console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -47,6 +91,7 @@ sap.ui.define([
           console.log('Image URL: ' + profile.getImageUrl());
           console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
         },
+
         /**
          *
          */
@@ -57,12 +102,18 @@ sap.ui.define([
             });
         },
 
+        /**
+         *
+         */
         navToCampaignView: function(){
             var oRouter = this.getRouter();
             console.log(oRouter);
             oRouter.navTo("Campaign");
         },
 
+        /**
+         *
+         */
         _refresh: function(sChannelId, sEventId, json){
             var oModel = new JSONModel();
             // Set data to the model
@@ -73,6 +124,9 @@ sap.ui.define([
             this.getOwnerComponent().getModel().setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
         },
 
+        /**
+         *
+         */
         onPageBack: function(oEvent){
             var sID = oEvent.getId();
             if (sID !== "navButtonPress") {
@@ -87,6 +141,20 @@ sap.ui.define([
             } else {
                 this.onNavBack();
             }
+        },
+
+        /**
+         *
+         */
+        setLoginDomain: function(sLogin){
+            localStorage.sLogin = sLogin;
+        },
+
+        /**
+         *
+         */
+        getLoginDomain: function(bLogin){
+            return localStorage.sLogin;
         }
 	});
 });

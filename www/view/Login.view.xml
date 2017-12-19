@@ -41,6 +41,7 @@
                 <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
                     <VBox>
                     <ObjectListItem
+                            id="googleObjListItem"
                             class="googleLoginBtn"
                             title="{i18n>googleLoginBtn}"
                             icon="./images/google-icon.png"
@@ -51,9 +52,13 @@
                                     <core:CustomData
                                         key="target"
                                         value="loginPage" />
+                                    <core:CustomData
+                                        key="provider"
+                                        value="google" />
                                 </customData>
                         </ObjectListItem>
                     <ObjectListItem
+                            id="facebookObjListItem"
                             class="facebookLoginBtn"
                             title="{i18n>facebookLoginBtn}"
                             icon="./images/facebook-icon.png"
@@ -64,6 +69,9 @@
                                     <core:CustomData
                                         key="target"
                                         value="loginPage" />
+                                    <core:CustomData
+                                        key="provider"
+                                        value="facebook" />
                                 </customData>
                         </ObjectListItem>
         <!--
@@ -94,6 +102,9 @@
               class="marginBoxContent">
                 <customHeader>
                     <Bar>
+                        <contentMiddle>
+                            <Title id="pageLoginProviderTitle" />
+                        </contentMiddle>
                         <contentLeft>
                             <Button icon="sap-icon://nav-back" press="onPageBack">
                                 <customData>
@@ -106,10 +117,25 @@
                     </Bar>
                 </customHeader>
             <content>
-                <VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
+                <FlexBox
+                    alignItems="Start"
+                    justifyContent="Center">
                     <items>
-                        <Input id="uid" placeholder="User ID"></Input>
-                        <Input id="pasw" placeholder="Password" type="Password"></Input>
+                        <Image
+                           id="loginProviderImage"
+					       densityAware="false"
+                           width="120px"
+                           height="120px" />
+                    </items>
+                </FlexBox>
+<!--                fitContainer="true"-->
+                <VBox
+                      justifyContent="Center"
+                      alignItems="Center"
+                      alignContent="Center">
+                    <items>
+                        <Input id="idUserName" placeholder="{i18n>userIdInput}"></Input>
+                        <Input id="idPassword" placeholder="{i18n>userPasswordInput}" type="Password"></Input>
                         <Button width="12rem" text="Login" type="Emphasized" press="onLoginPressed"></Button>
                     </items>
                 </VBox>
