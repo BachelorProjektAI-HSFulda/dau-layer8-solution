@@ -14,9 +14,6 @@
       "FACEBOOK_APP_ID": "313753335786008",
       "FACEBOOK_DISPLAY_NAME": "BusinessCardApp",
       "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-googleplus": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
   "dependent_plugins": {}

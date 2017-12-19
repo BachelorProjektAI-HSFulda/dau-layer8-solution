@@ -22,7 +22,7 @@ sap.ui.define([
         },
 
         onTest: function(){
-            console.log("Tamara - onTest");
+            console.log("onTest");
             this.requestFileSystem();
         },
 

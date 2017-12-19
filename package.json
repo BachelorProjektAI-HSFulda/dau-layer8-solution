@@ -15,7 +15,6 @@
     "cordova-plugin-camera": "^3.0.0",
     "cordova-plugin-facebook": "^0.2.2",
     "cordova-plugin-file": "^5.0.0",
-    "cordova-plugin-googleplus": "^5.1.1",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-windows": "4.4.2"
   },
@@ -27,9 +26,6 @@
       "cordova-plugin-facebook": {
         "FACEBOOK_DISPLAY_NAME": "BusinessCardApp",
         "FACEBOOK_APP_ID": "313753335786008"
-      },
-      "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "855269254217-10bvs0uabv44f5kn8dnb6jkdb39cjtsn.apps.googleusercontent.com"
       }
     },
     "platforms": [
