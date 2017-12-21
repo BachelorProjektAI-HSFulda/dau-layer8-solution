@@ -14,4 +14,4 @@ platforms/*
 .vs
 *.user
 bin
-/platforms/
+/platforms/ios/www/Component.js
