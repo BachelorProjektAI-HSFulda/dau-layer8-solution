@@ -31,12 +31,15 @@ sap.ui.define([
         _onObjectMatched: function(oEvent){
             this.iCampaignId = oEvent.getParameter("arguments").CampaignId-1;
             this.itemBindingPath = "/Campaigns/"+ this.iCampaignId +"/Customer";
-            // Read actual campaign object
-            var oCampaign = this.getView().getModel().getProperty("/Campaigns/"+this.iCampaignId);
-            // Get the title from the object
-            var sTitle = oCampaign.CampaignName;
-            // Set the header title
-            this.getView().byId("customerTitle").setText(sTitle);
+            // Bind Campaign Name
+            this.getView().byId("customerTitle").bindElement("/Campaigns/"+this.iCampaignId);
+//            // Read actual campaign object
+//            var oCampaign = this.getView().getModel().getProperty("/Campaigns/"+this.iCampaignId);
+//            // Get the title from the object
+//            var sTitle = oCampaign.CampaignName;
+//            // Set the header title
+//            this.getView().byId("customerTitle").setText(sTitle);
+            // Bind Customer List
             this.getView().byId("customerList").bindAggregation("items", {
                 path: this.itemBindingPath,
                 template: this._oItemTemplate
@@ -84,6 +87,16 @@ sap.ui.define([
 			this.editDialog.open();
         },
 
+        onSaveCampaign: function(sCampaignName){
+            var navCon = this.getView().byId("navContainerCampaignList");
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
+            // Nav back to list page
+            this.editDialog.close();
+            this.getOwnerComponent().getModel().refresh(true);
+        },
+
          /**
          *
          */
@@ -96,10 +109,54 @@ sap.ui.define([
 
         },
 
+        onCapturePhoto: function(oEvent){
+            if(!navCon){
+                var navCon = this.getView().byId("navContainerCustomerList");
+            }
+            var target = oEvent.getSource().data("target");
+
+            if(!oPage){
+                var oPage = this.getView().byId(target);
+            }
+
+            // Photo Area
+            var myPhotoArea = '<div heigth="100%" width="100%" id="videoArea"></div>';
+            var myhtml = new sap.ui.core.HTML();
+            myhtml.setContent(myPhotoArea);
+            oPage.addContent(myhtml);
+
+			if (target) {
+				var animation = "show";
+				navCon.to(this.getView().byId(target), animation);
+			} else {
+				navCon.back();
+			}
+
+            //navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1});
+            var oCamera = navigator.camera;
+            oCamera.getPicture(this.onCaptureSuccess, this.onCaptureError, { quality: 10, destinationType: oCamera.DestinationType.DATA_URL });
+        },
+
+        onCaptureSuccess: function(){
+            var i, path, len;
+            for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                path = mediaFiles[i].fullPath;
+                console.log(path);
+                // do something interesting with the file
+            }
+        },
+
+        onCaptureError: function(e){
+            console.log("capture error: "+JSON.stringify(e));
+        },
+
         /**
          *
          */
         onAddCustomerManual: function(oEvent){
+            this.getView().byId("statusErrorCreateCustomer").setVisible(false);
+            this.getView().byId("statusInformationCreateCustomer").setVisible(false);
+
            if(!navCon){
                 var navCon = this.getView().byId("navContainerCustomerList");
             }
@@ -117,10 +174,11 @@ sap.ui.define([
             if(!oModel){
                 var oModel = this.getView().getModel();
             }
-            this.iCampaignId
+            console.log("error");
+         //   var oNewCustomerData = {};
             var oNewCustomerData = {
-                    "CustomerName" : "",
-                    "Company" : ""
+                "CustomerName" : "",
+                "Company" : ""
             };
 
             if(!oInputCustomerName){
@@ -133,50 +191,41 @@ sap.ui.define([
             }
             var sCustomerCompany = oInputCustomerCompany.getValue();
 
-            // Check if the entries are valid
-            if(sCustomerName === null ||
-               sCustomerName === undefined ||
-               sCustomerName === ""){
-                oInputCustomerName.setValueState(sap.ui.core.ValueState.Error);
-				oInputCustomerName.setValueStateText(this.getResourceBundle().getText("customerNameNotValid"));
+            if(sCustomerCompany === null || sCustomerCompany === undefined || sCustomerCompany === ""  ||
+                sCustomerName === null || sCustomerName === undefined || sCustomerName === ""){
+                this.getView().byId("statusInformationCreateCustomer").setVisible(true);
             } else {
-                oInputCustomerName.setValueState(sap.ui.core.ValueState.None);
+                // Set data
                 oNewCustomerData.CustomerName = sCustomerName;
-            }
-            // Check if the entries are valid
-            if(sCustomerCompany === null ||
-               sCustomerCompany === undefined ||
-               sCustomerCompany === ""){
-                oInputCustomerCompany.setValueState(sap.ui.core.ValueState.Error);
-				oInputCustomerCompany.setValueStateText(this.getResourceBundle().getText("customerCompanyNotValid"));
-            } else {
-                oInputCustomerCompany.setValueState(sap.ui.core.ValueState.None);
                 oNewCustomerData.Company = sCustomerCompany;
-            }
 
-            if(!oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer")){
-                var bValueSet = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
-                if(bValueSet === true){
-                    var aCustomer = [];
+                if(!oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer")){
+                    var bValueSet = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
+
+                    if(bValueSet === true){
+                        var aCustomer = [];
+                    }
+                } else {
+                    var aCustomer = oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
                 }
-            } else {
-                var aCustomer = oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
-            }
-            aCustomer.push(oNewCustomerData);
-            console.log(oModel);
-            var bResponse = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
-            if(bResponse === true){
-                this.onCustomerCreateSuccess(sCustomerName);
-            } else {
-                console.log("error");
-            }
+                // Push data to array
+                aCustomer.push(oNewCustomerData);
+                // Check status
+                var bResponse = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer", aCustomer);
+                // Error handling
+                if(bResponse === true){
+                    this.onCustomerCreateSuccess(sCustomerName);
+                } else {
+                    this.getView().byId("statusErrorCreateCustomer").setVisible(true);
+                }
+             }
         },
 
         onCustomerCreateSuccess: function(sCustomerName){
             var navCon = this.getView().byId("navContainerCustomerList");
-            // var sText = this.getResourceBundle().getText("campaignCreateSuccess");
-            // var msg = sText.replace("&", sCampaignName);
-            // MessageToast.show(msg);
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
 
             var animation = "show";
             navCon.to(this.getView().byId("pageShowCustomer"), animation);

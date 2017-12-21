@@ -1,24 +1,20 @@
 <core:FragmentDefinition
     xmlns="sap.m"
-    xmlns:l="sap.ui.layout"
     xmlns:core="sap.ui.core">
     <Dialog
-        cancel="onCloseDialog"
         title="Edit Campaign"
-        ok="onDialogOk">
-       <Panel width="auto" class="sapUiResponsiveMargin">
-            <headerToolbar>
-                <Toolbar height="3rem">
-                    <Title text="Panel with picture"/>
-                </Toolbar>
-            </headerToolbar>
-            <content>
-                <Label text="Campaign Name" />
-                <Input value="{CampaignName}" />
-                <Label text="Description" />
-                <Input value="{Description}" />
-            </content>
-        </Panel>
-
+        class="sapUiContentPadding">
+        <content>
+            <Label text="Campaign Name" />
+            <Input value="{CampaignName}" />
+            <Label text="Description" />
+            <Input value="{Description}" />
+        </content>
+        <beginButton>
+            <Button type="Accept"
+                    text="Save"
+                    icon="sap-icon://save"
+                    press="onSaveCampaign" />
+        </beginButton>
     </Dialog>
 </core:FragmentDefinition>
