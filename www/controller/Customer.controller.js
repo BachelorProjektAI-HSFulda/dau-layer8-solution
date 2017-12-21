@@ -154,6 +154,9 @@ sap.ui.define([
          *
          */
         onAddCustomerManual: function(oEvent){
+            this.getView().byId("statusErrorCreateCustomer").setVisible(false);
+            this.getView().byId("statusInformationCreateCustomer").setVisible(false);
+
            if(!navCon){
                 var navCon = this.getView().byId("navContainerCustomerList");
             }
@@ -171,10 +174,11 @@ sap.ui.define([
             if(!oModel){
                 var oModel = this.getView().getModel();
             }
-            this.iCampaignId
+            console.log("error");
+         //   var oNewCustomerData = {};
             var oNewCustomerData = {
-                    "CustomerName" : "",
-                    "Company" : ""
+                "CustomerName" : "",
+                "Company" : ""
             };
 
             if(!oInputCustomerName){
@@ -187,50 +191,41 @@ sap.ui.define([
             }
             var sCustomerCompany = oInputCustomerCompany.getValue();
 
-            // Check if the entries are valid
-            if(sCustomerName === null ||
-               sCustomerName === undefined ||
-               sCustomerName === ""){
-                oInputCustomerName.setValueState(sap.ui.core.ValueState.Error);
-				oInputCustomerName.setValueStateText(this.getResourceBundle().getText("customerNameNotValid"));
+            if(sCustomerCompany === null || sCustomerCompany === undefined || sCustomerCompany === ""  ||
+                sCustomerName === null || sCustomerName === undefined || sCustomerName === ""){
+                this.getView().byId("statusInformationCreateCustomer").setVisible(true);
             } else {
-                oInputCustomerName.setValueState(sap.ui.core.ValueState.None);
+                // Set data
                 oNewCustomerData.CustomerName = sCustomerName;
-            }
-            // Check if the entries are valid
-            if(sCustomerCompany === null ||
-               sCustomerCompany === undefined ||
-               sCustomerCompany === ""){
-                oInputCustomerCompany.setValueState(sap.ui.core.ValueState.Error);
-				oInputCustomerCompany.setValueStateText(this.getResourceBundle().getText("customerCompanyNotValid"));
-            } else {
-                oInputCustomerCompany.setValueState(sap.ui.core.ValueState.None);
                 oNewCustomerData.Company = sCustomerCompany;
-            }
 
-            if(!oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer")){
-                var bValueSet = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
-                if(bValueSet === true){
-                    var aCustomer = [];
+                if(!oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer")){
+                    var bValueSet = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
+
+                    if(bValueSet === true){
+                        var aCustomer = [];
+                    }
+                } else {
+                    var aCustomer = oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
                 }
-            } else {
-                var aCustomer = oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
-            }
-            aCustomer.push(oNewCustomerData);
-            console.log(oModel);
-            var bResponse = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
-            if(bResponse === true){
-                this.onCustomerCreateSuccess(sCustomerName);
-            } else {
-                console.log("error");
-            }
+                // Push data to array
+                aCustomer.push(oNewCustomerData);
+                // Check status
+                var bResponse = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer", aCustomer);
+                // Error handling
+                if(bResponse === true){
+                    this.onCustomerCreateSuccess(sCustomerName);
+                } else {
+                    this.getView().byId("statusErrorCreateCustomer").setVisible(true);
+                }
+             }
         },
 
         onCustomerCreateSuccess: function(sCustomerName){
             var navCon = this.getView().byId("navContainerCustomerList");
-            // var sText = this.getResourceBundle().getText("campaignCreateSuccess");
-            // var msg = sText.replace("&", sCampaignName);
-            // MessageToast.show(msg);
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
 
             var animation = "show";
             navCon.to(this.getView().byId("pageShowCustomer"), animation);

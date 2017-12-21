@@ -4,10 +4,6 @@
 /bower_components/
 /node_modules/
 platforms
-<<<<<<< HEAD
-*.platforms
-=======
->>>>>>> BusinessCardApp/master
 platforms/*
 /platforms/**
 /platforms/ios/**
@@ -15,10 +11,6 @@ platforms/*
 /platforms/ios/www/view/Campaign.view.xml
 /platforms/ios/www/controller/Campaign.controller.js
 /platforms/ios/www/controller/BaseController.js
-<<<<<<< HEAD
-/platforms/android
-=======
->>>>>>> BusinessCardApp/master
 .vs
 *.user
 bin
