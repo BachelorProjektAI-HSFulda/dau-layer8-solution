@@ -57,4 +57,7 @@
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="CameraUsesGeolocation" value="false" />
+    <feature name="Capture">
+        <param name="ios-package" value="CDVCapture" />
+    </feature>
 </widget>

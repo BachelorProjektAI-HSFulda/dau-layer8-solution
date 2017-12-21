@@ -58,7 +58,7 @@ sap.ui.define([
 
         onSaveCampaign: function(oEvent){
             var iCampaignId;
-
+           
             if(!this.getView().byId("campaignList").getBinding("items").getLength()){
                 iCampaignId = 1;
             } else {

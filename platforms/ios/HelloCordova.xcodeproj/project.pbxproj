@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		042EAB1640E84B3E8B0C93A7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0E6BF03F444A7BAADE5A31 /* AVFoundation.framework */; };
@@ -23,6 +22,8 @@
 		87FABB00C275489F8FA38DFA /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4EAFCE96064CC89EB1F5E8 /* CDVJpegHeaderWriter.m */; };
 		D93A069BD09846F39210041C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91520DB687B485281E1B290 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E38D70FE79E64E9EA2281242 /* UIImage+CropScaleOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A59148A9695A4F4291618BCF /* UIImage+CropScaleOrientation.m */; };
+		30ABA38FB5BE4CC2B1365483 /* CDVCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C359186194445C84FA7EA3 /* CDVCapture.m */; };
+		9257514F8937400DA19F6C34 /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 81D5ABEBD6254E8197536A42 /* CDVCapture.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,9 @@
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		EE82EAB5E7F246D69DDC89EF /* CDVFile.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVFile.m; path = "cordova-plugin-file/CDVFile.m"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = HelloCordova/config.xml; sourceTree = "<group>"; };
+		45C359186194445C84FA7EA3 /* CDVCapture.m */ = {isa = PBXFileReference; name = "CDVCapture.m"; path = "cordova-plugin-media-capture/CDVCapture.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		911912C10A3F47B8A98D684D /* CDVCapture.h */ = {isa = PBXFileReference; name = "CDVCapture.h"; path = "cordova-plugin-media-capture/CDVCapture.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		81D5ABEBD6254E8197536A42 /* CDVCapture.bundle */ = {isa = PBXFileReference; name = "CDVCapture.bundle"; path = "CDVCapture.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,7 @@
 				3047A50E1AB8057F00498E2A /* config */,
 				8D1107310486CEB800E47090 /* HelloCordova-Info.plist */,
 				6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */,
+				81D5ABEBD6254E8197536A42 /* CDVCapture.bundle */,
 			);
 			name = Resources;
 			path = HelloCordova/Resources;
@@ -209,6 +214,8 @@
 				A2D3C4B51433443D94BFE0FA /* CDVFile.h */,
 				11737610039644F3A25F5DDD /* CDVLocalFilesystem.h */,
 				436CC53751E946F28E02F3B5 /* CDVAssetLibraryFilesystem.h */,
+				45C359186194445C84FA7EA3 /* CDVCapture.m */,
+				911912C10A3F47B8A98D684D /* CDVCapture.h */,
 			);
 			name = Plugins;
 			path = HelloCordova/Plugins;
@@ -305,6 +312,7 @@
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
 				0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */,
 				6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */,
+				9257514F8937400DA19F6C34 /* CDVCapture.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +350,7 @@
 				073ED57FE8AF46EF8527A430 /* CDVFile.m in Sources */,
 				45631C41EE894127917DB4E8 /* CDVLocalFilesystem.m in Sources */,
 				1DEB38166CE04884859EA959 /* CDVAssetLibraryFilesystem.m in Sources */,
+				30ABA38FB5BE4CC2B1365483 /* CDVCapture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
