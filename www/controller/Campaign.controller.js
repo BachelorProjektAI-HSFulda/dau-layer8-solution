@@ -5,7 +5,8 @@ sap.ui.define([
 	"sap/m/Dialog",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/routing/History",
-], function (BaseController, JQuery, Button, Dialog, JSONModel, History) {
+    "sap/m/MessageToast"
+], function (BaseController, JQuery, Button, Dialog, JSONModel, History, MessageToast) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.Campaign", {
@@ -58,8 +59,9 @@ sap.ui.define([
 
         onSaveCampaign: function(oEvent){
             var iCampaignId;
-           
-            if(!this.getView().byId("campaignList").getBinding("items").getLength()){
+            var binding = this.getView().byId("campaignList").getBinding("items");
+
+            if(binding === undefined){
                 iCampaignId = 1;
             } else {
                 iCampaignId = this.getView().byId("campaignList").getBinding("items").getLength()+1;
@@ -93,17 +95,19 @@ sap.ui.define([
                 oNewCampaignData.CampaignName = sCampaignName;
                 oNewCampaignData.Description = sCampaignDesc;
 
-                if(!oModel.getProperty("/Campaigns")){
+                if(iCampaignId === 1){
+                    console.log(this.getView().getModel());
                     var bValueSet = oModel.setProperty("/Campaigns");
-
-                    if(bValueSet === true){
+                      console.log(this.getView().getModel());
+                    //if(bValueSet === true){
                         var aCampaigns = [];
-                    }
+                    //}
                 } else {
                     var aCampaigns = oModel.getProperty("/Campaigns");
                 }
                 // Push data to array
                 aCampaigns.push(oNewCampaignData);
+                console.log(this.getView().getModel());
                 // Check status
                 var bResponse = oModel.setProperty("/Campaigns", aCampaigns);
                 // Error handling
@@ -135,6 +139,7 @@ sap.ui.define([
         },
 
         _refresh: function(sChannelId, sEventId, json){
+            MessageToast.show("_refresh");
             var oModel = new JSONModel();
             // Set data to the model
             oModel.setData(json);

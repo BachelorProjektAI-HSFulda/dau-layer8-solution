@@ -58,7 +58,7 @@ sap.ui.define([
 
                 // If data object is not passed in
                 if (!dataObj) {
-                    dataObj = '{}';
+                    dataObj = "{}";
                 }
                 fileWriter.write(dataObj);
             });
