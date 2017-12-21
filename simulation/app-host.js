@@ -5019,7 +5019,7 @@ Messages.prototype = {
         // Notify any local listeners
         notify.call(this, messagesObj, message, data);
     },
-    
+
     // Emit messages destined to external debug-hosts
     emitDebug: function(message, data) {
         this.socket.emit('debug-message', {
@@ -5350,7 +5350,7 @@ function trySendPendingEvents() {
             sendClientTelemetry(eventData);
         }
     });
-    
+
     pendingTelemetryEvents = unsent;
 }
 

@@ -4983,7 +4983,7 @@ function handleSavedSim(success, fail, service, action) {
 
 /**
  * Sends an 'exec-unhandled' telemetry event to the server.
- * 
+ *
  * @param {string} service The name of the plugin's service.
  * @param {string} action The name of the plugin's action.
  * @param {boolean} hasPersisted Whether or not the exec call already had a persiste result (no dialog popup was shown to the user).
@@ -5009,7 +5009,7 @@ function sendExecUnhandledTelemetry(service, action, hasPersisted, isSuccess, ha
 
 /**
  * Determines whether the user typed something in the unhandled exec popup.
- * 
+ *
  * @param {any} result The content of the text entry.
  * @returns {boolean} Whether the user entered a value.
  */
@@ -5195,7 +5195,7 @@ Messages.prototype = {
         // Notify any local listeners
         notify.call(this, messagesObj, message, data);
     },
-    
+
     // Emit messages destined to external debug-hosts
     emitDebug: function(message, data) {
         this.socket.emit('debug-message', {
@@ -5559,7 +5559,7 @@ function trySendPendingEvents() {
             sendClientTelemetry(eventData);
         }
     });
-    
+
     pendingTelemetryEvents = unsent;
 }
 

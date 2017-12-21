@@ -22,5 +22,24 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-facebook": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-facebook@^0.2.2"
+    },
+    "is_top_level": true,
+    "variables": {
+      "FACEBOOK_DISPLAY_NAME": "BusinessCardApp",
+      "FACEBOOK_APP_ID": "313753335786008"
+    }
+  },
+  "cordova-plugin-googleplus": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-googleplus"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

@@ -6,3 +6,4 @@
 .vs
 *.user
 bin
+/platforms/
