@@ -3,10 +3,9 @@ sap.ui.define([
     "jquery.sap.global",
     "sap/m/Button",
 	"sap/m/Dialog",
-	"sap/m/Text",
-    "sap/m/MessageToast",
-    "sap/m/MessageBox"
-], function (BaseController, JQuery, Button, Dialog, Text) {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/core/routing/History",
+], function (BaseController, JQuery, Button, Dialog, JSONModel, History) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.Campaign", {
@@ -17,6 +16,9 @@ sap.ui.define([
         onInit: function(){
             // Set style class cozy
             this.getView().addStyleClass("cozy");
+            // Subscribe to event bus
+            var oEventBus = sap.ui.getCore().getEventBus();
+            oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
         },
 
         onTest: function(){
@@ -28,6 +30,9 @@ sap.ui.define([
          * Adds a campaign in the app
          */
         onAddCampaign: function(oEvent){
+            this.getView().byId("statusErrorCreateCampaign").setVisible(false);
+            this.getView().byId("statusInformationCreateCampaign").setVisible(false);
+
             if(!navCon){
                 var navCon = this.getView().byId("navContainerCampaignList");
             }
@@ -45,7 +50,6 @@ sap.ui.define([
 			var oRouter = this.getRouter();
             var sPath = oItem.getBindingContext().getPath();
             var object = oItem.getModel().getProperty(sPath);
-            console.log(object.CampaignId);
 
 			oRouter.navTo("Customer", {
 				CampaignId: object.CampaignId
@@ -53,14 +57,20 @@ sap.ui.define([
         },
 
         onSaveCampaign: function(oEvent){
-            var iCampaignCount = this.getView().byId("campaignList").getBinding("items").getLength()+1;
+            var iCampaignId;
+
+            if(!this.getView().byId("campaignList").getBinding("items").getLength()){
+                iCampaignId = 1;
+            } else {
+                iCampaignId = this.getView().byId("campaignList").getBinding("items").getLength()+1;
+            }
 
             if(!oModel){
                 var oModel = this.getView().getModel();
             }
 
             var oNewCampaignData = {
-                    "CampaignId" : iCampaignCount,
+                    "CampaignId" : iCampaignId,
                     "CampaignName" : "",
                     "Description" : ""
             };
@@ -75,43 +85,33 @@ sap.ui.define([
             }
             var sCampaignDesc = oInputCampaignDesc.getValue();
 
-            // Check if the entries are valid
-            if(sCampaignName === null ||
-               sCampaignName === undefined ||
-               sCampaignName === ""){
-                this.getView().byId("inputCampaignName").setValueState(sap.ui.core.ValueState.Error);
-				this.getView().byId("inputCampaignName").setValueStateText(this.getResourceBundle().getText("campaignNameNotValid"));
+            if(sCampaignName === null || sCampaignName === undefined || sCampaignName === ""  ||
+                sCampaignDesc === null || sCampaignDesc === undefined || sCampaignDesc === ""){
+                this.getView().byId("statusInformationCreateCampaign").setVisible(true);
             } else {
-                this.getView().byId("inputCampaignName").setValueState(sap.ui.core.ValueState.None);
+                // Set data
                 oNewCampaignData.CampaignName = sCampaignName;
-            }
-            // Check if the entries are valid
-            if(sCampaignDesc === null ||
-               sCampaignDesc === undefined ||
-               sCampaignDesc === ""){
-                this.getView().byId("inputCampaignDesc").setValueState(sap.ui.core.ValueState.Error);
-				this.getView().byId("inputCampaignDesc").setValueStateText(this.getResourceBundle().getText("campaignDescNotValid"));
-            } else {
-                this.getView().byId("inputCampaignDesc").setValueState(sap.ui.core.ValueState.None);
                 oNewCampaignData.Description = sCampaignDesc;
-            }
 
-            if(!oModel.getProperty("/Campaigns")){
-                var bValueSet = oModel.setProperty("/Campaigns");
-                if(bValueSet === true){
-                    var aCampaigns = [];
+                if(!oModel.getProperty("/Campaigns")){
+                    var bValueSet = oModel.setProperty("/Campaigns");
+
+                    if(bValueSet === true){
+                        var aCampaigns = [];
+                    }
+                } else {
+                    var aCampaigns = oModel.getProperty("/Campaigns");
                 }
-            } else {
-                var aCampaigns = oModel.getProperty("/Campaigns");
-            }
-
-            aCampaigns.push(oNewCampaignData);
-
-            var bResponse = oModel.setProperty("/Campaigns", aCampaigns);
-            if(bResponse === true){
-                this.onCampaignCreateSuccess(sCampaignName);
-            } else {
-                console.log("error");
+                // Push data to array
+                aCampaigns.push(oNewCampaignData);
+                // Check status
+                var bResponse = oModel.setProperty("/Campaigns", aCampaigns);
+                // Error handling
+                if(bResponse === true){
+                    this.onCampaignCreateSuccess(sCampaignName);
+                } else {
+                    this.getView().byId("statusErrorCreateCampaign").setVisible(true);
+                }
             }
         },
 
@@ -124,14 +124,24 @@ sap.ui.define([
 
         onCampaignCreateSuccess: function(sCampaignName){
             var navCon = this.getView().byId("navContainerCampaignList");
-//            var sText = this.getResourceBundle().getText("campaignCreateSuccess");
-//            var msg = sText.replace("&", sCampaignName);
-//			MessageToast.show(msg);
-
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
+            // Nav back to list page
             var animation = "show";
             navCon.to(this.getView().byId("pageShowCampaigns"), animation);
             this.getView().byId("inputCampaignName").setValue("");
             this.getView().byId("inputCampaignDesc").setValue("");
+        },
+
+        _refresh: function(sChannelId, sEventId, json){
+            var oModel = new JSONModel();
+            // Set data to the model
+            oModel.setData(json);
+            // Assign the model object to the SAPUI5 core
+			this.getOwnerComponent().setModel(oModel);
+            // Set Binding mode
+            this.getOwnerComponent().getModel().setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
         }
 	});
 });

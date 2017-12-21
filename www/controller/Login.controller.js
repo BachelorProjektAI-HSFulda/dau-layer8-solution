@@ -22,30 +22,37 @@ sap.ui.define([
         /**
          *
          */
-        navToLoginView: function(oEvent){
+        onLoginPress: function(oEvent){
 
             var sProvider = oEvent.getSource().data("provider");
             switch(sProvider) {
                 case "google":
-                    this.getView().byId("pageLoginProviderTitle").setText(this.getResourceBundle().getText("loginPageGoogleTitle"));
-                    this.getView().byId("loginProviderImage").setSrc("./images/google-icon.png");
+                    // Login to google - todo implementation
                     break;
                 case "facebook":
-                    this.getView().byId("pageLoginProviderTitle").setText(this.getResourceBundle().getText("loginPageFacebookTitle"));
-                    this.getView().byId("loginProviderImage").setSrc("./images/facebook-icon.png");
+                    CordovaFacebook.login({
+                        permissions: ['email', 'user_likes'],
+                        onSuccess: function(result) {
+                            console.log(result);
+                            if(result.declined.length > 0) {
+                                alert("The User declined something!");
+                            } else {
+                                var oRouter = this.getRouter();
+                                console.log(oRouter);
+                                oRouter.navTo("Campaign");
+                            }
+                        },
+                        onFailure: function(result) {
+                            if(result.cancelled) {
+                                alert("The user doesn't like my app");
+                            } else if(result.error) {
+                                alert("There was an error:" + result.errorLocalized);
+                            }
+                        }
+                    });
                     break;
                 default:
                     console.log("failure login provider");
-            }
-
-            var navCon = this.getView().byId("navContainerLoginPage");
-            var target = oEvent.getSource().data("target");
-
-            if (target) {
-                var animation = "show";
-                navCon.to(this.getView().byId(target), animation);
-            } else {
-                navCon.back();
             }
         },
 

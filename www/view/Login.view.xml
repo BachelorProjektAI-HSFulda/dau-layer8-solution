@@ -6,11 +6,6 @@
     xmlns:form="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <NavContainer
-        id="navContainerLoginPage"
-        width="100%"
-        height="100%"
-        class="navContainerControl sapUiSmallMarginBottom">
         <Page
             title="{i18n>loginPageTitle}"
             id="startPage"
@@ -47,7 +42,7 @@
                             icon="./images/google-icon.png"
                             intro="Log-in with Google"
                             type="Active"
-                            press="navToLoginView">
+                            press="onLoginPress">
                                 <customData>
                                     <core:CustomData
                                         key="target"
@@ -64,7 +59,7 @@
                             icon="./images/facebook-icon.png"
                             intro="Log-in with Facebook"
                             type="Active"
-                            press="navToLoginView">
+                            press="onLoginPress">
                                 <customData>
                                     <core:CustomData
                                         key="target"
@@ -98,60 +93,4 @@
                 </Toolbar>
             </footer>
         </Page>
-        <Page id="loginPage"
-              class="marginBoxContent">
-                <customHeader>
-                    <Bar>
-                        <contentMiddle>
-                            <Title id="pageLoginProviderTitle" />
-                        </contentMiddle>
-                        <contentLeft>
-                            <Button icon="sap-icon://nav-back" press="onPageBack">
-                                <customData>
-                                    <core:CustomData
-                                        key="target"
-                                        value="startPage" />
-                                </customData>
-                            </Button>
-                        </contentLeft>
-                    </Bar>
-                </customHeader>
-            <content>
-                <FlexBox
-                    alignItems="Start"
-                    justifyContent="Center">
-                    <items>
-                        <Image
-                           id="loginProviderImage"
-					       densityAware="false"
-                           width="120px"
-                           height="120px" />
-                    </items>
-                </FlexBox>
-<!--                fitContainer="true"-->
-                <VBox
-                      justifyContent="Center"
-                      alignItems="Center"
-                      alignContent="Center">
-                    <items>
-                        <Input id="idUserName" placeholder="{i18n>userIdInput}"></Input>
-                        <Input id="idPassword" placeholder="{i18n>userPasswordInput}" type="Password"></Input>
-                        <Button width="12rem" text="Login" type="Emphasized" press="onLoginPressed"></Button>
-                    </items>
-                </VBox>
-            </content>
-            <footer >
-                <Toolbar>
-    <!--
-                    <contentleft>
-                        <Text text="GoogleLogin"></Text>
-                    </contentleft>
-                    <contentRight>
-                        <Text text="FacebookLogin"></Text>
-                    </contentRight>
-    -->
-                </Toolbar>
-            </footer>
-         </Page>
-    </NavContainer>
 </mvc:View>

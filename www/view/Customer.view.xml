@@ -19,11 +19,17 @@
                             <Button icon="sap-icon://edit" press="onEdit" />
                         </contentLeft>
                         <contentMiddle>
-                            <Title id="customerTitle" />
+                            <Title id="customerTitle" text="{CampaignName}"/>
                         </contentMiddle>
                         <contentRight>
-                            <Button icon="sap-icon://camera" press="onTakePhoto"  />
-                            <Button icon="sap-icon://add" press="onAddCustomer">
+                            <Button icon="sap-icon://camera" press="onCapturePhoto">
+                                <customData>
+                                    <core:CustomData
+                                         key="target"
+                                         value="pageCapturePhoto" />
+                                </customData>
+                            </Button>
+                            <Button icon="sap-icon://add" press="onAddCustomerManual">
                                 <customData>
                                     <core:CustomData
                                         key="target"
@@ -35,7 +41,7 @@
                 </customHeader>
                 <l:VerticalLayout width="100%" >
                     <l:content>
-                        <List id="customerList" headerText="Customer" items="{/Customers}">
+                        <List id="customerList" headerText="Customer" >
                                 <!-- items="{/Customer}" binding="{/ProductCollection}" -->
                             <items>
                                 <StandardListItem
@@ -72,9 +78,6 @@
                                    class="sapUiSmallMarginTop sapUiTinyMarginBottom"
                                    tooltip="{i18n>customerCompany}" />
 							<Input id="inputCustomerCompany" placeholder="Enter customer company" />
-                              <Label text="Rating" labelFor="inputCustomerRating"/>
-                              <RatingIndicator id="inputCustomerRating" change="onRatingChanged" maxValue="5" class="sapUiSmallMarginBottom" value="4" iconSize="32px" tooltip="" />
-                              
                         </form:SimpleForm>
                     </VBox>
                 </l:Grid>
@@ -102,6 +105,24 @@
                                          value="pageShowCustomer" />
                                 </customData>
                             </Button>
+                        </content>
+                    </Toolbar>
+                 </footer>
+            </Page>
+            <Page id="pageCapturePhoto"
+                  title="Capture Photo">
+                <l:VerticalLayout width="100%" >
+                    <l:content>
+<!--
+                        <core:HTML heigth="100%" content="&lt;div&gt;&lt;/div&gt;">
+                        </core:HTML>
+-->
+                    </l:content>
+                </l:VerticalLayout>
+                    <footer>
+                    <Toolbar>
+                        <content>
+                            <Button text="take Photo"/>
                         </content>
                     </Toolbar>
                  </footer>
