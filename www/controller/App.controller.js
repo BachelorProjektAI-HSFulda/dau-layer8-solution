@@ -14,11 +14,6 @@ sap.ui.define([
             this.getView().addStyleClass("compact");
             // Set file create to false to check if a file exist
             this.setFileCreate(false);
-        },
-
-        saveData: function(){
-            console.log(this.getOwnerComponent());
-            //console.log(this.getOwnerComponent().getModel());
         }
 	});
 });

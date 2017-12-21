@@ -36,47 +36,71 @@ sap.ui.define([
         };
 
         DataManager.getFile = function(fileSystem, fnSuccess, fnError, mParameters){
-            // BusinessCardAppData6
-            fileSystem.root.getFile("AppData.txt", mParameters, fnSuccess, fnError);
+            fileSystem.root.getFile("BusinessCardAppData6.txt", mParameters, fnSuccess, fnError);
         };
 
-        DataManager.writeFile = function(fileEntry, fnSuccess, fnError, fnErrorReadFile, dataObj) {
+        DataManager.createPersistentFile = function(fileEntry, fnSuccess, fnError, data){
+            //this.writeFile(fileEntry, data);
+        };
 
+        DataManager.getFileWriter = function(fileEntry, fnSuccess, fnError){
+            fileEntry.createWriter(fnSuccess, fnError);
+        };
+
+        DataManager.writeFile = function(fileEntry, dataObj) {
+            // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function (fileWriter) {
 
-                fileWriter.onwriteend = function(fileEntry) {
-                    if(!dataObj){
-                        this.readFile(fileEntry, fnSuccess, fnErrorReadFile);
-                    } else {
-                        fnSuccess(fileEntry);
-                    }
+                fileWriter.onwriteend = function() {
+                    console.log("Successful file write...");
+                    //readFile(fileEntry);
+                    var fnOnErrorReadFile = function(){
+                        console.log("Error read file");
+                    };
+
+                    fileEntry.file(function (file) {
+                        var reader = new FileReader();
+                        reader.onloadend = function() {
+                            console.log("Successful file read: " + this.result);
+                            //displayFileData(fileEntry.fullPath + ": " + this.result);
+                        };
+                       reader.readAsText(file);
+                    }, fnOnErrorReadFile);
                 };
 
                 fileWriter.onerror = function (e) {
-                    fnError();
+                    console.log("Failed file write: " + e.toString());
                 };
 
-                // If data object is not passed in
+                // If data object is not passed in,
+                // create a new Blob instead.
                 if (!dataObj) {
-                    dataObj = '{}';
+                    //dataObj = "data/BusinessCardApp.json", { type: 'text/plain' });
                 }
+
                 fileWriter.write(dataObj);
             });
         };
 
-        DataManager.readFile = function(fileEntry, fnSuccess, fnError) {
+        DataManager.readFile = function(fileEntry) {
+
+            var fnOnErrorReadFile = function(){
+                console.log("Error read file");
+            };
 
             fileEntry.file(function (file) {
                 var reader = new FileReader();
 
                 reader.onloadend = function() {
-                    fnSuccess(fileEntry.fullPath, this.result);
+                    console.log("Successful file read: " + this.result);
+                    displayFileData(fileEntry.fullPath + ": " + this.result);
                 };
                 reader.readAsText(file);
-            }, fnError);
+            }, fnOnErrorReadFile);
         };
 
         return DataManager;
+
 });
 
 

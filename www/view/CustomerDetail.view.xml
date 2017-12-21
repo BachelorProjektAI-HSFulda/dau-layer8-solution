@@ -4,77 +4,50 @@
         xmlns="sap.m"
         xmlns:l="sap.ui.layout"
 	    xmlns:form="sap.ui.layout.form"
-        xmlns:blockcolor="sap.uxap.sample.ObjectPageFormLayout.block.blockscolor"
         xmlns:mvc="sap.ui.core.mvc"
         xmlns:core="sap.ui.core">
-        <ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true">
-            <headerTitle>
-                <ObjectPageHeader objectImageURI="./test-resources/sap/uxap/images/imageID_275314.png"
-                                  objectTitle="Denise Smith"
-                                  objectImageShape="Circle"
-                                  objectImageAlt="Denise Smith"
-                                  isObjectIconAlwaysVisible="true"
-                                  objectSubtitle="Senior UI Developer">
-                    <actions>
-                        <ObjectPageHeaderActionButton icon="sap-icon://pull-down" text="show section" type="Emphasized"/>
-                        <ObjectPageHeaderActionButton icon="sap-icon://show" text="show state" type="Emphasized"/>
-                    </actions>
-                    <breadCrumbsLinks>
-                        <Link text="Page 1 a very long link" press="handleLink1Press"/>
-                        <Link text="Page 2 long link" press="handleLink2Press"/>
-                    </breadCrumbsLinks>
-                </ObjectPageHeader>
-            </headerTitle>
-            <headerContent>
-                <l:VerticalLayout>
-                    <Link text="+33 6 4512 5158"/>
-                    <Link text="DeniseSmith@sap.com"/>
-                </l:VerticalLayout>
+         <Page id="pageShowCustomerDetails"
+                  title="Customer Details"
+                  class="sapUiContentPadding" >
+                <headerContent>
+                    <Button
+                        icon="sap-icon://settings"
+                        press="handleSettingsPressed" />
+                        <Button
+                        icon="sap-icon://add"
+                        press="onTest" />
+                </headerContent>
+                <l:VerticalLayout width="100%" >
+                    <l:content>
+                        <List id="customerDetailList" headerText="Customer Detail" items="{}">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <Title text="Products" level="H2" />
+                                    <ToolbarSpacer />
+                                    <Button icon="sap-icon://add" press="onEditCustomerDetail" >
+                                        <customData>
+                                            <core:CustomData
+                                                key="target"
+                                                value="pageAddCampaign" />
+                                        </customData>
+			                        </Button>
+                                </Toolbar>
+		                    </headerToolbar>
+                            <items>
+                            <StandardListItem
+                                 title="{CustomerName}"
+                                 description="{Company}"
+                                 type="Navigation" />
+                            </items>
+                        </List>
+                 </l:content>
+                 </l:VerticalLayout>
+                 <footer>
+                    <Toolbar>
+                        <content>
 
-                <l:VerticalLayout>
-                    <Label text="Hello! I am Denise and I use UxAP"/>
-                    <VBox height="63px">
-                        <Label text="Achieved goals"/>
-                        <ProgressIndicator
-                                percentValue="30"
-                                displayValue="30%"
-                                showValue="true"
-                                state="None"/>
-                    </VBox>
-                </l:VerticalLayout>
-
-                <l:VerticalLayout>
-                    <m:Label text="San Jose, USA"/>
-                </l:VerticalLayout>
-            </headerContent>
-            <sections>
-                <ObjectPageSection title="Personal">
-                    <subSections>
-                        <ObjectPageSubSection title=" ">
-                            <blocks>
-                                <personal:PersonalFormBlock id="personalinfo" columnLayout="4"/>
-                                <blockcolor:BlockBlue id="bbt1"/>
-                                <blockcolor:BlockBlue id="bbt2"/>
-                                <blockcolor:BlockBlue id="bbt3"/>
-                                <blockcolor:BlockBlue id="bbt4"/>
-                            </blocks>
-                        </ObjectPageSubSection>
-                    </subSections>
-                </ObjectPageSection>
-
-                <ObjectPageSection title="Employment">
-                    <subSections>
-                        <ObjectPageSubSection title="Employment">
-                            <blocks>
-                                <employment:BlockJobInfo id="jobinfo" columnLayout="2"/>
-                                <blockcolor:BlockBlue id="bbt5"/>
-                                <blockcolor:BlockBlue id="bbt6"/>
-                                <blockcolor:BlockBlue id="bbt7"/>
-                                <blockcolor:BlockBlue id="bbt8"/>
-                            </blocks>
-                        </ObjectPageSubSection>
-                    </subSections>
-                </ObjectPageSection>
-            </sections>
-        </ObjectPageLayout>
+                        </content>
+                    </Toolbar>
+                 </footer>
+            </Page>
     </mvc:View>

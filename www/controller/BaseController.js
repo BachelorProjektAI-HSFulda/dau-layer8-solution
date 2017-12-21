@@ -3,190 +3,141 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"hs/fulda/customer/management/misc/DataManager",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageBox",
-    "sap/m/MessageToast"
+	'sap/m/MessageBox',
+    'sap/m/MessageToast'
 ], function(Controller, History, DataManager, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 	return Controller.extend("hs.fulda.customer.management.controller.BaseController", {
         dataManager: DataManager,
-        /**
-         * Is called after the event "onDeviceReady" is called from cordova
-         * Only in this case the cordova container is ready
-         */
+
         requestFile: function(){
-            this.requestFileSystem();
+            MessageToast.show("on Device Ready - Base Controller");
+            //this.requestFileSystem();
         },
-        /**
-		 * Request File System to read/create a file
-         * @public
-		 */
+
         requestFileSystem: function(){
+            console.log("requestFileSystem");
             this.setFileCreate("false");
             this.dataManager.requestFileSystem($.proxy(this.onRequestFileSystemSuccess, this), $.proxy(this.onRequestFileSystemError, this));
         },
 
-         requestNewFileSystem: function(){
+        requestNewFileSystem: function(){
+            console.log("requestNewFileSystem");
             this.setFileCreate("true");
             this.dataManager.requestFileSystem($.proxy(this.onRequestNewFileSystemSuccess, this), $.proxy(this.onRequestFileSystemError, this));
         },
 
         /**
-		 * Success handler for method: requestileSystem
-         * @public
-		 */
-        onRequestFileSystemSuccess: function(fileSystem){
-            var mParameters = {
-                create: false,
-                exclusive: false
-            };
-            // Read File from File System
-            this.dataManager.getFile(fileSystem, $.proxy(this.getFileSuccess, this), $.proxy(this.getFileError, this), mParameters);
-        },
-        /**
-		 * Error handler for method: requestFileSystem
-         * @public
-		 */
-        onRequestFileSystemError: function(){
-            MessageToast.show(this.getResourceBundle().getText("statusFileSystemError"));
-        },
-        /**
-		 * Success Handler for method: requestNewFileSystem
-         * @public
+		 *
 		 */
         onRequestNewFileSystemSuccess: function(fileSystem){
+            console.log("onRequestNewFileSystemSuccess:");
+
             var mParameters = {
                 create: true,
                 exclusive: false
             };
             this.dataManager.getFile(fileSystem, $.proxy(this.getFileSuccess, this), $.proxy(this.getFileError, this), mParameters);
         },
-       /**
-		 * Success handler for read file success
-         * @public
+
+        /**
+		 *
+		 */
+        onRequestFileSystemSuccess: function(fileSystem){
+            console.log("onRequestFileSystemSuccess:");
+
+            var mParameters = {
+                create: false,
+                exclusive: false
+            };
+
+            this.dataManager.getFile(fileSystem, $.proxy(this.getFileSuccess, this), $.proxy(this.getFileError, this), mParameters);
+        },
+
+        /**
+		 *
+		 */
+        onRequestFileSystemError: function(oEvent){
+            MessageToast.show("onRequestFileSystemError");
+            console.log(oEvent);
+        },
+
+        /**
+		 *
 		 */
         getFileSuccess: function(fileEntry){
             var sCreateFile = this.getFileCreate();
 
             if(sCreateFile === "true"){
-                // Create and write new File
-                this.dataManager.writeFile(fileEntry, $.proxy(this.onCreateFileSuccess, this), $.proxy(this.onCreateFileError, this), $.proxy(this.onReadFileError, this));
+                this.dataManager.getFileWriter(fileEntry, $.proxy(this.onGetFileWriterSuccess, this), $.proxy(this.onGetFileWriterError, this));
             } else {
                 // Read File
-                this.dataManager.readFile(fileEntry, $.proxy(this.onReadFileSuccess, this), $.proxy(this.onReadFileError, this));
+                this.dataManager.createPersistentFile(fileEntry, $.proxy(this.onCreateFileSuccess, this), $.proxy(this.onCreateFileError, this), data);
             }
+
         },
+
         /**
-		 * Error handler that handles file errors
-         * In case of event 1 the file was not found
-         * on the file system and it is called a method to create a new one
-         * @public
+		 *
 		 */
         getFileError: function(oEvent){
+
             if(oEvent.code === 1){
                 this.requestNewFileSystem();
             } else if(oEvent.code === 4){
-                // File not readable
-                MessageToast.show(this.getResourceBundle().getText("statusReadFileError")+ "Error Code: 4");
+                MessageToast.show("File not readable");
             } else if(oEvent.code === 5){
-                // File encoding error
-                MessageToast.show(this.getResourceBundle().getText("statusReadFileError")+ "Error Code: 5");
+                MessageToast.show("File encoding error");
             } else {
                 MessageToast.show("Error Code:"+ oEvent.code);
             }
         },
 
-        /**
-		 *
-		 */
-        onCreateFileSuccess: function(sFullPath, sResult) {
-            this._setModel(sResult);
-        },
+        onGetFileWriterSuccess: function(fileWriter){
+            console.log("onGetFileWriterSuccess");
+            console.log(fileWriter);
 
-        /**
-		 *
-		 */
-        onCreateFileError: function(){
-            MessageToast.show(this.getResourceBundle().getText("statusCreateFileError"));
-        },
+            var data = "{}";
 
-        /**
-		 * Success handler for read file success
-         * @public
-		 */
-        onReadFileSuccess: function(sFullPath, sResult) {
-            this._setModel(sResult);
-        },
-
-        /**
-		 * Error handler for read file success
-         * @public
-		 */
-        onReadFileError: function(){
-            MessageToast.show(this.getResourceBundle().getText("statusReadFileError"));
-        },
-
-        /**
-         * Save App data globally
-         * @public
-         */
-        saveData: function(JSONData){
-            localStorage.JSONData = JSONData;
-            this.dataManager.requestFileSystem($.proxy(this.onRequestSaveFileSystemSuccess, this), $.proxy(this.onRequestFileSystemError, this));
-        },
-        /**
-         * Succes handler request file system (save)
-         */
-        onRequestSaveFileSystemSuccess: function(fileSystem){
-            var mParameters = {
-                create: false,
-                exclusive: false
+            // File writer success function
+            fileWriter.onwriteend = function() {
+                console.log("Successful file write...");
             };
-            // Read File from File System
-            this.dataManager.getFile(fileSystem, $.proxy(this.getSaveFileSuccess, this), $.proxy(this.getSaveFileError, this), mParameters);
-        },
-         /**
-		 * Success handler for read file
-         * @public
-		 */
-        getSaveFileSuccess: function(fileEntry){
-            var JSONData = localStorage.JSONData;
-            // Create and write new File
-            this.dataManager.writeFile(fileEntry, $.proxy(this.onWriteFileSuccess, this), $.proxy(this.onWriteFileError, this), $.proxy(this.onReadFileError, this), JSONData);
+
+            // File Writer error function
+            fileWriter.onerror = function (e) {
+                console.log("Failed file write: " + e.toString());
+            };
+
+            fileWriter.write(data);
+
         },
 
-        getSaveFileError: function(){
-            MessageToast.show(this.getResourceBundle().getText("statusWriteFileError"));
+        onGetFileWriterError: function(){
+            console.log("onCreateFileWriterError");
         },
+
         /**
-		 * Success handler write file
-         * @public
+		 *
 		 */
-        onWriteFileSuccess: function(fileEntry){
-            localStorage.removeItem("JSONData");
-            MessageToast.show(this.getResourceBundle().getText("statusDataSaved"));
+        onCreateFileSuccess: function(fileEntry) {
+            console.log("fileEntry is file?" + fileEntry.isFile.toString());
         },
+
         /**
-		 * error handler write file
-         * @public
+		 *
 		 */
-        onWriteFileError: function(){
-            MessageToast.show(this.getResourceBundle().getText("statusWriteFileError"));
+        onCreateFileError: function(oEvent){
+            console.log("onCreateFileError");
+            console.log(oEvent);
         },
+
         /**
-         * Method to parse the retrieved json data and
-         * publishes the event to bind the data
-         * Hint: Do not set the model here to the component, it is to early
-         *       so that the data gets displayed on the view
-         * @private
-         */
-        _setModel: function(oData){
-            // Parse retrieved JSON
-            var json = JSON.parse(oData);
-            // Publish event and pass json data to the views to set the model on the component
-            // Do not set the model here to the component, it is to early so that the data
-            // gets displayed on the view
-            var oEventBus = sap.ui.getCore().getEventBus();
-            oEventBus.publish("DataSetToModel", "DataReceived", json);
+		 *
+		 */
+        onResolveSuccess: function(fileEntry) {
+            console.log(fileEntry);
+            console.log(fileEntry.name);
         },
 
         /**
@@ -212,22 +163,12 @@ sap.ui.define([
 		 * @public
 		 */
         onNavBack: function(){
-            var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
-            console.log(oHistory);
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				var oRouter = this.getRouter();
-				oRouter.navTo("Login");
-			}
+            window.history.back();
         },
 
-        /**
-         * Lifecycle method to free objects on close of the app
-         * @private
-         */
-        onExit: function(){
+        onExit: function(oEvent){
+            console.log("onExit");
+            console.log(oEvent);
         },
         /**
          * Global Nav Back Handler
@@ -238,14 +179,16 @@ sap.ui.define([
         },
         /**
 		 * Setter method for boolean create
-		 * @private
+		 * @public
+		 *
 		 */
         setFileCreate: function(bCreateFile){
             localStorage.bCreateFile = bCreateFile;
         },
         /**
 		 * Getter method which returns the boolean create
-		 * @private
+		 * @public
+		 *
 		 */
         getFileCreate: function(){
             return localStorage.bCreateFile;
