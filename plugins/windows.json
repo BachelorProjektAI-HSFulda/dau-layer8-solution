@@ -11,6 +11,9 @@
       "FACEBOOK_APP_ID": "313753335786008",
       "FACEBOOK_DISPLAY_NAME": "BusinessCardApp",
       "PACKAGE_NAME": "HelloCordova"
+    },
+    "cordova-plugin-googleplus": {
+      "PACKAGE_NAME": "HelloCordova"
     }
   },
   "dependent_plugins": {}

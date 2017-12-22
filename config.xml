@@ -31,6 +31,9 @@
         <variable name="FACEBOOK_DISPLAY_NAME" value="BusinessCardApp" />
         <variable name="FACEBOOK_APP_ID" value="313753335786008" />
     </plugin>
+    <plugin name="cordova-plugin-googleplus" spec="https://github.com/EddyVerbruggen/cordova-plugin-googleplus">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.855269254217-5n7v4d9vqujeh6kn8cuoopab9ue5q02j" />
+    </plugin>
     <engine name="ios" spec="^4.5.4" />
     <engine name="android" spec="5.2.1" />
     <engine name="windows" spec="4.4.2" />
