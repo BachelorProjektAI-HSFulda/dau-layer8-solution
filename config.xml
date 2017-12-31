@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HelloCordova</name>
+    <name>BusinessCardApp</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
@@ -16,9 +16,28 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="android">
+        <icon src="res/icon/android/icon-36-ldpi.png" density="ldpi" />
+        <icon src="res/icon/android/icon-48-mdpi.png" density="mdpi" />
+        <icon src="res/icon/android/icon-72-hdpi.png" density="hdpi" />
+        <icon src="res/icon/android/icon-96-xhdpi.png" density="xhdpi" />
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
+        <icon height="180" src="res/icon/ios/Icon-180.png" width="180" />
+        <icon height="60" src="res/icon/ios/Icon-60.png" width="60" />
+        <icon height="120" src="res/icon/ios/Icon-120.png" width="120" />
+        <icon height="76" src="res/icon/ios/Icon-76.png" width="76" />
+        <icon height="152" src="res/icon/ios/Icon-152.png" width="152" />
+        <icon height="40" src="res/icon/ios/Icon-40.png" width="40" />
+        <icon height="80" src="res/icon/ios/Icon-80.png" width="80" />
+        <icon height="57" src="res/icon/ios/Icon-57.png" width="57" />
+        <icon height="114" src="res/icon/ios/Icon-57-2x.png" width="114" />
+        <icon height="72" src="res/icon/ios/Icon-72.png" width="72" />
+        <icon height="144" src="res/icon/ios/Icon-72-2x.png" width="144" />
+        <icon height="29" src="res/icon/ios/Icon-29.png" width="29" />
+        <icon height="58" src="res/icon/ios/Icon-58.png" width="58" />
+        <icon height="50" src="res/icon/ios/Icon-50.png" width="50" />
+        <icon height="100" src="res/icon/ios/Icon-100.png" width="100" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
@@ -34,7 +53,7 @@
     <plugin name="cordova-plugin-googleplus" spec="https://github.com/EddyVerbruggen/cordova-plugin-googleplus">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.855269254217-5n7v4d9vqujeh6kn8cuoopab9ue5q02j" />
     </plugin>
-    <engine name="ios" spec="^4.5.4" />
-    <engine name="android" spec="5.2.1" />
     <engine name="windows" spec="4.4.2" />
+    <engine name="android" spec="^7.0.0" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>

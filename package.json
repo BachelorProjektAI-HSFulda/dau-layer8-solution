@@ -10,7 +10,7 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
-    "cordova-android": "5.2.1",
+    "cordova-android": "^7.0.0",
     "cordova-ios": "^4.5.4",
     "cordova-plugin-camera": "^3.0.0",
     "cordova-plugin-facebook": "^0.2.2",
@@ -33,9 +33,9 @@
       }
     },
     "platforms": [
-      "ios",
+      "windows",
       "android",
-      "windows"
+      "ios"
     ]
   }
 }
