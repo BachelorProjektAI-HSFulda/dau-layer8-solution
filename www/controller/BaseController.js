@@ -230,12 +230,39 @@ sap.ui.define([
         captureSuccess: function(mediaFiles) {
             var i, path, len;
             for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-                path = mediaFiles[i].fullPath;
-                // do something interesting with the file
+                sPath = mediaFiles[i].fullPath;
+                // Store File Path to local Storage
+                this.setImagePath(sPath);
+                // Only for testing
                 MessageToast.show(path);
-
-                setTimeout(function(){ MessageToast.show(len); }, 6000);
+                this.dataManager.requestFileSystem($.proxy(this.onRequestFileSystemImageSuccess, this), $.proxy(this.onRequestFileSystemError, this));
             }
+        },
+
+        /* Success handler for method: requestileSystem
+         * @public
+		 */
+        onRequestFileSystemImageSuccess: function(fileSystem){
+
+            MessageToast.show("onRequestFileSystemImageSuccess");
+            var mParameters = {
+                create: false,
+                exclusive: false
+            };
+            // Read File from File System
+            this.dataManager.getImageFile(fileSystem,
+                                          $.proxy(this.getImageFileSuccess, this),
+                                          $.proxy(this.getFileError, this),
+                                          mParameters,
+                                          this.getImagePath());
+        },
+
+        /**
+         * Success handler: Get image file success
+         * @public
+         */
+        getImageFileSuccess: function(fileEntry){
+            MessageToast.show(fileEntry);
         },
 
         /**
@@ -243,6 +270,7 @@ sap.ui.define([
          * @public
          */
         captureError: function(error) {
+            // implement suitable error handling here
             navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
         },
 
@@ -279,6 +307,21 @@ sap.ui.define([
 		 */
         getFileCreate: function(){
             return localStorage.bCreateFile;
+        },
+
+         /**
+		 * Setter method for boolean create
+		 * @private
+		 */
+        setImagePath: function(sPath){
+            localStorage.imagePath = sPath;
+        },
+        /**
+		 * Getter method which returns the boolean create
+		 * @private
+		 */
+        getImagePath: function(){
+            return localStorage.imagePath;
         }
     });
 });

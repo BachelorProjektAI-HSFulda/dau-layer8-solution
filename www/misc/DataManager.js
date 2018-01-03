@@ -40,6 +40,10 @@ sap.ui.define([
             fileSystem.root.getFile("AppData.txt", mParameters, fnSuccess, fnError);
         };
 
+        DataManager.getImageFile = function(fileSystem, fnSuccess, fnError, mParameters, sPath){
+            fileSystem.root.getFile(sPath, mParameters, fnSuccess, fnError);
+        };
+
         DataManager.writeFile = function(fileEntry, fnSuccess, fnError, fnErrorReadFile, dataObj) {
 
             fileEntry.createWriter(function (fileWriter) {
