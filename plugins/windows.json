@@ -17,6 +17,9 @@
     },
     "cordova-plugin-media-capture": {
       "PACKAGE_NAME": "HelloCordova"
+    },
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "HelloCordova"
     }
   },
   "dependent_plugins": {

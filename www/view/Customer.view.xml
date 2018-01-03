@@ -22,7 +22,7 @@
                             <Title id="customerTitle" text="{CampaignName}"/>
                         </contentMiddle>
                         <contentRight>
-                            <Button icon="sap-icon://camera" press="onCapturePhoto">
+                            <Button icon="sap-icon://camera" press="startCapture">
                                 <customData>
                                     <core:CustomData
                                          key="target"

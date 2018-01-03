@@ -24,6 +24,13 @@
                     <Button
                         icon="sap-icon://add"
                         press="onTest" />
+                    <Button icon="sap-icon://camera" press="startCapture">
+                                <customData>
+                                    <core:CustomData
+                                         key="target"
+                                         value="pageCapturePhoto" />
+                                </customData>
+                            </Button>
 
                 </headerContent>
                 <l:VerticalLayout width="100%" >

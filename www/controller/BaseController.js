@@ -224,6 +224,36 @@ sap.ui.define([
         },
 
         /**
+         * success capture Image
+         * @public
+         */
+        captureSuccess: function(mediaFiles) {
+            var i, path, len;
+            for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                path = mediaFiles[i].fullPath;
+                // do something interesting with the file
+                MessageToast.show(path);
+
+                setTimeout(function(){ MessageToast.show(len); }, 6000);
+            }
+        },
+
+        /**
+         * error capture Image
+         * @public
+         */
+        captureError: function(error) {
+            navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+        },
+
+        /**
+         * Start capture Image
+         * @public
+         */
+        startCapture: function(){
+            navigator.device.capture.captureImage($.proxy(this.captureSuccess, this), $.proxy(this.captureError, this), {limit:1});
+        },
+        /**
          * Lifecycle method to free objects on close of the app
          * @private
          */

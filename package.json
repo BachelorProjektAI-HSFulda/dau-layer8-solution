@@ -11,6 +11,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "cordova-android": "^7.0.0",
+    "cordova-custom-config": "^5.0.2",
     "cordova-ios": "^4.5.4",
     "cordova-plugin-facebook": "^0.2.2",
     "cordova-plugin-file": "^5.0.0",
@@ -30,7 +31,10 @@
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.855269254217-5n7v4d9vqujeh6kn8cuoopab9ue5q02j"
       },
-      "cordova-plugin-media-capture": {}
+      "cordova-plugin-media-capture": {
+        "CAMERA_USAGE_DESCRIPTION": "BusinessCardApp"
+      },
+      "cordova-custom-config": {}
     },
     "platforms": [
       "windows",
