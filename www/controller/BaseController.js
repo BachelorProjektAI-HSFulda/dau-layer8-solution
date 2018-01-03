@@ -248,12 +248,14 @@ sap.ui.define([
                 create: false,
                 exclusive: false
             };
+            var sPath = this.getImagePath();
+            MessageToast.show(sPath);
             // Read File from File System
             this.dataManager.getImageFile(fileSystem,
                                           $.proxy(this.getImageFileSuccess, this),
                                           $.proxy(this.getFileError, this),
                                           mParameters,
-                                          this.getImagePath());
+                                          sPath);
         },
 
         /**
