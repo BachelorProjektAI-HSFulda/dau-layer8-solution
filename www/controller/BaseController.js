@@ -244,7 +244,6 @@ sap.ui.define([
 		 */
         onRequestFileSystemImageSuccess: function(fileSystem){
 
-            MessageToast.show("onRequestFileSystemImageSuccess");
             var mParameters = {
                 create: false,
                 exclusive: false
@@ -262,7 +261,7 @@ sap.ui.define([
          * @public
          */
         getImageFileSuccess: function(fileEntry){
-            MessageToast.show(fileEntry);
+            MessageToast.show("getImageFileSuccess");
         },
 
         /**
