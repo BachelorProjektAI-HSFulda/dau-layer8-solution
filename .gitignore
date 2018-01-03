@@ -15,4 +15,3 @@ platforms/*
 *.user
 bin
 /platforms/ios/www/Component.js
-/package.json
