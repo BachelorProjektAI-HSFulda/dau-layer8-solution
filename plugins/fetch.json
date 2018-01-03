@@ -15,14 +15,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-camera": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-camera@3.0.0"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-facebook": {
     "source": {
       "type": "registry",
@@ -43,5 +35,13 @@
     "variables": {
       "REVERSED_CLIENT_ID": "com.googleusercontent.apps.855269254217-5n7v4d9vqujeh6kn8cuoopab9ue5q02j"
     }
+  },
+  "cordova-plugin-media-capture": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-media-capture@^3.0.1"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

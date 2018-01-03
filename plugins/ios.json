@@ -7,9 +7,6 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-camera": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-facebook": {
       "FACEBOOK_APP_ID": "313753335786008",
       "FACEBOOK_DISPLAY_NAME": "BusinessCardApp",
@@ -23,6 +20,9 @@
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-media-capture": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },

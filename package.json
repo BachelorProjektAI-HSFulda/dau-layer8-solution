@@ -12,10 +12,10 @@
   "dependencies": {
     "cordova-android": "^7.0.0",
     "cordova-ios": "^4.5.4",
-    "cordova-plugin-camera": "^3.0.0",
     "cordova-plugin-facebook": "^0.2.2",
     "cordova-plugin-file": "^5.0.0",
     "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
+    "cordova-plugin-media-capture": "^3.0.1",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-windows": "4.4.2"
   },
@@ -23,14 +23,14 @@
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-camera": {},
       "cordova-plugin-facebook": {
         "FACEBOOK_DISPLAY_NAME": "BusinessCardApp",
         "FACEBOOK_APP_ID": "313753335786008"
       },
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.855269254217-5n7v4d9vqujeh6kn8cuoopab9ue5q02j"
-      }
+      },
+      "cordova-plugin-media-capture": {}
     },
     "platforms": [
       "windows",
