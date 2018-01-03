@@ -228,7 +228,7 @@ sap.ui.define([
          * @public
          */
         captureSuccess: function(mediaFiles) {
-            var i, path, len;
+            var i, sPath, len;
             for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                 sPath = mediaFiles[i].fullPath;
                 // Store File Path to local Storage
