@@ -26,8 +26,8 @@
         <splash height="480" src="res/screen/ios/screen-iphone-portrait.png" width="320" />
         <splash height="960" src="res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
         <splash height="1136" src="res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
-        <splash src="res/screen/ios/Default-667h.png" width="750" height="1334"/>
-        <splash src="res/screen/ios/Default-736h.png" width="1242" height="2208"/>
+        <splash height="1334" src="res/screen/ios/Default-667h.png" width="750" />
+        <splash height="2208" src="res/screen/ios/Default-736h.png" width="1242" />
         <icon height="180" src="res/icon/ios/Icon-180.png" width="180" />
         <icon height="60" src="res/icon/ios/Icon-60.png" width="60" />
         <icon height="120" src="res/icon/ios/Icon-120.png" width="120" />
