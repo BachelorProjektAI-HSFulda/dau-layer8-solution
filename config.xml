@@ -23,6 +23,11 @@
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
+        <splash height="480" src="res/screen/ios/screen-iphone-portrait.png" width="320" />
+        <splash height="960" src="res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
+        <splash height="1136" src="res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
+        <splash height="1334" src="res/screen/ios/Default-667h.png" width="750" />
+        <splash height="2208" src="res/screen/ios/Default-736h.png" width="1242" />
         <icon height="180" src="res/icon/ios/Icon-180.png" width="180" />
         <icon height="60" src="res/icon/ios/Icon-60.png" width="60" />
         <icon height="120" src="res/icon/ios/Icon-120.png" width="120" />
@@ -68,7 +73,8 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.855269254217-5n7v4d9vqujeh6kn8cuoopab9ue5q02j" />
     </plugin>
     <plugin name="cordova-custom-config" spec="^5.0.2" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.1" />
+    <plugin name="cordova-plugin-media-capture" spec="^3.0.1" />
     <engine name="windows" spec="4.4.2" />
     <engine name="android" spec="^7.0.0" />
-    <engine name="ios" spec="^4.5.4" />
 </widget>
