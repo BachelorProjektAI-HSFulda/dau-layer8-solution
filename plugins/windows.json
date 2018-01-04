@@ -20,6 +20,9 @@
     },
     "cordova-custom-config": {
       "PACKAGE_NAME": "HelloCordova"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "BusinessCardApp"
     }
   },
   "dependent_plugins": {
