@@ -257,8 +257,6 @@ sap.ui.define([
                 MessageToast.show('FileReader Error: ',oError.target.result);
             };
             reader.onloadend = function(fileObject) {
-                //MessageToast.show('we have the file:',fileObject);
-                MessageToast.show('the image data is in fileObject.target._result');
                 MessageToast.show(fileObject.target._result);
             };
             reader.readAsDataURL(file);
