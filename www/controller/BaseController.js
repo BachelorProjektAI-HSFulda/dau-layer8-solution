@@ -247,66 +247,35 @@ sap.ui.define([
                 exclusive: false
             };
             var sPath = this.getImagePath();
-            this.convertPath(sPath);
+            navigator.camera.getPicture(
+                  function (fileURI){
+                     MessageToast.show(fileURI);
+                     /* remove the comment below to use with
+                      * the rest of the code on this page
+                      */
+                     //convertPath(fileURI);
+                  },
+                  function (err){
+                     // fail
+                     MessageToast.show('fail',err);
+                  },
+                  {
+                     allowEdit: true,
+                     correctOrientation: true,
+                     destinationType: Camera.DestinationType.FILE_URI,
+                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                     targetHeight: window.innerHeight,
+                     targetWidth: window.innerWidth
+                  }
+           );
+
+
             // Read File from File System
 //            this.dataManager.getImageFile(fileSystem,
 //                                          $.proxy(this.getImageFileSuccess, this),
 //                                          $.proxy(this.getFileError, this),
 //                                          mParameters,
 //                                          sPath);
-        },
-         /**
-        * This takes a file:// URI and creates a file entry object. The operation is asynch,
-        * so the resulting fileEntry object is passed to the success callback.
-        * @type {Function}
-        * @name convertPath
-        * @param {String} fileURI - the file:// path to the resource
-        * @return {} Returns nothing
-        */
-        convertPath: function(fileURI){
-            window.resolveLocalFileSystemURL(
-                fileURI,
-                function(fileEntry){
-                    MessageToast.show("getFileSuccess");
-                    $.proxy(this.getFileSuccessTest(fileEntry), this);
-            });
-        },
-
-       /**
-        * This starts the read process via the file entry object. This is asynch, so the file is passed to the success callback
-        * @type {Function}
-        * @name getFileSuccess
-        * @param {Object} fileEntry - the file entry object
-        * @return {} Returns nothing
-        */
-        getFileSuccessTest: function(fileEntry){
-            fileEntry.file(
-                $.proxy(this.readFile(), this), // success
-                function(err){ // failure
-                    MessageToast.show("Failed to get file");
-                }
-            );
-        },
-
-       /**
-        * This creates a file reader using the file object that is passed to it.
-        * Note how similar this is to programatically creating an image and loading data into it.
-        * @type {Function}
-        * @name readFile
-        * @param {Object} file - file object
-        * @return {} Returns nothing
-        */
-        readFile: function(file){
-            console.log('got file...',file);
-            var reader = new window.FileReader();
-            reader.oneerror = function(e){
-                console.log('FileReader Error: ',e.target.result);
-            };
-            reader.onloadend = function(fileObject) {
-                console.log('we have the file:',fileObject);
-                console.log('the image data is in fileObject.target._result');
-            };
-            reader.readAsDataURL(file);
         },
 
         /**
