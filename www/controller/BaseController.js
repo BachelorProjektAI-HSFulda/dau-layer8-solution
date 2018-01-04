@@ -231,40 +231,14 @@ sap.ui.define([
             var i, sPath, len;
             for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                 sPath = mediaFiles[i].fullPath;
+                var sPathFull = "file://"+sPath;
                 // Store File Path to local Storage
-                this.setImagePath(sPath);
-                this.dataManager.requestFileSystem($.proxy(this.onRequestFileSystemImageSuccess, this), $.proxy(this.onRequestFileSystemError, this));
+                this.setImagePath(sPathFull);
+                MessageToast.show(sPathFull);
+
+                // Read File from File System
+                this.dataManager.getImageFile($.proxy(this.getImageFileSuccess, this), $.proxy(this.getFileError, this), sPathFull);
             }
-        },
-
-        /* Success handler for method: requestileSystem
-         * @public
-		 */
-        onRequestFileSystemImageSuccess: function(fileSystem){
-
-            var mParameters = {
-                create: false,
-                exclusive: false
-            };
-            var sPath = "file://"+this.getImagePath();
-            MessageToast.show(sPath);
-
-            window.resolveLocalFileSystemURL(
-                sPath,
-                function(fileEntry){
-                    MessageToast.show("Get File Success");
-                },
-                function(err){
-                    MessageToast.show("Get File Error");
-                }
-            );
-
-            // Read File from File System
-//            this.dataManager.getImageFile(fileSystem,
-//                                          $.proxy(this.getImageFileSuccess, this),
-//                                          $.proxy(this.getFileError, this),
-//                                          mParameters,
-//                                          sPath);
         },
 
         /**
