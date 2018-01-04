@@ -233,8 +233,6 @@ sap.ui.define([
                 sPath = mediaFiles[i].fullPath;
                 // Store File Path to local Storage
                 this.setImagePath(sPath);
-                // Only for testing
-                MessageToast.show(sPath);
                 this.dataManager.requestFileSystem($.proxy(this.onRequestFileSystemImageSuccess, this), $.proxy(this.onRequestFileSystemError, this));
             }
         },

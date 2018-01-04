@@ -34,6 +34,10 @@ sap.ui.define([
             this.getView().byId("statusErrorCreateCampaign").setVisible(false);
             this.getView().byId("statusInformationCreateCampaign").setVisible(false);
 
+            // request Filesystem -->Pre-Fix
+            // WICHTIg: muss noch ordentlich gemacht werden
+            this.requestFileSystem();
+
             if(!navCon){
                 var navCon = this.getView().byId("navContainerCampaignList");
             }
