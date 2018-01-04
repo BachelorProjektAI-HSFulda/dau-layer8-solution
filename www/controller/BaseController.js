@@ -249,16 +249,20 @@ sap.ui.define([
             var sPath = this.getImagePath();
             MessageToast.show(sPath);
 
-            var gotFile = function(entry){
-                MessageToast.show(entry.isDirectory);
-            };
+            var fnError = function(){
+                MessageToast.show("Read error");
+            }
 
-            var fail = function(){
-                MessageToast.show("error got file");
-            };
-
-            // Test
-            window.resolveLocalFileSystemURL(sPath, gotFile, fail);
+            window.resolveLocalFileSystemURL(sPath, function(fileEntry) {
+                fileEntry.file(function(file) {
+                    var reader = new FileReader();
+                    reader.onloadend = function(event) {
+                        MessageToast.show("File gelesen");
+                    };
+                    console.log('Reading file: ' + file.name);
+                    reader.readAsArrayBuffer(file);
+                });
+            }, fnError);
 
             // Read File from File System
             this.dataManager.getImageFile(fileSystem,
