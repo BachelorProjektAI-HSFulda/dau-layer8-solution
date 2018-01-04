@@ -246,29 +246,18 @@ sap.ui.define([
                 create: false,
                 exclusive: false
             };
-            var sPath = this.getImagePath();
-            navigator.camera.getPicture(
-                  function (fileURI){
-                     MessageToast.show(fileURI);
-                     /* remove the comment below to use with
-                      * the rest of the code on this page
-                      */
-                     //convertPath(fileURI);
-                  },
-                  function (err){
-                     // fail
-                     MessageToast.show('fail',err);
-                  },
-                  {
-                     allowEdit: true,
-                     correctOrientation: true,
-                     destinationType: Camera.DestinationType.FILE_URI,
-                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                     targetHeight: window.innerHeight,
-                     targetWidth: window.innerWidth
-                  }
-           );
+            var sPath = "file://"+this.getImagePath();
+            MessageToast.show(sPath);
 
+            window.resolveLocalFileSystemURL(
+                sPath,
+                function(fileEntry){
+                    MessageToast.show("Get File Success");
+                },
+                function(err){
+                    MessageToast.show("Get File Error");
+                }
+            );
 
             // Read File from File System
 //            this.dataManager.getImageFile(fileSystem,
