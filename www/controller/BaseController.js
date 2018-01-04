@@ -233,8 +233,6 @@ sap.ui.define([
                 sPath = mediaFiles[i].fullPath;
                 // Store File Path to local Storage
                 this.setImagePath(sPath);
-                // Only for testing
-                MessageToast.show(sPath);
                 this.dataManager.requestFileSystem($.proxy(this.onRequestFileSystemImageSuccess, this), $.proxy(this.onRequestFileSystemError, this));
             }
         },
@@ -250,6 +248,18 @@ sap.ui.define([
             };
             var sPath = this.getImagePath();
             MessageToast.show(sPath);
+
+            var gotFile = function(entry){
+                MessageToast.show(entry.isDirectory);
+            };
+
+            var fail = function(){
+                MessageToast.show("error got file");
+            };
+
+            // Test
+            window.resolveLocalFileSystemURL(sPath, gotFile, fail);
+
             // Read File from File System
             this.dataManager.getImageFile(fileSystem,
                                           $.proxy(this.getImageFileSuccess, this),
