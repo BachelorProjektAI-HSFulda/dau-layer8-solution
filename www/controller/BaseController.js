@@ -268,8 +268,8 @@ sap.ui.define([
                 fileURI,
                 function(fileEntry){
                     MessageToast.show("getFileSuccess");
-                    this.getFileSuccessTest(fileEntry);
-                });
+                    $.proxy(this.getFileSuccessTest(fileEntry), this);
+            });
         },
 
        /**
@@ -281,7 +281,7 @@ sap.ui.define([
         */
         getFileSuccessTest: function(fileEntry){
             fileEntry.file(
-                this.readFile(), // success
+                $.proxy(this.readFile(), this), // success
                 function(err){ // failure
                     MessageToast.show("Failed to get file");
                 }
