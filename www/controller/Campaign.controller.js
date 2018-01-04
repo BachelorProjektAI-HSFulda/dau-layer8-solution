@@ -22,11 +22,6 @@ sap.ui.define([
             oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
         },
 
-        onTest: function(){
-            console.log("onTest");
-            this.requestFileSystem();
-        },
-
         /**
          * Adds a campaign in the app
          */
