@@ -23,6 +23,7 @@ sap.ui.define([
         },
 
         onTest: function(){
+            this.initClarifai();
             console.log("onTest");
             this.requestFileSystem();
         },

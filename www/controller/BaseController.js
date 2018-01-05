@@ -10,6 +10,16 @@ sap.ui.define([
 	return Controller.extend("hs.fulda.customer.management.controller.BaseController", {
         dataManager: DataManager,
         /**
+         * Init Clarifai app reference constant
+         */
+        initClarifai: function(){
+            const app = new Clarifai.App({
+                apiKey: "fd1e0050a5ba40379c658727abe0c405"
+            });
+            console.log(app);
+        },
+
+        /**
          * Is called after the event "onDeviceReady" is called from cordova
          * Only in this case the cordova container is ready
          */
