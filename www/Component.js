@@ -21,6 +21,7 @@ sap.ui.define([
             document.addEventListener("deviceready", this.onDeviceReady, false);
             // Register event listener on resume
             document.addEventListener("resume", this.onResume, false);
+            // Init Clarifai
 		},
         /**
          * Event is called when the app gets opened on iOS

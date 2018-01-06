@@ -22,6 +22,12 @@ sap.ui.define([
             oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
         },
 
+        onTest: function(){
+            this.initClarifai();
+            console.log("onTest");
+            this.requestFileSystem();
+        },
+
         /**
          * Adds a campaign in the app
          */
