@@ -20,11 +20,11 @@ sap.ui.define([
                 var oJSONResult = JSON.parse(this.response);
             });
             // Set URI
-            xhr.open("POST", " https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAC_P9gkAVcdaipBKPiP4dZE7tb7uMOYMA");
+            xhr.open("POST", " https://vision.googleapis.com/v1/images:annotate?key="");
             // Adding Request Headers
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("APIKey", "AIzaSyAC_P9gkAVcdaipBKPiP4dZE7tb7uMOYMA");
+            xhr.setRequestHeader("APIKey", "");
             // Send data to the google vision api
             xhr.send(imageData);
         },
