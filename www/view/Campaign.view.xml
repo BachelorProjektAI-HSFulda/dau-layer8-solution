@@ -23,9 +23,6 @@
                     <Button
                         icon="sap-icon://settings"
                         press="handleSettingsPressed" />
-                    <Button
-                        icon="sap-icon://add"
-                        press="onTest" />
                     <Button icon="sap-icon://camera" press="startCapture">
                                 <customData>
                                     <core:CustomData
