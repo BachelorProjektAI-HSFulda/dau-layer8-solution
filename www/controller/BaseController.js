@@ -10,13 +10,23 @@ sap.ui.define([
 	return Controller.extend("hs.fulda.customer.management.controller.BaseController", {
         dataManager: DataManager,
         /**
-         * Init Clarifai app reference constant
+         * Init Google Vision api
          */
-        initClarifai: function(){
-            const app = new Clarifai.App({
-                apiKey: "fd1e0050a5ba40379c658727abe0c405"
+        sendDataToGoogleVisionAPI: function(imageData){
+            // Init
+            var xhr = XMLHttpRequest();
+
+            xhr.addEventListener("readystatechange", function(){
+                var oJSONResult = JSON.parse(this.response);
             });
-            console.log(app);
+            // Set URI
+            xhr.open("POST", " https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAC_P9gkAVcdaipBKPiP4dZE7tb7uMOYMA");
+            // Adding Request Headers
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("APIKey", "AIzaSyAC_P9gkAVcdaipBKPiP4dZE7tb7uMOYMA");
+            // Send data to the google vision api
+            xhr.send(imageData);
         },
 
         /**
@@ -268,6 +278,7 @@ sap.ui.define([
             };
             reader.onloadend = function(fileObject) {
                 MessageToast.show(fileObject.target._result);
+                this.sendDataToGoogleVisionAPI(fileObject.target._result);
             };
             reader.readAsDataURL(file);
         },
