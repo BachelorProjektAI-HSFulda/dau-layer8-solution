@@ -14,12 +14,12 @@ sap.ui.define([
          */
         sendDataToGoogleVisionAPI: function(imageData){
             // Init
-            var xhr = XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
 
             xhr.addEventListener("readystatechange", function(){
                 if (this.readyState === this.DONE) {
                     var oJSONResult = JSON.parse(this.response);
-                    MessageToast.show("Success send");
+                    MessageToast.show(this.response);
 	            }
             });
             // Set URI
