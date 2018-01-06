@@ -272,6 +272,7 @@ sap.ui.define([
         },
 
         readFile: function(file){
+            var that = this;
             MessageToast.show('got file...',file);
             var reader = new window.FileReader();
             reader.oneerror = function(oError){
@@ -279,7 +280,7 @@ sap.ui.define([
             };
             reader.onloadend = function(fileObject) {
                 MessageToast.show(fileObject.target._result);
-                this.sendDataToGoogleVisionAPI(fileObject.target._result);
+                that.sendDataToGoogleVisionAPI(fileObject.target._result);
             };
             reader.readAsDataURL(file);
         },
