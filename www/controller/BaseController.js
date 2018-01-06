@@ -17,15 +17,17 @@ sap.ui.define([
             var xhr = XMLHttpRequest();
 
             xhr.addEventListener("readystatechange", function(){
-                var oJSONResult = JSON.parse(this.response);
-                MessageToast.show("Success send");
+                if (this.readyState === this.DONE) {
+                    var oJSONResult = JSON.parse(this.response);
+                    MessageToast.show("Success send");
+	            }
             });
             // Set URI
             xhr.open("POST", " https://vision.googleapis.com/v1/images:annotate?key=''");
             // Adding Request Headers
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("APIKey", "");
+            xhr.setRequestHeader("Authorization", "");
             // Send data to the google vision api
             xhr.send(imageData);
         },
