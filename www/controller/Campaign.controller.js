@@ -22,15 +22,12 @@ sap.ui.define([
             oEventBus.subscribe("DataSetToModel", "DataReceived", this._refresh, this);
         },
 
-<<<<<<< HEAD
         onTest: function(){
             this.initClarifai();
             console.log("onTest");
             this.requestFileSystem();
         },
 
-=======
->>>>>>> BusinessCardApp/master
         /**
          * Adds a campaign in the app
          */
