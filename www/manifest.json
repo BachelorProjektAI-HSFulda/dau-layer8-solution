@@ -73,7 +73,7 @@
 		  "target": "Customer"
 		},
         {
-		  "pattern": "Customer",
+		  "pattern": "/CustomerDetail",
 		  "name": "CustomerDetail",
 		  "target": "CustomerDetail"
 		},

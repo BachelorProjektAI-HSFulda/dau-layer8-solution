@@ -132,7 +132,6 @@ sap.ui.define([
 				navCon.back();
 			}
 
-            //navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1});
             var oCamera = navigator.camera;
             oCamera.getPicture(this.onCaptureSuccess, this.onCaptureError, { quality: 10, destinationType: oCamera.DestinationType.DATA_URL });
         },
