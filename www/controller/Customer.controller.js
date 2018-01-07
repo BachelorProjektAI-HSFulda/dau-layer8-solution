@@ -49,7 +49,7 @@ sap.ui.define([
         /**
          *
          */
-        onCustomerItemPressed: function(){
+        onCustomerItemPressed: function(oEvent){
             var oItem = oEvent.getSource();
 			var oRouter = this.getRouter();
             var sPath = oItem.getBindingContext().getPath();
@@ -57,9 +57,6 @@ sap.ui.define([
             //console.log(object.CampaignId);
 
 			oRouter.navTo("CustomerDetail");
-//                          ", {
-//				CampaignId: object.CampaignId
-//			});
         },
 
         /**
