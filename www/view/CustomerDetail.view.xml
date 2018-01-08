@@ -7,31 +7,36 @@
         xmlns:blockcolor="sap.uxap.sample.ObjectPageFormLayout.block.blockscolor"
         xmlns:mvc="sap.ui.core.mvc"
         xmlns:core="sap.ui.core">
-        <ObjectHeader
-		id="oh1"
-		responsive="true"
-		binding="{}"
-		icon=""
-		iconAlt="Test"
-		intro="Test Beschreibung"
-		title="Test Titel"
-		showMarkers="false"
-		markFlagged="true"
-		markFavorite="true"
-		backgroundDesign="Translucent">
-		<attributes>
-			<ObjectAttribute
-				title="Manufacturer"
-				text="Test Lieferant"/>
-			<ObjectAttribute
-				title="Dimension per unit"
-				text="Width x Depth x Height"/>
-		</attributes>
-		<statuses>
-			<ObjectStatus
-				title="Approval"
-				text="Pending"
-				state="Warning"/>
-		</statuses>
-	</ObjectHeader>
+        <Page id="pageShowCustomerDetail"
+                  title="{i18n>customerDetailHeaderTitle}"
+                  showNavButton="true"
+                  navButtonPress="onNavBack"
+                  class="sapUiContentPadding" >
+            <ObjectHeader
+            id="objHeaderCustomerDetail"
+            responsive="true"
+            icon=""
+            iconAlt="Test"
+            intro=""
+            title="{CustomerName}"
+            showMarkers="false"
+            markFlagged="true"
+            markFavorite="true"
+            backgroundDesign="Translucent">
+                <attributes>
+                    <ObjectAttribute
+                        title="{CustomerName}"
+                        text="{Company}"/>
+                    <ObjectAttribute
+                        title="Dimension per unit"
+                        text="Width x Depth x Height"/>
+                </attributes>
+                <statuses>
+                    <ObjectStatus
+                        title="Approval"
+                        text="Pending"
+                        state="Warning"/>
+                </statuses>
+            </ObjectHeader>
+        </Page>
     </mvc:View>

@@ -56,7 +56,7 @@ sap.ui.define([
 			var oRouter = this.getRouter();
             var sPath = oItem.getBindingContext().getPath();
             var object = oItem.getModel().getProperty(sPath);
-
+            console.log(object);
 			oRouter.navTo("Customer", {
 				CampaignId: object.CampaignId
 			});

@@ -29,20 +29,25 @@
                                          value="pageCapturePhoto" />
                                 </customData>
                             </Button>
-                            <Button icon="sap-icon://add" press="onAddCustomerManual">
-                                <customData>
-                                    <core:CustomData
-                                        key="target"
-                                        value="pageAddCustomerManual" />
-                                </customData>
-                        </Button>
                         </contentRight>
                     </Bar>
                 </customHeader>
                 <l:VerticalLayout width="100%" >
                     <l:content>
                         <List id="customerList" headerText="Customer" >
-                                <!-- items="{/Customer}" binding="{/ProductCollection}" -->
+                           <headerToolbar>
+                                <Toolbar>
+                                    <Title text="{i18n>customerTitle}" level="H2" />
+                                    <ToolbarSpacer />
+                                    <Button icon="sap-icon://add" press="onAddCustomerManual" >
+                                        <customData>
+                                            <core:CustomData
+                                                key="target"
+                                                value="pageAddCustomerManual" />
+                                        </customData>
+			                        </Button>
+                                </Toolbar>
+		                    </headerToolbar>
                             <items>
                                 <StandardListItem
                                      id="columnListItemCustomer"

@@ -56,7 +56,10 @@ sap.ui.define([
             var object = oItem.getModel().getProperty(sPath);
             //console.log(object.CampaignId);
 
-			oRouter.navTo("CustomerDetail");
+			oRouter.navTo("CustomerDetail", {
+                CampaignId: this.iCampaignId,
+                CustomerId: object.CustomerId
+            });
         },
 
         /**
@@ -166,13 +169,21 @@ sap.ui.define([
         },
 
         onSaveCustomer: function(oEvent){
+            var iCustomerId;
+            var binding = this.getView().byId("customerList").getBinding("items");
+
+            if(binding === undefined){
+                iCustomerId = 1;
+            } else {
+                iCustomerId = this.getView().byId("customerList").getBinding("items").getLength()+1;
+            }
 
             if(!oModel){
                 var oModel = this.getView().getModel();
             }
-            console.log("error");
-         //   var oNewCustomerData = {};
+
             var oNewCustomerData = {
+                "CustomerId": iCustomerId,
                 "CustomerName" : "",
                 "Company" : ""
             };
