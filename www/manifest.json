@@ -73,7 +73,7 @@
 		  "target": "Customer"
 		},
         {
-		  "pattern": "Customer",
+		  "pattern": "CustomerDetail/{CampaignId}/{CustomerId}",
 		  "name": "CustomerDetail",
 		  "target": "CustomerDetail"
 		},

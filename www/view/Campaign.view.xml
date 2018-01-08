@@ -17,20 +17,16 @@
                   navButtonPress="onNavBack"
                   class="sapUiContentPadding" >
                 <headerContent>
-                     <Button
-                        icon="sap-icon://settings"
-                        press="onTest" />
                     <Button
                         icon="sap-icon://settings"
                         press="handleSettingsPressed" />
                     <Button icon="sap-icon://camera" press="startCapture">
-                                <customData>
-                                    <core:CustomData
-                                         key="target"
-                                         value="pageCapturePhoto" />
-                                </customData>
-                            </Button>
-
+                        <customData>
+                            <core:CustomData
+                             key="target"
+                             value="pageCapturePhoto" />
+                        </customData>
+                    </Button>
                 </headerContent>
                 <l:VerticalLayout width="100%" >
                     <l:content>

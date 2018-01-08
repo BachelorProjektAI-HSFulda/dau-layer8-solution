@@ -19,8 +19,6 @@ sap.ui.define([
             var oRouter = this.getRouter();
             oRouter.getRoute("CustomerDetail").attachPatternMatched(this._onObjectMatched, this);
 
-            this._oItemTemplate = this.getView().byId("columnListItemCustomer").clone();
-
         },
 
         /**
@@ -28,8 +26,15 @@ sap.ui.define([
          * @private
          */
         _onObjectMatched: function(oEvent){
-            //this.iCampaignId = oEvent.getParameter("arguments").CampaignId-1;
-            this.itemBindingPath = "/Campaigns/"+this.iCampaignId+"/Customer";
+            this.iCampaignId = oEvent.getParameter("arguments").CampaignId;
+            this.iCustomerId = oEvent.getParameter("arguments").CustomerId-1;
+            var sItemBindingPath = "/Campaigns/"+this.iCampaignId+"/Customer/"+this.iCustomerId;
+            console.log(sItemBindingPath);
+            // Set Binding
+            var oObjectHeaderCustomerDetail = this.getView().byId("objHeaderCustomerDetail");
+            oObjectHeaderCustomerDetail.bindElement({
+                path: sItemBindingPath
+            });
         }
 	});
 });

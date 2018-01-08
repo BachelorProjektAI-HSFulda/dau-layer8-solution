@@ -49,17 +49,17 @@ sap.ui.define([
         /**
          *
          */
-        onCustomerItemPressed: function(){
+        onCustomerItemPressed: function(oEvent){
             var oItem = oEvent.getSource();
 			var oRouter = this.getRouter();
             var sPath = oItem.getBindingContext().getPath();
             var object = oItem.getModel().getProperty(sPath);
             //console.log(object.CampaignId);
 
-			oRouter.navTo("CustomerDetail");
-//                          ", {
-//				CampaignId: object.CampaignId
-//			});
+			oRouter.navTo("CustomerDetail", {
+                CampaignId: this.iCampaignId,
+                CustomerId: object.CustomerId
+            });
         },
 
         /**
@@ -132,7 +132,6 @@ sap.ui.define([
 				navCon.back();
 			}
 
-            //navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1});
             var oCamera = navigator.camera;
             oCamera.getPicture(this.onCaptureSuccess, this.onCaptureError, { quality: 10, destinationType: oCamera.DestinationType.DATA_URL });
         },
@@ -170,13 +169,21 @@ sap.ui.define([
         },
 
         onSaveCustomer: function(oEvent){
+            var iCustomerId;
+            var binding = this.getView().byId("customerList").getBinding("items");
+
+            if(binding === undefined){
+                iCustomerId = 1;
+            } else {
+                iCustomerId = this.getView().byId("customerList").getBinding("items").getLength()+1;
+            }
 
             if(!oModel){
                 var oModel = this.getView().getModel();
             }
-            console.log("error");
-         //   var oNewCustomerData = {};
+
             var oNewCustomerData = {
+                "CustomerId": iCustomerId,
                 "CustomerName" : "",
                 "Company" : ""
             };
