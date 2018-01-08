@@ -15,6 +15,10 @@ sap.ui.define([
         sendDataToGoogleVisionAPI: function(imageData){
             // Init
             var xhr = new XMLHttpRequest();
+            var token = "AIzaSyAr5pmJ22gDjoall0ffQAxKlM28gNXR4kw";
+
+            var data = '{"requests": [{"image": {"content": sBaseImage},"features": [{"type": "TEXT_DETECTION"}]}]}';
+
 
             xhr.addEventListener("readystatechange", function(){
                 if (this.readyState === this.DONE) {
@@ -23,13 +27,13 @@ sap.ui.define([
 	            }
             });
             // Set URI
-            xhr.open("POST", " https://vision.googleapis.com/v1/images:annotate?key=''");
+            xhr.open("POST", " https://vision.googleapis.com/v1/images:annotate?key=" + token);
             // Adding Request Headers
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Authorization", "");
+            xhr.setRequestHeader("Authorization", token);
             // Send data to the google vision api
-            xhr.send(imageData);
+            xhr.send(data);
         },
 
         /**
@@ -275,6 +279,7 @@ sap.ui.define([
 
         readFile: function(file){
             var that = this;
+
             MessageToast.show('got file...',file);
             var reader = new window.FileReader();
             reader.oneerror = function(oError){
@@ -283,6 +288,7 @@ sap.ui.define([
             reader.onloadend = function(fileObject) {
                 MessageToast.show(fileObject.target._result);
                 that.sendDataToGoogleVisionAPI(fileObject.target._result);
+                var sBaseImage = fileObject.target._result;
             };
             reader.readAsDataURL(file);
         },
