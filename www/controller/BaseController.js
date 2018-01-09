@@ -24,10 +24,10 @@ sap.ui.define([
                 if (this.readyState === this.DONE) {
                     var oJSONRequestObject = new JSONModel();
                     oJSONResponseObject.setData(this.response);
-                    var oTextProperty = oJSONResponseObject.getProperty("text");
-                    var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+//                    var oTextProperty = oJSONResponseObject.getProperty("text");
+//                    var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
                     MessageBox.alert(
-                        oTextProperty,
+                        this.response,
                         {
                             styleClass: bCompact ? "sapUiSizeCompact" : ""
                         }

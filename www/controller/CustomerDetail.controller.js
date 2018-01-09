@@ -39,7 +39,6 @@ sap.ui.define([
             oTextAreaCustomerDetailNotes.bindElement({
                 path: sItemBindingPath
             });
-            console.log("Test");
         },
         /**
          * This method exports the customer data to the file System as a contact
