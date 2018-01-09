@@ -19,15 +19,17 @@ sap.ui.define([
             var n = imageData.search(",");
             imageData = imageData.substring(n+1, imageData.length);
             imageData = imageData.trim();
+            var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+
 
             xhr.addEventListener("readystatechange", function(){
                 if (this.readyState === this.DONE) {
-                    var oJSONRequestObject = new JSONModel();
-                    oJSONResponseObject.setData(this.response);
-                    var oTextProperty = oJSONResponseObject.getProperty("text");
-                    var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+                    var oJSONResponseObject = new JSONModel();
+                    var sResponseJSON = this.response;
+                    oJSONResponseObject.setJSON(sResponseJSON);
+                    var sStringTanga = oJSONResponseObject.getProperty("/responses");
                     MessageBox.alert(
-                        oTextProperty,
+                        sStringTanga,
                         {
                             styleClass: bCompact ? "sapUiSizeCompact" : ""
                         }
@@ -298,7 +300,6 @@ sap.ui.define([
                 MessageToast.show('FileReader Error: ',oError.target.result);
             };
             reader.onloadend = function(fileObject) {
-//                MessageToast.show(fileObject.target._result);
                 that.sendDataToGoogleVisionAPI(fileObject.target._result);
             };
             reader.readAsDataURL(file);
