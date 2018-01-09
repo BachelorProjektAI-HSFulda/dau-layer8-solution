@@ -185,7 +185,11 @@ sap.ui.define([
             var oNewCustomerData = {
                 "CustomerId": iCustomerId,
                 "CustomerName" : "",
-                "Company" : ""
+                "Company" : "",
+                "Telephone" : "",
+                "EMail" : "",
+                "Rating": "",
+                "Notes": ""
             };
 
             if(!oInputCustomerName){
@@ -198,13 +202,40 @@ sap.ui.define([
             }
             var sCustomerCompany = oInputCustomerCompany.getValue();
 
+            if(!oInputCustomerEMail){
+                var oInputCustomerEMail = this.getView().byId("inputCustomerEmail");
+            }
+            var sCustomerEMail = oInputCustomerEMail.getValue();
+
+            if(!oInputCustomerTel){
+                var oInputCustomerTel = this.getView().byId("inputCustomerTel");
+            }
+            var sCustomerTel = oInputCustomerTel.getValue();
+
+            if(!oInputCustomerRating){
+                var oInputCustomerRating = this.getView().byId("customerRating");
+            }
+            var sCustomerRating = oInputCustomerRating.getValue();
+
+
+            if(!oInputCustomerNotes){
+                var oInputCustomerNotes = this.getView().byId("textAreaCustomerNotes");
+            }
+            var sCustomerNotes = oInputCustomerNotes.getValue();
+
             if(sCustomerCompany === null || sCustomerCompany === undefined || sCustomerCompany === ""  ||
-                sCustomerName === null || sCustomerName === undefined || sCustomerName === ""){
+                sCustomerName === null || sCustomerName === undefined || sCustomerName === "" ||
+                sCustomerTel === null || sCustomerTel === undefined || sCustomerTel === "" ||
+                sCustomerEMail === null || sCustomerEMail === undefined || sCustomerEMail === "" ){
                 this.getView().byId("statusInformationCreateCustomer").setVisible(true);
             } else {
                 // Set data
                 oNewCustomerData.CustomerName = sCustomerName;
                 oNewCustomerData.Company = sCustomerCompany;
+                oNewCustomerData.Telephone = sCustomerTel;
+                oNewCustomerData.EMail = sCustomerEMail;
+                oNewCustomerData.Rating = sCustomerRating;
+                oNewCustomerData.Notes = sCustomerNotes;
 
                 if(!oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer")){
                     var bValueSet = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");

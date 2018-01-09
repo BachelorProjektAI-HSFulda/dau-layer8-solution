@@ -14,8 +14,7 @@
             <Page id="pageShowCampaigns"
                   title="{i18n>campaignHeaderTitle}"
                   showNavButton="true"
-                  navButtonPress="onNavBack"
-                  class="sapUiContentPadding" >
+                  navButtonPress="onNavBack">
                 <headerContent>
                     <Button
                         icon="sap-icon://settings"

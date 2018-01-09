@@ -35,6 +35,68 @@ sap.ui.define([
             oObjectHeaderCustomerDetail.bindElement({
                 path: sItemBindingPath
             });
+            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
+            oTextAreaCustomerDetailNotes.bindElement({
+                path: sItemBindingPath
+            });
+        },
+        /**
+         * This method exports the customer data to the file System as a contact
+         * @public
+         */
+        exportCustomer: function(oEvent){
+            // Export Data from the view
+            var oObjectHeaderCustomerDetail = this.getView().byId("objHeaderCustomerDetail");
+            var sCustomerTitle = oObjectHeaderCustomerDetail.getTitle();
+            var sCustomerCompany = oObjectHeaderCustomerDetail.getIntro();
+            var sCustomerTel = this.getView().byId("customerDetailTelephone");
+            var sCustomerEMail = this.getView().byId("customerDetailEMail");
+            var sCustomerNotes = this.getView().byId("textAreaCustomerDetailNotes");
+            // Request Contact Object
+            var oNewContact = navigator.contacts.create({"displayName": sCustomerTitle });
+
+            if(sCustomerTel !== "" || sCustomerTel !== undefined){
+                oNewContact.phoneNumbers = sCustomerTel;
+            }
+
+            if(sCustomerCompany !== "" || sCustomerCompany !== undefined){
+                oNewContact.organizations = sCustomerCompany;
+            }
+
+            if(sCustomerEMail !== "" || sCustomerEMail !== undefined){
+                oNewContact.emails = sCustomerEMail;
+            }
+
+            if(sCustomerNotes !== "" || sCustomerNotes !== undefined){
+                oNewContact.note = sCustomerNotes;
+            }
+
+            console.log(oNewContact);
+            // Save data to the phones file system
+            //oNewContact.save($.proxy(this.onContactSaveSuccess, this), $.proxy(this.onContactSaveError, this));
+        },
+        /**
+         * Error callback after contact was successfully saved
+         * @public
+         */
+        onContactSaveSuccess: function(oSuccess){
+            console.log("onContactSaveSuccess");
+            console.log(oSuccess);
+        },
+        /**
+         * Error callback after contact was not succesfully saved
+         * @public
+         */
+        onContactSaveError: function(oError){
+            console.log("onContactSaveError");
+            console.log(oError);
+        },
+        /**
+         * Edit Customer Data
+         * @public
+         */
+        editCustomerData: function(){
+
         }
 	});
 });
