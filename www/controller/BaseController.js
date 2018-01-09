@@ -16,25 +16,49 @@ sap.ui.define([
             // Init
             var xhr = new XMLHttpRequest();
             var token = "AIzaSyAr5pmJ22gDjoall0ffQAxKlM28gNXR4kw";
-
-            var data = '{"requests": [{"image": {"content": sBaseImage},"features": [{"type": "TEXT_DETECTION"}]}]}';
-
-
+            var n = imageData.search(",");
+            imageData = imageData.substring(n+1, imageData.length);
+//            imageData = imageData.imageAsResized(1024,768);
+            imageData = imageData.trim();
+            var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+//            MessageBox.alert(
+//                        imageData,
+//                            {
+//                                styleClass: bCompact ? "sapUiSizeCompact" : ""
+//                            }
+//                    );
             xhr.addEventListener("readystatechange", function(){
                 if (this.readyState === this.DONE) {
                     var oJSONResult = JSON.parse(this.response);
-                    MessageToast.show(this.response);
+//                    MessageToast.show(this.response);
+                    MessageBox.alert(
+                        this.response,
+                            {
+                                styleClass: bCompact ? "sapUiSizeCompact" : ""
+                            }
+                    );
 	            }
             });
+
+
+            var data = '{"requests": [{"image": {"content": "'+imageData+'"},"features": [{"type": "TEXT_DETECTION"}]}]}';
+            MessageBox.alert(
+                        data,
+                            {
+                                styleClass: bCompact ? "sapUiSizeCompact" : ""
+                            }
+                    );
             // Set URI
             xhr.open("POST", " https://vision.googleapis.com/v1/images:annotate?key=" + token);
             // Adding Request Headers
+            xhr.setRequestHeader("Content-Length", data.length);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Accept", "application/json");
             xhr.setRequestHeader("Authorization", token);
             // Send data to the google vision api
             xhr.send(data);
         },
+
 
         /**
          * Is called after the event "onDeviceReady" is called from cordova
@@ -261,7 +285,7 @@ sap.ui.define([
                 var sPathFull = "file://"+sPath;
                 // Store File Path to local Storage
                 this.setImagePath(sPathFull);
-                MessageToast.show(sPathFull);
+//                MessageToast.show(sPathFull);
 
                 // Read File from File System
                 this.dataManager.getImageFile($.proxy(this.getImageFileSuccess, this), $.proxy(this.getFileError, this), sPathFull);
@@ -288,7 +312,6 @@ sap.ui.define([
             reader.onloadend = function(fileObject) {
                 MessageToast.show(fileObject.target._result);
                 that.sendDataToGoogleVisionAPI(fileObject.target._result);
-                var sBaseImage = fileObject.target._result;
             };
             reader.readAsDataURL(file);
         },
