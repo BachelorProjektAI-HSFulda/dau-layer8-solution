@@ -5,7 +5,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
     "sap/m/MessageToast"
-], function(Controller, History, DataManager, JSONModel, MessageBox, MessageToast) {
+], function(Controller, History, DataManager, JSONModel, MessageBox, MessageToast, JSONModel) {
 	"use strict";
 	return Controller.extend("hs.fulda.customer.management.controller.BaseController", {
         dataManager: DataManager,
@@ -23,8 +23,8 @@ sap.ui.define([
             xhr.addEventListener("readystatechange", function(){
                 if (this.readyState === this.DONE) {
                     var oJSONRequestObject = new JSONModel();
-                    oJSONRequestObject.setData(this.response);
-                    var oTextProperty = oJSONRequestObject.getProperty("text");
+                    oJSONResponseObject.setData(this.response);
+                    var oTextProperty = oJSONResponseObject.getProperty("text");
                     var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
                     MessageBox.alert(
                         oTextProperty,
