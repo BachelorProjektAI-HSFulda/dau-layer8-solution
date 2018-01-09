@@ -94,11 +94,37 @@
                             <Label text="{i18n>customerName}"
                                    class="sapUiSmallMarginTop sapUiTinyMarginBottom"
                                    tooltip="{i18n>customerName}" />
-							<Input id="inputCustomerName" placeholder="Enter customer name" />
+							<Input id="inputCustomerName" placeholder="{i18n>placeholderEnterCustomerName}" />
 						    <Label text="{i18n>customerCompany}"
                                    class="sapUiSmallMarginTop sapUiTinyMarginBottom"
                                    tooltip="{i18n>customerCompany}" />
-							<Input id="inputCustomerCompany" placeholder="Enter customer company" />
+							<Input id="inputCustomerCompany" placeholder="{i18n>placeholderEnterCustomerCompany}" />
+                    	    <Label text="{i18n>customerTel}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerCompany}" />
+                            <Input id="inputCustomerTel"
+                                   type="Tel"
+                                   placeholder="{i18n>placeholderTelNumber}" />
+                            <Label text="{i18n>customerEMail}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerCompany}" />
+                            <Input id="inputCustomerEmail"
+                                   type="Email"
+                                   class="sapUiSmallMarginBottom"
+                                   placeholder="{i18n>placeholderEMail}" />
+                            <Label text="{i18n>customerRating}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerCompany}" />
+                            <RatingIndicator id="customerRating"
+                                   maxValue="5"
+                                   class="sapUiSmallMarginBottom"
+                                   tooltip="{i18n>customerRating}" />
+                            <Label text="{i18n>customerNotes}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerNotes}" />
+                            <TextArea id="textAreaCustomerNotes"
+                                      rows="4"
+                                      placeholder="{i18n>placeholderCustomerNotes}"/>
                         </form:SimpleForm>
                     </VBox>
                 </l:Grid>

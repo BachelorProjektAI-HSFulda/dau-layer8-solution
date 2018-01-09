@@ -11,32 +11,57 @@
                   title="{i18n>customerDetailHeaderTitle}"
                   showNavButton="true"
                   navButtonPress="onNavBack"
-                  class="sapUiContentPadding" >
-            <ObjectHeader
-            id="objHeaderCustomerDetail"
-            responsive="true"
-            icon=""
-            iconAlt="Test"
-            intro=""
-            title="{CustomerName}"
-            showMarkers="false"
-            markFlagged="true"
-            markFavorite="true"
-            backgroundDesign="Translucent">
-                <attributes>
-                    <ObjectAttribute
+                class="sapUiContentPadding" >
+                <headerContent>
+                    <Button
+                        icon="sap-icon://edit"
+                        press="editCustomerData" />
+                </headerContent>
+                <content>
+                    <ObjectHeader
+                        id="objHeaderCustomerDetail"
+                        responsive="true"
+                        icon="sap-icon://customer"
+                        intro="{Company}"
                         title="{CustomerName}"
-                        text="{Company}"/>
-                    <ObjectAttribute
-                        title="Dimension per unit"
-                        text="Width x Depth x Height"/>
-                </attributes>
-                <statuses>
-                    <ObjectStatus
-                        title="Approval"
-                        text="Pending"
-                        state="Warning"/>
-                </statuses>
-            </ObjectHeader>
+                        showMarkers="false"
+                        markFlagged="true"
+                        markFavorite="true"
+                        backgroundDesign="Translucent">
+                        <attributes>
+                            <ObjectAttribute
+                                id="customerDetailTelephone"
+                                active="true"
+                                title="{i18n>textCustomerDetailTelephone}"
+                                text="{Telephone}"/>
+                            <ObjectAttribute
+                                id="customerDetailEMail"
+                                title="{i18n>textCustomerDetailEMail}"
+                                active="true"
+                                text="{EMail}"/>
+                        </attributes>
+                        <headerContainer>
+                            <HeaderContainer scrollStep="200" id="headerContainer" orientation="Vertical" >
+                                <RatingIndicator
+                                    id="customerDetailRating"
+                                    maxValue="5"
+                                    value="{Rating}"
+                                    class="sapUiSmallMarginBottom"
+                                    tooltip="{i18n>customerRating}" />
+                            </HeaderContainer>
+                        </headerContainer>
+                    </ObjectHeader>
+                    <TextArea id="textAreaCustomerDetailNotes"
+                              enabled="false"
+                              width="100%"
+                              rows="4"
+                              value="{Notes}" />
+                </content>
+                <footer>
+                <Toolbar>
+                    <ToolbarSpacer/>
+                    <Button icon="sap-icon://upload" type="Accept" press="exportCustomer" />
+                </Toolbar>
+            </footer>
         </Page>
     </mvc:View>

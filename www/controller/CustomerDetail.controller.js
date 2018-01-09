@@ -35,6 +35,10 @@ sap.ui.define([
             oObjectHeaderCustomerDetail.bindElement({
                 path: sItemBindingPath
             });
+            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
+            oTextAreaCustomerDetailNotes.bindElement({
+                path: sItemBindingPath
+            });
         }
 	});
 });

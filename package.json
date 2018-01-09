@@ -14,6 +14,8 @@
     "cordova-custom-config": "^5.0.2",
     "cordova-ios": "^4.5.4",
     "cordova-plugin-camera": "^4.0.1",
+    "cordova-plugin-compat": "^1.2.0",
+    "cordova-plugin-contacts": "^2.3.1",
     "cordova-plugin-facebook": "^0.2.2",
     "cordova-plugin-file": "^5.0.0",
     "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
@@ -34,7 +36,10 @@
       },
       "cordova-plugin-media-capture": {},
       "cordova-custom-config": {},
-      "cordova-plugin-camera": {}
+      "cordova-plugin-camera": {},
+      "cordova-plugin-contacts": {
+        "CONTACTS_USAGE_DESCRIPTION": " "
+      }
     },
     "platforms": [
       "windows",
