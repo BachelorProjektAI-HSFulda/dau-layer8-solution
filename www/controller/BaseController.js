@@ -18,36 +18,24 @@ sap.ui.define([
             var token = "AIzaSyAr5pmJ22gDjoall0ffQAxKlM28gNXR4kw";
             var n = imageData.search(",");
             imageData = imageData.substring(n+1, imageData.length);
-//            imageData = imageData.imageAsResized(1024,768);
             imageData = imageData.trim();
-            var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-//            MessageBox.alert(
-//                        imageData,
-//                            {
-//                                styleClass: bCompact ? "sapUiSizeCompact" : ""
-//                            }
-//                    );
+
             xhr.addEventListener("readystatechange", function(){
                 if (this.readyState === this.DONE) {
-                    var oJSONResult = JSON.parse(this.response);
-//                    MessageToast.show(this.response);
+                    var oJSONRequestObject = new JSONModel();
+                    oJSONResponseObject.setData(this.response);
+                    var oTextProperty = oJSONResponseObject.getProperty("text");
+                    var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
                     MessageBox.alert(
-                        this.response,
-                            {
-                                styleClass: bCompact ? "sapUiSizeCompact" : ""
-                            }
+                        oTextProperty,
+                        {
+                            styleClass: bCompact ? "sapUiSizeCompact" : ""
+                        }
                     );
 	            }
             });
-
-
+            // Build request data
             var data = '{"requests": [{"image": {"content": "'+imageData+'"},"features": [{"type": "TEXT_DETECTION"}]}]}';
-            MessageBox.alert(
-                        data,
-                            {
-                                styleClass: bCompact ? "sapUiSizeCompact" : ""
-                            }
-                    );
             // Set URI
             xhr.open("POST", " https://vision.googleapis.com/v1/images:annotate?key=" + token);
             // Adding Request Headers
