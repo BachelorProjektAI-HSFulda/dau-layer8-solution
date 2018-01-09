@@ -5,7 +5,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
     "sap/m/MessageToast"
-], function(Controller, History, DataManager, JSONModel, MessageBox, MessageToast, JSONModel) {
+], function(Controller, History, DataManager, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 	return Controller.extend("hs.fulda.customer.management.controller.BaseController", {
         dataManager: DataManager,
