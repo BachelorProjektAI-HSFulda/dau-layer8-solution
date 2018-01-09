@@ -1,0 +1,67 @@
+    <mvc:View
+        height="100%"
+        controllerName="hs.fulda.customer.management.controller.CustomerDetail"
+        xmlns="sap.m"
+        xmlns:l="sap.ui.layout"
+	    xmlns:form="sap.ui.layout.form"
+        xmlns:blockcolor="sap.uxap.sample.ObjectPageFormLayout.block.blockscolor"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:core="sap.ui.core">
+        <Page id="pageShowCustomerDetail"
+                  title="{i18n>customerDetailHeaderTitle}"
+                  showNavButton="true"
+                  navButtonPress="onNavBack"
+                class="sapUiContentPadding" >
+                <headerContent>
+                    <Button
+                        icon="sap-icon://edit"
+                        press="editCustomerData" />
+                </headerContent>
+                <content>
+                    <ObjectHeader
+                        id="objHeaderCustomerDetail"
+                        responsive="true"
+                        icon="sap-icon://customer"
+                        intro="{Company}"
+                        title="{CustomerName}"
+                        showMarkers="false"
+                        markFlagged="true"
+                        markFavorite="true"
+                        backgroundDesign="Translucent">
+                        <attributes>
+                            <ObjectAttribute
+                                id="customerDetailTelephone"
+                                active="true"
+                                title="{i18n>textCustomerDetailTelephone}"
+                                text="{Telephone}"/>
+                            <ObjectAttribute
+                                id="customerDetailEMail"
+                                title="{i18n>textCustomerDetailEMail}"
+                                active="true"
+                                text="{EMail}"/>
+                        </attributes>
+                        <headerContainer>
+                            <HeaderContainer scrollStep="200" id="headerContainer" orientation="Vertical" >
+                                <RatingIndicator 
+                                    id="customerDetailRating" 
+                                    maxValue="5" 
+                                    value="{Rating}"
+                                    class="sapUiSmallMarginBottom"
+                                    tooltip="{i18n>customerRating}" />
+                            </HeaderContainer>
+                        </headerContainer>
+                    </ObjectHeader>
+                    <TextArea id="textAreaCustomerDetailNotes"
+                              enabled="false"
+                              width="100%"
+                              rows="4"
+                              value="{Notes}" />
+                </content>
+                <footer>
+                <Toolbar>
+                    <ToolbarSpacer/>
+                    <Button icon="sap-icon://upload" type="Accept" press="exportCustomer" />
+                </Toolbar>
+            </footer>
+        </Page>
+    </mvc:View>
