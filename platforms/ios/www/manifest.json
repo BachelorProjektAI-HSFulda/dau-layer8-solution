@@ -1,0 +1,108 @@
+{
+  "_version": "1.1.0",
+  "sap.app": {
+	"_version": "1.1.0",
+	"id": "hs.fulda.customer.management",
+	"type": "application",
+	"i18n": "i18n/i18n.properties",
+	"title": "{{appTitle}}",
+	"description": "{{appDescription}}",
+	"applicationVersion": {
+	  "version": "1.0.0"
+	}
+  },
+  "sap.ui": {
+	"_version": "1.1.0",
+	"technology": "UI5",
+	"deviceTypes": {
+	  "desktop": true,
+	  "tablet": true,
+	  "phone": true
+	},
+	"supportedThemes": [
+		"sap_hcb",
+		"sap_belize"
+	]
+  },
+  "sap.ui5": {
+	"_version": "1.1.0",
+	"rootView": "hs.fulda.customer.management.view.App",
+	"dependencies": {
+	  "minUI5Version": "1.30",
+	  "libs": {
+		"sap.m": {}
+	  }
+	},
+	"models": {
+	  "i18n": {
+		"type": "sap.ui.model.resource.ResourceModel",
+		"settings": {
+		  "bundleName": "hs.fulda.customer.management.i18n.i18n"
+		}
+	  }
+	},
+	"resources": {
+	  "css": [
+		{
+		  "uri": "css/css.css"
+		}
+	  ]
+	},
+	"routing": {
+	  "config": {
+		"routerClass": "sap.m.routing.Router",
+		"viewType": "XML",
+		"viewPath": "hs.fulda.customer.management.view",
+		"controlId": "app",
+		"controlAggregation": "pages"
+	  },
+	  "routes": [
+        	{
+		  "pattern": "",
+		  "name": "Login",
+		  "target": "Login"
+		},
+		{
+		  "pattern": "Campaign",
+		  "name": "Campaign",
+		  "target": "Campaign"
+		},
+        {
+		  "pattern": "Customer/{CampaignId}",
+		  "name": "Customer",
+		  "target": "Customer"
+		},
+        {
+		  "pattern": "CustomerDetail/{CampaignId}/{CustomerId}",
+		  "name": "CustomerDetail",
+		  "target": "CustomerDetail"
+		},
+        {
+		  "pattern": "Settings",
+		  "name": "Settings",
+		  "target": "Settings"
+		}
+
+	  ],
+	  "targets": {
+         "Login": {
+		  "viewName": "Login"
+		},
+		"Campaign": {
+		  "viewName": "Campaign"
+		},
+        "Customer": {
+		  "viewName": "Customer"
+		},
+        "CustomerDetail": {
+            "viewName": "CustomerDetail"
+        },
+          "Settings": {
+            "viewName": "Settings"
+        }
+
+
+	  }
+	}
+  }
+}

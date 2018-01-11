@@ -32,6 +32,14 @@
                         </contentRight>
                     </Bar>
                 </customHeader>
+                <subHeader>
+			         <Toolbar>
+				        <SearchField
+                            liveChange="onSearchCustomer"
+                            width="100%" />
+			         </Toolbar>
+		        </subHeader>
+
                 <l:VerticalLayout width="100%" >
                     <l:content>
                         <List id="customerList" headerText="Customer" >
