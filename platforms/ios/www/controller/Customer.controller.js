@@ -45,6 +45,24 @@ sap.ui.define([
                 template: this._oItemTemplate
             });
         },
+        /**
+         * Filter for campaign list
+         * @public
+         */
+        onSearchCustomer: function(oEvent){
+            // add filter for search
+			var aFilters = [];
+			var sQuery = oEvent.getSource().getValue();
+			if (sQuery && sQuery.length > 0) {
+				var filter = new Filter("CustomerName", sap.ui.model.FilterOperator.Contains, sQuery);
+				aFilters.push(filter);
+			}
+
+			// update list binding
+			var list = this.getView().byId("customerList");
+			var binding = list.getBinding("items");
+			binding.filter(aFilters, "Application");
+        },
 
         /**
          *
