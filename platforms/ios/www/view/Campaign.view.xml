@@ -44,6 +44,7 @@
                                 <Toolbar>
                                     <Title text="{i18n>campaignTitle}" level="H2" />
                                     <ToolbarSpacer />
+                                    <Button id="idBtnToggleDelete" icon="sap-icon://delete" press="onToggleDeleteCampaign"/>
                                     <Button icon="sap-icon://add" press="onAddCampaign" >
                                         <customData>
                                             <core:CustomData
@@ -66,7 +67,12 @@
                  <footer>
                     <Toolbar>
                         <content>
-
+                            <ToolbarSpacer/>
+                            <Button id="idBtnDelete"
+                                    visible="false"
+                                    type="Reject"
+                                    text="{i18n>deleteCampaign}"
+                                    press="onDeleteCampaign"/>
                         </content>
                     </Toolbar>
                  </footer>

@@ -5,8 +5,9 @@ sap.ui.define([
 	"sap/m/Dialog",
     "sap/m/Input",
 	"sap/m/Text",
-    "sap/ui/model/json/JSONModel"
-], function (BaseController, JQuery, Button, Dialog, Input, Text, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+], function (BaseController, JQuery, Button, Dialog, Input, Text, JSONModel, Filter) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.Customer", {

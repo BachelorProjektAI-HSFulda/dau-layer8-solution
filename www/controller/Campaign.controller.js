@@ -7,7 +7,8 @@ sap.ui.define([
     "sap/ui/core/routing/History",
     "sap/m/MessageToast",
     "sap/ui/model/Filter",
-], function (BaseController, JQuery, Button, Dialog, JSONModel, History, MessageToast, Filter) {
+    "sap/m/MessageBox"
+], function (BaseController, JQuery, Button, Dialog, JSONModel, History, MessageToast, Filter, MessageBox) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.Campaign", {
@@ -45,6 +46,60 @@ sap.ui.define([
 			var list = this.getView().byId("campaignList");
 			var binding = list.getBinding("items");
 			binding.filter(aFilters, "Application");
+        },
+        /**
+         * This method allows multi delete for campaigns
+         * @public
+         */
+        onDeleteCampaign: function(oEvent){
+            var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+            var that = this;
+
+			MessageBox.warning(
+				this.getResourceBundle().getText("deleteQuestion"),
+				{
+					actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+					styleClass: bCompact ? "sapUiSizeCompact" : "",
+					onClose: function(sAction) {
+						if(sAction === "OK"){
+                            var aCampaignItems = that.getView().byId("campaignList").getSelectedItems();
+
+                            for(var i=0; i<aCampaignItems.length; i++){
+                                var oItemContextPath = aCampaignItems[0].getBindingContext().getPath();
+                                var aPathParts = oItemContextPath.split("/");
+                                var iIndex = aPathParts[aPathParts.length - 1];
+                                var oJSONData = that.getView().getModel().getData();
+                                oJSONData.Campaigns.splice(iIndex, 1); //Use splice to remove your object in the array
+                                that.getView().getModel().setData(oJSONData); //And set the new data to the model
+                            }
+
+                            // Save Data persistent
+                            var JSONData = that.getView().getModel().getJSON();
+                            that.saveData(JSONData);
+                            // Toggle Campaign List
+                            that.onToggleDeleteCampaign();
+                        }
+					}
+				}
+			);
+        },
+
+        /**
+         * This method toggles the delete state in the campaign view
+         * @public
+         */
+        onToggleDeleteCampaign: function(){
+            var mode = this.getView().byId("campaignList").getMode();
+            if(mode === "MultiSelect"){
+                this.getView().byId("idBtnDelete").setVisible(false);
+                this.getView().byId("idBtnToggleDelete").setIcon("sap-icon://delete");
+                mode = "None";
+            } else {
+                this.getView().byId("idBtnDelete").setVisible(true);
+                this.getView().byId("idBtnToggleDelete").setIcon("sap-icon://save");
+                mode = "MultiSelect";
+            }
+			this.getView().byId("campaignList").setMode(mode);
         },
 
         /**
