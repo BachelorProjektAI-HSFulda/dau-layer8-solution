@@ -15,7 +15,7 @@ sap.ui.define([
         sendDataToGoogleVisionAPI: function(imageData){
             // Init
             var xhr = new XMLHttpRequest();
-            var token = "";
+            var token = "AIzaSyBfMfxZyVWNNNk2T8WO8tn4Ss7_9GDo3eM";
             var n = imageData.search(",");
             imageData = imageData.substring(n+1, imageData.length);
             imageData = imageData.trim();
@@ -24,16 +24,43 @@ sap.ui.define([
 
             xhr.addEventListener("readystatechange", function(){
                 if (this.readyState === this.DONE) {
-                    var oJSONResponseObject = new JSONModel();
+//                    var oJSONResponseObject = new JSONModel();
                     var sResponseJSON = this.response;
-                    oJSONResponseObject.setJSON(sResponseJSON);
-                    var sStringTanga = oJSONResponseObject.getProperty("/responses");
-                    MessageBox.alert(
-                        sStringTanga,
-                        {
-                            styleClass: bCompact ? "sapUiSizeCompact" : ""
-                        }
-                    );
+
+                            MessageBox.alert(
+                                sResponseJSON,
+                                {
+                                    styleClass: bCompact ? "sapUiSizeCompact" : ""
+                                }
+                            );
+
+//                    sResponseJSON = "'" + sResponseJSON + "'";
+//
+//                            MessageBox.alert(
+//                                sResponseJSON,
+//                                {
+//                                    styleClass: bCompact ? "sapUiSizeCompact" : ""
+//                                }
+//                            );
+
+//                    var jJson = JSON.parse(sResponseJSON);
+//                    MessageBox.alert(
+//                                jJson,
+//                                {
+//                                    styleClass: bCompact ? "sapUiSizeCompact" : ""
+//                                }
+//                            );
+                    var json =  sResponseJSON.getProperty("/responses[0]");
+////                    MessageToast.show(sFinal);
+////                    oJSONResponseObject.setJSON(sResponseJSON);
+////                    var sStringTanga = oJSONResponseObject.getProperty("responses");
+//
+                            MessageBox.alert(
+                                json,
+                                {
+                                    styleClass: bCompact ? "sapUiSizeCompact" : ""
+                                }
+                            );
 	            }
             });
             // Build request data
