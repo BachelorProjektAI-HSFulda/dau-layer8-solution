@@ -18,6 +18,9 @@
                 <headerContent>
                     <Button
                         icon="sap-icon://settings"
+                        press="onTestJSONResponse" />
+                    <Button
+                        icon="sap-icon://settings"
                         press="handleSettingsPressed" />
                     <Button icon="sap-icon://camera" press="startCapture">
                         <customData>
