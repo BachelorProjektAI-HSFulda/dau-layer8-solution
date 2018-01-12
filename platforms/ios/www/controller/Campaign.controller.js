@@ -65,7 +65,7 @@ sap.ui.define([
                             var aCampaignItems = that.getView().byId("campaignList").getSelectedItems();
 
                             for(var i=0; i<aCampaignItems.length; i++){
-                                var oItemContextPath = aCampaignItems[0].getBindingContext().getPath();
+                                var oItemContextPath = aCampaignItems[i].getBindingContext().getPath();
                                 var aPathParts = oItemContextPath.split("/");
                                 var iIndex = aPathParts[aPathParts.length - 1];
                                 var oJSONData = that.getView().getModel().getData();

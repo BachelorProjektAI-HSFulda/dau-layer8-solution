@@ -47,6 +47,7 @@
                                 <Toolbar>
                                     <Title text="{i18n>customerTitle}" level="H2" />
                                     <ToolbarSpacer />
+                                    <Button id="idBtnToggleDeleteCustomer" icon="sap-icon://delete" press="onToggleDeleteCustomer"/>
                                     <Button icon="sap-icon://add" press="onAddCustomerManual" >
                                         <customData>
                                             <core:CustomData
@@ -70,6 +71,12 @@
                     <footer>
                     <Toolbar>
                         <content>
+                             <ToolbarSpacer/>
+                            <Button id="idBtnDeleteCustomer"
+                                    visible="false"
+                                    type="Reject"
+                                    text="{i18n>deleteCustomer}"
+                                    press="onDeleteCustomer"/>
                         </content>
                     </Toolbar>
                  </footer>

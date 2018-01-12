@@ -7,7 +7,8 @@ sap.ui.define([
 	"sap/m/Text",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-], function (BaseController, JQuery, Button, Dialog, Input, Text, JSONModel, Filter) {
+    "sap/m/MessageBox"
+], function (BaseController, JQuery, Button, Dialog, Input, Text, JSONModel, Filter, MessageBox) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.Customer", {
@@ -64,6 +65,65 @@ sap.ui.define([
 			var binding = list.getBinding("items");
 			binding.filter(aFilters, "Application");
         },
+
+        /**
+         * This method allows multi delete for campaigns
+         * @public
+         */
+        onDeleteCustomer: function(oEvent){
+            var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+            var that = this;
+
+			MessageBox.warning(
+				this.getResourceBundle().getText("deleteQuestionCustomer"),
+				{
+					actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+					styleClass: bCompact ? "sapUiSizeCompact" : "",
+					onClose: function(sAction) {
+						if(sAction === "OK"){
+                            var aCustomerItems = that.getView().byId("customerList").getSelectedItems();
+
+                            for(var i=0; i < aCustomerItems.length; i++){
+                                var oItemContextPath = aCustomerItems[i].getBindingContext().getPath();
+                                console.log(oItemContextPath);
+                                var aPathParts = oItemContextPath.split("/");
+                                var iIndex = aPathParts[aPathParts.length - 1];
+                                var oJSONData = that.getView().getModel().getData();
+
+                                console.log(oJSONData.Campaigns[that.iCampaignId].Customer);
+                                oJSONData.Campaigns[that.iCampaignId].Customer.splice(iIndex, 1); //Use splice to remove your object in the array
+                                that.getView().getModel().setData(oJSONData); //And set the new data to the model
+                            }
+
+                            // Save Data persistent
+                            var JSONData = that.getView().getModel().getJSON();
+                            that.saveData(JSONData);
+                            // Toggle Campaign List
+                            that.onToggleDeleteCustomer();
+                        }
+					}
+				}
+			);
+        },
+
+        /**
+         * This method toggles the delete state in the campaign view
+         * @public
+         */
+        onToggleDeleteCustomer: function(){
+            var mode = this.getView().byId("customerList").getMode();
+            if(mode === "MultiSelect"){
+                this.getView().byId("idBtnDeleteCustomer").setVisible(false);
+                this.getView().byId("idBtnToggleDeleteCustomer").setIcon("sap-icon://delete");
+                mode = "None";
+            } else {
+                this.getView().byId("idBtnDeleteCustomer").setVisible(true);
+                this.getView().byId("idBtnToggleDeleteCustomer").setIcon("sap-icon://save");
+                mode = "MultiSelect";
+            }
+			this.getView().byId("customerList").setMode(mode);
+        },
+
 
         /**
          *
