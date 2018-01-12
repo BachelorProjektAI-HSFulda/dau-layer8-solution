@@ -83,14 +83,14 @@ sap.ui.define([
 						if(sAction === "OK"){
                             var aCustomerItems = that.getView().byId("customerList").getSelectedItems();
 
-                            for(var i=0; i < aCustomerItems.length; i++){
+                            for(var i=aCustomerItems.length-1; i >= 0 ; i--){
                                 var oItemContextPath = aCustomerItems[i].getBindingContext().getPath();
-                                console.log(oItemContextPath);
+
                                 var aPathParts = oItemContextPath.split("/");
                                 var iIndex = aPathParts[aPathParts.length - 1];
                                 var oJSONData = that.getView().getModel().getData();
 
-                                console.log(oJSONData.Campaigns[that.iCampaignId].Customer);
+
                                 oJSONData.Campaigns[that.iCampaignId].Customer.splice(iIndex, 1); //Use splice to remove your object in the array
                                 that.getView().getModel().setData(oJSONData); //And set the new data to the model
                             }

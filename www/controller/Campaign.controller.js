@@ -64,7 +64,7 @@ sap.ui.define([
 						if(sAction === "OK"){
                             var aCampaignItems = that.getView().byId("campaignList").getSelectedItems();
 
-                            for(var i=0; i<aCampaignItems.length; i++){
+                            for(var i=aCampaignItems.length-1; i >= 0 ; i--){
                                 var oItemContextPath = aCampaignItems[i].getBindingContext().getPath();
                                 var aPathParts = oItemContextPath.split("/");
                                 var iIndex = aPathParts[aPathParts.length - 1];
