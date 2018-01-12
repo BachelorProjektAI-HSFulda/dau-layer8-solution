@@ -126,6 +126,53 @@ sap.ui.define([
 			}
 		},
 
+        /**
+         * Edit Campaign
+         * @public
+         */
+        onEditCampaign: function(oEvent){
+            var oList = oEvent.getSource().getParent();
+            this.editDialog = this.getView().byId("");
+            // Read actual campaign object
+            var oCampaign = this.getView().getModel().getProperty(oList.getSwipedItem().getBindingContextPath());
+            console.log(oCampaign);
+            var oCampaignData = new JSONModel(oCampaign);
+            // Set binding mode
+            oCampaignData.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+
+            if (!this.editDialog) {
+				this.editDialog = sap.ui.xmlfragment("hs.fulda.customer.management.fragment.EditCampaign", this);
+
+				//to get access to the global model
+				this.getView().addDependent(this.editDialog);
+			}
+            this.editDialog.setModel(oCampaignData);
+            this.editDialog.bindElement("/");
+            // toggle compact style
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this.editDialog);
+			this.editDialog.open();
+        },
+        /**
+         * Saves the campaign after changes from the user
+         * @public
+         */
+        onSaveCampaignAfterEdit: function(sCampaignName){
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
+            // Nav back to list page
+            this.editDialog.close();
+            this.getOwnerComponent().getModel().refresh(true);
+        },
+        /**
+         * Cancel edit campaign
+         * @public
+         */
+        onEditCampaignCancel: function(){
+            // Nav back to list page
+            this.editDialog.close();
+        },
+
         onCampaignItemPressed: function(oEvent){
             var oItem = oEvent.getSource();
 			var oRouter = this.getRouter();

@@ -61,6 +61,11 @@
                                  type="Navigation"
                                  press="onCampaignItemPressed"/>
                             </items>
+                            <swipeContent>
+                                <Button
+                                    icon="sap-icon://edit"
+                                    press="onEditCampaign"/>
+                            </swipeContent>
                         </List>
                  </l:content>
                  </l:VerticalLayout>

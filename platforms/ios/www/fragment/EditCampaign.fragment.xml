@@ -10,11 +10,14 @@
             <Label text="Description" />
             <Input value="{Description}" />
         </content>
-        <beginButton>
+        <buttons>
             <Button type="Accept"
                     text="Save"
                     icon="sap-icon://save"
-                    press="onSaveCampaign" />
-        </beginButton>
+                    press="onSaveCampaignAfterEdit" />
+            <Button text="Cancel"
+                    icon="sap-icon://cancel"
+                    press="onEditCampaignCancel" />
+        </buttons>
     </Dialog>
 </core:FragmentDefinition>

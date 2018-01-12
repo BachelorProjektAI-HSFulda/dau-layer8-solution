@@ -141,41 +141,6 @@ sap.ui.define([
             });
         },
 
-        /**
-         *  Edit Campaign
-         */
-        onEdit: function(oEvent){
-            this.editDialog = this.getView().byId("");
-            // Read actual campaign object
-            var oCampaign = this.getView().getModel().getProperty("/Campaigns/"+this.iCampaignId);
-            console.log(oCampaign);
-            var oCampaignData = new JSONModel(oCampaign);
-            // Set binding mode
-            oCampaignData.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-
-            if (!this.editDialog) {
-				this.editDialog = sap.ui.xmlfragment("hs.fulda.customer.management.fragment.EditCampaign", this);
-
-				//to get access to the global model
-				this.getView().addDependent(this.editDialog);
-			}
-            this.editDialog.setModel(oCampaignData);
-            this.editDialog.bindElement("/");
-            // toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this.editDialog);
-			this.editDialog.open();
-        },
-
-        onSaveCampaign: function(sCampaignName){
-            var navCon = this.getView().byId("navContainerCampaignList");
-            // Save Data persistent
-            var JSONData = this.getView().getModel().getJSON();
-            this.saveData(JSONData);
-            // Nav back to list page
-            this.editDialog.close();
-            this.getOwnerComponent().getModel().refresh(true);
-        },
-
          /**
          *
          */
