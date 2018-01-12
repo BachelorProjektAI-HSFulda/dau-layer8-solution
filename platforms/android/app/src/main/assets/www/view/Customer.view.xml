@@ -1,0 +1,178 @@
+    <mvc:View
+        height="100%"
+        controllerName="hs.fulda.customer.management.controller.Customer"
+        xmlns="sap.m"
+        xmlns:l="sap.ui.layout"
+	    xmlns:form="sap.ui.layout.form"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:core="sap.ui.core">
+        <NavContainer
+			id="navContainerCustomerList"
+			width="100%"
+			height="100%"
+			class="navContainerControl sapUiSmallMarginBottom">
+            <Page id="pageShowCustomer">
+                <customHeader>
+                    <Bar>
+                        <contentLeft>
+                            <Button icon="sap-icon://nav-back" press="onNavBack" />
+                            <Button icon="sap-icon://edit" press="onEdit" />
+                        </contentLeft>
+                        <contentMiddle>
+                            <Title id="customerTitle" text="{CampaignName}"/>
+                        </contentMiddle>
+                        <contentRight>
+                            <Button icon="sap-icon://camera" press="startCapture">
+                                <customData>
+                                    <core:CustomData
+                                         key="target"
+                                         value="pageCapturePhoto" />
+                                </customData>
+                            </Button>
+                        </contentRight>
+                    </Bar>
+                </customHeader>
+                <l:VerticalLayout width="100%" >
+                    <l:content>
+                        <List id="customerList" headerText="Customer" >
+                           <headerToolbar>
+                                <Toolbar>
+                                    <Title text="{i18n>customerTitle}" level="H2" />
+                                    <ToolbarSpacer />
+                                    <Button icon="sap-icon://add" press="onAddCustomerManual" >
+                                        <customData>
+                                            <core:CustomData
+                                                key="target"
+                                                value="pageAddCustomerManual" />
+                                        </customData>
+			                        </Button>
+                                </Toolbar>
+		                    </headerToolbar>
+                            <items>
+                                <StandardListItem
+                                     id="columnListItemCustomer"
+                                     title="{CustomerName}"
+                                     description="{Company}"
+                                     type="Navigation"
+                                     press="onCustomerItemPressed"/>
+                            </items>
+                        </List>
+                    </l:content>
+                </l:VerticalLayout>
+                    <footer>
+                    <Toolbar>
+                        <content>
+                        </content>
+                    </Toolbar>
+                 </footer>
+                </Page>
+                <Page id="pageAddCustomerManual"
+                  title="{i18n>createCustomer}"
+                  class="sapUiContentPadding" >
+                <headerContent>
+
+                </headerContent>
+                <l:Grid vSpacing = "2" defaultSpan = "XL12 L12 M12 S12">
+                    <VBox>
+                        <MessageStrip
+                            id="statusErrorCreateCustomer"
+				            text="{i18n>messageStripErrorMessageCustomer}"
+				            type="Error"
+				            showIcon="true"
+                            showCloseButton="true"
+				            class="sapUiMediumMarginBottom">
+			            </MessageStrip>
+                        <MessageStrip
+                            id="statusInformationCreateCustomer"
+				            text="{i18n>messageStripInformationValidDataCustomer}"
+				            type="Warning"
+				            customIcon="sap-icon://message-information"
+                            showCloseButton="true"
+				            class="sapUiMediumMarginBottom">
+			            </MessageStrip>
+                        <form:SimpleForm id="formCreateCampaign" title="Create Customer">
+                            <Label text="{i18n>customerName}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerName}" />
+							<Input id="inputCustomerName" placeholder="{i18n>placeholderEnterCustomerName}" />
+						    <Label text="{i18n>customerCompany}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerCompany}" />
+							<Input id="inputCustomerCompany" placeholder="{i18n>placeholderEnterCustomerCompany}" />
+                    	    <Label text="{i18n>customerTel}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerCompany}" />
+                            <Input id="inputCustomerTel"
+                                   type="Tel"
+                                   placeholder="{i18n>placeholderTelNumber}" />
+                            <Label text="{i18n>customerEMail}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerCompany}" />
+                            <Input id="inputCustomerEmail"
+                                   type="Email"
+                                   class="sapUiSmallMarginBottom"
+                                   placeholder="{i18n>placeholderEMail}" />
+                            <Label text="{i18n>customerRating}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerCompany}" />
+                            <RatingIndicator id="customerRating"
+                                   maxValue="5"
+                                   class="sapUiSmallMarginBottom"
+                                   tooltip="{i18n>customerRating}" />
+                            <Label text="{i18n>customerNotes}"
+                                   class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                                   tooltip="{i18n>customerNotes}" />
+                            <TextArea id="textAreaCustomerNotes"
+                                      rows="4"
+                                      placeholder="{i18n>placeholderCustomerNotes}"/>
+                        </form:SimpleForm>
+                    </VBox>
+                </l:Grid>
+                <footer>
+                    <Toolbar>
+                        <content>
+                            <ToolbarSpacer/>
+                            <Button type="Accept"
+                                    text="Save"
+                                    icon="sap-icon://save"
+                                    press="onSaveCustomer">
+                                <customData>
+                                    <core:CustomData
+                                         key="target"
+                                        value="pageShowCustomer" />
+                                </customData>
+                            </Button>
+                            <Button type="Reject"
+                                    text="Cancel"
+                                    icon="sap-icon://cancel"
+                                    press="onCancelCustomer">
+                                <customData>
+                                    <core:CustomData
+                                         key="target"
+                                         value="pageShowCustomer" />
+                                </customData>
+                            </Button>
+                        </content>
+                    </Toolbar>
+                 </footer>
+            </Page>
+            <Page id="pageCapturePhoto"
+                  title="Capture Photo">
+                <l:VerticalLayout width="100%" >
+                    <l:content>
+<!--
+                        <core:HTML heigth="100%" content="&lt;div&gt;&lt;/div&gt;">
+                        </core:HTML>
+-->
+                    </l:content>
+                </l:VerticalLayout>
+                    <footer>
+                    <Toolbar>
+                        <content>
+                            <Button text="take Photo"/>
+                        </content>
+                    </Toolbar>
+                 </footer>
+            </Page>
+            </NavContainer>
+    </mvc:View>

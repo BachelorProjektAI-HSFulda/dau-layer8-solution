@@ -1,0 +1,30 @@
+{
+    "Campaigns" : [
+        {
+            "CampaignId": "1",
+            "CampaignName": "CeBit 2017",
+            "Description" : "Die neue CeBit - Europas Business-Festival für Innovation und Digitalisierung",
+            "Customer": [
+                {
+                    "CustomerName": "Max Mustermann",
+                    "Company": "IBM"
+                },
+                {
+                    "CustomerName": "Werner Schultze",
+                    "Company": "EDAG"
+                }
+            ]
+        },
+        {
+            "CampaignId": "2",
+            "CampaignName": "Hannover Messe 2017",
+            "Description" : "Die Hannover-Messe ist eine Industriemesse mit weltweiter Bedeutung. Sie wird jedes Frühjahr in Hannover auf dem Messegelände Hannover abgehalten.",
+            "Customer": [
+                {
+                    "CustomerName": "Helmut Müller",
+                    "Company": "Jumo"
+                }
+            ]
+        }
+    ]
+}
