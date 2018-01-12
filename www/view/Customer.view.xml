@@ -16,7 +16,6 @@
                     <Bar>
                         <contentLeft>
                             <Button icon="sap-icon://nav-back" press="onNavBack" />
-                            <Button icon="sap-icon://edit" press="onEdit" />
                         </contentLeft>
                         <contentMiddle>
                             <Title id="customerTitle" text="{CampaignName}"/>
