@@ -31,7 +31,9 @@ sap.ui.define([
          * @private
          */
         _onObjectMatched: function(oEvent){
-            this.iCampaignId = oEvent.getParameter("arguments").CampaignId-1;
+            console.log(this.getView().getModel());
+            this.iCampaignId = oEvent.getParameter("arguments").CampaignId;
+            console.log(this.iCampaignId);
             this.itemBindingPath = "/Campaigns/"+ this.iCampaignId +"/Customer";
             // Bind Campaign Name
             this.getView().byId("customerTitle").bindElement("/Campaigns/"+this.iCampaignId);
@@ -282,13 +284,18 @@ sap.ui.define([
                 oNewCustomerData.Notes = sCustomerNotes;
 
                 if(!oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer")){
+                    console.log("Customer if");
                     var bValueSet = oModel.setProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
+                    console.log("bValueSet");
+                    console.log(bValueSet);
 
                     if(bValueSet === true){
                         var aCustomer = [];
                     }
                 } else {
+                    console.log("else");
                     var aCustomer = oModel.getProperty("/Campaigns/"+ this.iCampaignId +"/Customer");
+                    console.log(aCustomer);
                 }
                 // Push data to array
                 aCustomer.push(oNewCustomerData);

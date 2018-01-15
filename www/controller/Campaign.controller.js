@@ -91,10 +91,13 @@ sap.ui.define([
         onToggleDeleteCampaign: function(){
             var mode = this.getView().byId("campaignList").getMode();
             if(mode === "MultiSelect"){
+
+                //this.getView().byId("campaignList").attachItemPress(this.onCampaignItemPressed);
                 this.getView().byId("idBtnDelete").setVisible(false);
                 this.getView().byId("idBtnToggleDelete").setIcon("sap-icon://delete");
                 mode = "None";
             } else {
+                //this.getView().byId("campaignList").detachItemPress(this.onCampaignItemPressed);
                 this.getView().byId("idBtnDelete").setVisible(true);
                 this.getView().byId("idBtnToggleDelete").setIcon("sap-icon://save");
                 mode = "MultiSelect";
@@ -177,14 +180,16 @@ sap.ui.define([
             var oItem = oEvent.getSource();
 			var oRouter = this.getRouter();
             var sPath = oItem.getBindingContext().getPath();
-            var object = oItem.getModel().getProperty(sPath);
-            console.log(object);
+
+            var iCampaignId = sPath.substr(11, 1);
+
 			oRouter.navTo("Customer", {
-				CampaignId: object.CampaignId
+				CampaignId: iCampaignId
 			});
         },
 
         onSaveCampaign: function(oEvent){
+            console.log(this.getView().getModel());
             var iCampaignId;
             var binding = this.getView().byId("campaignList").getBinding("items");
 
