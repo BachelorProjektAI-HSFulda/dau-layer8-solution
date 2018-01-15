@@ -320,6 +320,10 @@ sap.ui.define([
             navCon.to(this.getView().byId("pageShowCustomer"), animation);
             this.getView().byId("inputCustomerName").setValue("");
             this.getView().byId("inputCustomerCompany").setValue("");
+            this.getView().byId("inputCustomerTel").setValue("");
+            this.getView().byId("inputCustomerEmail").setValue("");
+            this.getView().byId("customerRating").setValue(0);
+            this.getView().byId("textAreaCustomerNotes").setValue("");
         },
 
         onCancelCustomer: function(oEvent){
