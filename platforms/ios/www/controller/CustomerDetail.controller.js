@@ -27,7 +27,7 @@ sap.ui.define([
          */
         _onObjectMatched: function(oEvent){
             this.iCampaignId = oEvent.getParameter("arguments").CampaignId;
-            this.iCustomerId = oEvent.getParameter("arguments").CustomerId-1;
+            this.iCustomerId = oEvent.getParameter("arguments").CustomerId;
             var sItemBindingPath = "/Campaigns/"+this.iCampaignId+"/Customer/"+this.iCustomerId;
             console.log(sItemBindingPath);
             // Set Binding

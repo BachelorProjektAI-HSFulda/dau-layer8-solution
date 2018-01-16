@@ -136,10 +136,17 @@ sap.ui.define([
             var sPath = oItem.getBindingContext().getPath();
             var object = oItem.getModel().getProperty(sPath);
             //console.log(object.CampaignId);
+            var sPath = oItem.getBindingContext().getPath();
+
+            var iCustomerId = sPath.substr(22, 1);
+            console.log("customer id");
+            console.log(iCustomerId);
+            console.log("campaign id");
+            console.log(this.iCampaignId);
 
 			oRouter.navTo("CustomerDetail", {
                 CampaignId: this.iCampaignId,
-                CustomerId: object.CustomerId
+                CustomerId: iCustomerId
             });
         },
 
