@@ -45,6 +45,7 @@
                                 <RatingIndicator
                                     id="customerDetailRating"
                                     maxValue="5"
+                                    displayOnly="true"
                                     value="{Rating}"
                                     class="sapUiSmallMarginBottom"
                                     tooltip="{i18n>customerRating}" />
