@@ -189,6 +189,7 @@ sap.ui.define([
         },
 
         onSaveCampaign: function(oEvent){
+
             console.log(this.getView().getModel());
             var iCampaignId;
             var binding = this.getView().byId("campaignList").getBinding("items");
@@ -221,8 +222,27 @@ sap.ui.define([
 
             if(sCampaignName === null || sCampaignName === undefined || sCampaignName === ""  ||
                 sCampaignDesc === null || sCampaignDesc === undefined || sCampaignDesc === ""){
-                this.getView().byId("statusInformationCreateCampaign").setVisible(true);
+                // Not needed anymore
+                //this.getView().byId("statusInformationCreateCampaign").setVisible(true);
+                if(sCampaignName === null || sCampaignName === undefined || sCampaignName === ""){
+                    this.getView().byId("inputCampaignName").setValueState(sap.ui.core.ValueState.Error);
+                    this.getView().byId("inputCampaignName").setValueStateText(this.getResourceBundle().getText("pleaseEnterCampaignName"));
+                }  else {
+                    this.getView().byId("inputCampaignName").setValueState(sap.ui.core.ValueState.None);
+                }
+
+                if(sCampaignDesc === null || sCampaignDesc === undefined || sCampaignDesc === ""){
+                    this.getView().byId("inputCampaignDesc").setValueState(sap.ui.core.ValueState.Error);
+                    this.getView().byId("inputCampaignDesc").setValueStateText(this.getResourceBundle().getText("pleaseEnterDescription"));
+                } else {
+                    this.getView().byId("inputCampaignDesc").setValueState(sap.ui.core.ValueState.None);
+                    this.getView().byId("inputCampaignDesc").setValueStateText("");
+                }
             } else {
+                this.getView().byId("inputCampaignName").setValueState(sap.ui.core.ValueState.None);
+                this.getView().byId("inputCampaignName").setValueStateText("");
+                this.getView().byId("inputCampaignDesc").setValueState(sap.ui.core.ValueState.None);
+                this.getView().byId("inputCampaignDesc").setValueStateText("");
                 // Set data
                 oNewCampaignData.CampaignName = sCampaignName;
                 oNewCampaignData.Description = sCampaignDesc;

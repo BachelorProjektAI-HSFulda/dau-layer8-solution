@@ -280,8 +280,51 @@ sap.ui.define([
                 sCustomerName === null || sCustomerName === undefined || sCustomerName === "" ||
                 sCustomerTel === null || sCustomerTel === undefined || sCustomerTel === "" ||
                 sCustomerEMail === null || sCustomerEMail === undefined || sCustomerEMail === "" ){
-                this.getView().byId("statusInformationCreateCustomer").setVisible(true);
+                // Not needed anymore
+                //this.getView().byId("statusInformationCreateCustomer").setVisible(true);
+                if(sCustomerName === null || sCustomerName === undefined || sCustomerName === ""){
+                    this.getView().byId("inputCustomerName").setValueState(sap.ui.core.ValueState.Error);
+                    this.getView().byId("inputCustomerName").setValueStateText(this.getResourceBundle().getText("pleaseEnterCustomerName"));
+                } else {
+                    this.getView().byId("inputCustomerName").setValueState(sap.ui.core.ValueState.None);
+                    this.getView().byId("inputCustomerName").setValueStateText("");
+                }
+
+                if(sCustomerCompany === null || sCustomerCompany === undefined || sCustomerCompany === ""){
+                    this.getView().byId("inputCustomerCompany").setValueState(sap.ui.core.ValueState.Error);
+                    this.getView().byId("inputCustomerCompany").setValueStateText(this.getResourceBundle().getText("pleaseEnterCustomerCompany"));
+                } else {
+                    this.getView().byId("inputCustomerCompany").setValueState(sap.ui.core.ValueState.None);
+                    this.getView().byId("inputCustomerCompany").setValueStateText("");
+                }
+
+                if(sCustomerTel === null || sCustomerTel === undefined || sCustomerTel === ""){
+                    this.getView().byId("inputCustomerTel").setValueState(sap.ui.core.ValueState.Error);
+                    this.getView().byId("inputCustomerTel").setValueStateText(this.getResourceBundle().getText("pleaseEnterCustomerTel"));
+                } else {
+                    this.getView().byId("inputCustomerTel").setValueState(sap.ui.core.ValueState.None);
+                    this.getView().byId("inputCustomerTel").setValueStateText("");
+                }
+
+                if(sCustomerEMail === null || sCustomerEMail === undefined || sCustomerEMail === ""){
+                    this.getView().byId("inputCustomerEmail").setValueState(sap.ui.core.ValueState.Error);
+                    this.getView().byId("inputCustomerEmail").setValueStateText(this.getResourceBundle().getText("pleaseEnterCustomerEMail"));
+                } else {
+                    var n = sCustomerEMail.search("@");
+                    console.log(n);
+                    if(n  == "-1"){
+                        this.getView().byId("inputCustomerEmail").setValueState(sap.ui.core.ValueState.Error);
+                        this.getView().byId("inputCustomerEmail").setValueStateText(this.getResourceBundle().getText("pleaseEnterCustomerEMailFormat"));
+                    } else {
+                        this.getView().byId("inputCustomerEmail").setValueState(sap.ui.core.ValueState.None);
+                        this.getView().byId("inputCustomerEmail").setValueStateText("");
+                    }
+                }
             } else {
+                this.getView().byId("inputCustomerName").setValueState(sap.ui.core.ValueState.None);
+                this.getView().byId("inputCustomerCompany").setValueState(sap.ui.core.ValueState.None);
+                this.getView().byId("inputCustomerTel").setValueState(sap.ui.core.ValueState.None);
+                this.getView().byId("inputCustomerEmail").setValueState(sap.ui.core.ValueState.None);
                 // Set data
                 oNewCustomerData.CustomerName = sCustomerName;
                 oNewCustomerData.Company = sCustomerCompany;
