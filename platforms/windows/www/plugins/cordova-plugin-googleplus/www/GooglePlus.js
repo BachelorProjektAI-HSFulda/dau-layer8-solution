@@ -1,4 +1,4 @@
-﻿cordova.define("cordova-plugin-googleplus.GooglePlus", function(require, exports, module) {
+cordova.define("cordova-plugin-googleplus.GooglePlus", function(require, exports, module) {
 function GooglePlus() {
 }
 
