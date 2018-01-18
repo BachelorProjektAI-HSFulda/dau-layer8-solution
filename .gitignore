@@ -1,9 +1,12 @@
 platforms/
 bin/ 
 vs/
+vs/*
 package-lock.json
 config.xml
 /platforms/
+/platforms/*
 /platforms
 /bin/
+/bin/*
 /bin
