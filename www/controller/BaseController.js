@@ -48,7 +48,7 @@ sap.ui.define([
             var id = "78ee1msmy8l0qi";
             var	secret = "wEbSPMyWmE3PvuI9";
 
-            var sEmail = this.getEmail();
+            var sEmail = this.getEmail(oResponse);
 
             if(sEmail !== "" || sEmail !== undefined || sEmail !== null){
                 MessageBox.alert(
@@ -85,10 +85,10 @@ sap.ui.define([
          *
          */
         getEmail: function(oResponse){
-            var oResponse = new JSONModel();
-            oResponse.setData("data/response.json", "", false);
+            var oJSONResponse = new JSONModel();
+            oJSONResponse.setData(oResponse);
 
-            var sText = oResponse.getProperty("/responses/0/fullTextAnnotation/text");
+            var sText = oJSONResponse.getProperty("/responses/0/fullTextAnnotation/text");
 
             if(sText.includes("@") === true){
                  var n = sText.search("@");
@@ -363,7 +363,6 @@ sap.ui.define([
                 MessageToast.show('FileReader Error: ',oError.target.result);
             };
             reader.onloadend = function(fileObject) {
-                MessageToast.show(fileObject.target._result);
                 that.sendDataToGoogleVisionAPI(fileObject.target._result, $.proxy(that.requestLinkedInData, that));
             };
             reader.readAsDataURL(file);
