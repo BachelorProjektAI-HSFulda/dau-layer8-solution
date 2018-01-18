@@ -3,8 +3,9 @@ sap.ui.define([
     "jquery.sap.global",
     "sap/m/Button",
 	"sap/m/Dialog",
-	"sap/m/Text"
-], function (BaseController, JQuery, Button, Dialog, Text) {
+	"sap/m/Text",
+    "sap/m/MessageToast"
+], function (BaseController, JQuery, Button, Dialog, Text, MessageToast) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.CustomerDetail", {
@@ -45,58 +46,56 @@ sap.ui.define([
          * @public
          */
         exportCustomer: function(oEvent){
+            var aEmails = [];
+            var aPhoneNumbers = [];
+            var aOrganizations = [];
+            //phoneNumbers[0] = new ContactField('work', employee.officePhone, false);
             // Export Data from the view
             var oObjectHeaderCustomerDetail = this.getView().byId("objHeaderCustomerDetail");
             var sCustomerTitle = oObjectHeaderCustomerDetail.getTitle();
             var sCustomerCompany = oObjectHeaderCustomerDetail.getIntro();
-            var sCustomerTel = this.getView().byId("customerDetailTelephone");
-            var sCustomerEMail = this.getView().byId("customerDetailEMail");
-            var sCustomerNotes = this.getView().byId("textAreaCustomerDetailNotes");
+            var sCustomerTel = this.getView().byId("customerDetailTelephone").getText();
+            var sCustomerEMail = this.getView().byId("customerDetailEMail").getText();
+            var sCustomerNotes = this.getView().byId("textAreaCustomerDetailNotes").getValue();
+            // Set mobile Number to array
+            aPhoneNumbers[0] = new ContactField('mobile', sCustomerTel, true);
+            // Set email to array
+            aEmails[0] = new ContactField('work', sCustomerEMail, true);
+            // Set COmpany to array
+            aOrganizations = new ContactOrganization(false, '', sCustomerCompany, '', null);
+
             // Request Contact Object
-            var oNewContact = navigator.contacts.create({"displayName": sCustomerTitle });
+            var oNewContact = navigator.contacts.create({
+                "displayName": sCustomerTitle,
+                //"organizations": aOrganizations,
+                "emails": aEmails,
+                "phoneNumbers": aPhoneNumbers,
+                "notes": sCustomerNotes
+            });
 
-            if(sCustomerTel !== "" || sCustomerTel !== undefined){
-                oNewContact.phoneNumbers = sCustomerTel;
-            }
-
-            if(sCustomerCompany !== "" || sCustomerCompany !== undefined){
-                oNewContact.organizations = sCustomerCompany;
-            }
-
-            if(sCustomerEMail !== "" || sCustomerEMail !== undefined){
-                oNewContact.emails = sCustomerEMail;
-            }
-
-            if(sCustomerNotes !== "" || sCustomerNotes !== undefined){
-                oNewContact.note = sCustomerNotes;
-            }
-
-            console.log(oNewContact);
             // Save data to the phones file system
-            //oNewContact.save($.proxy(this.onContactSaveSuccess, this), $.proxy(this.onContactSaveError, this));
+            oNewContact.save($.proxy(this.onContactSaveSuccess, this), $.proxy(this.onContactSaveError, this));
         },
         /**
          * Error callback after contact was successfully saved
          * @public
          */
         onContactSaveSuccess: function(oSuccess){
-            console.log("onContactSaveSuccess");
-            console.log(oSuccess);
+            MessageToast.show(this.getResourceBundle().getText("contactExportSuccesfully"));
         },
         /**
          * Error callback after contact was not succesfully saved
          * @public
          */
         onContactSaveError: function(oError){
-            console.log("onContactSaveError");
-            console.log(oError);
+
         },
         /**
          * Edit Customer Data
          * @public
          */
         editCustomerData: function(){
-
+            MessageToast.show(this.getResourceBundle().getText("contactExportError"));
         }
 	});
 });

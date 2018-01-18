@@ -10,31 +10,31 @@
           "NSPhotoLibraryUsageDescription": [
             {
               "xml": "<string>This app needs access to your Photo Library to include a screenshot with feedback foo.</string>",
-              "count": 117
+              "count": 167
             }
           ],
           "NSCameraUsageDescription": [
             {
               "xml": "<string>need camera access to take pictures</string>",
-              "count": 117
+              "count": 167
             }
           ],
           "NSMicrophoneUsageDescription": [
             {
               "xml": "<string>need microphone access to record sounds</string>",
-              "count": 117
+              "count": 167
             }
           ],
           "NSPhotoLibraryUsageDescriptionentry": [
             {
               "xml": "<string>need to photo library access to get pictures from there</string>",
-              "count": 117
+              "count": 167
             }
           ],
           "NSPhotoLibraryAddUsageDescription": [
             {
               "xml": "<string>need access to photo library to save pircure there</string>",
-              "count": 117
+              "count": 167
             }
           ],
           "CFBundleURLTypes": [
@@ -72,7 +72,7 @@
             },
             {
               "xml": "<string>The app need access to your contacts please allow the usage.</string>",
-              "count": 66
+              "count": 116
             }
           ]
         }

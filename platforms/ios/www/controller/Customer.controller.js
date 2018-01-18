@@ -113,17 +113,21 @@ sap.ui.define([
          * @public
          */
         onToggleDeleteCustomer: function(){
-            var mode = this.getView().byId("customerList").getMode();
-            if(mode === "MultiSelect"){
-                this.getView().byId("idBtnDeleteCustomer").setVisible(false);
-                this.getView().byId("idBtnToggleDeleteCustomer").setIcon("sap-icon://delete");
-                mode = "None";
-            } else {
-                this.getView().byId("idBtnDeleteCustomer").setVisible(true);
-                this.getView().byId("idBtnToggleDeleteCustomer").setIcon("sap-icon://save");
-                mode = "MultiSelect";
+            var aItems = this.getView().byId("customerList").getItems();
+            console.log(aItems.length);
+            if(aItems.length !== 0){
+                var mode = this.getView().byId("customerList").getMode();
+                if(mode === "MultiSelect"){
+                    this.getView().byId("idBtnDeleteCustomer").setVisible(false);
+                    this.getView().byId("idBtnToggleDeleteCustomer").setIcon("sap-icon://delete");
+                    mode = "None";
+                } else {
+                    this.getView().byId("idBtnDeleteCustomer").setVisible(true);
+                    this.getView().byId("idBtnToggleDeleteCustomer").setIcon("sap-icon://save");
+                    mode = "MultiSelect";
+                }
+                this.getView().byId("customerList").setMode(mode);
             }
-			this.getView().byId("customerList").setMode(mode);
         },
 
 
@@ -311,8 +315,8 @@ sap.ui.define([
                     this.getView().byId("inputCustomerEmail").setValueStateText(this.getResourceBundle().getText("pleaseEnterCustomerEMail"));
                 } else {
                     var n = sCustomerEMail.search("@");
-                    console.log(n);
-                    if(n  == "-1"){
+                    console.log("chheck Email");
+                    if(n  === "-1"){
                         this.getView().byId("inputCustomerEmail").setValueState(sap.ui.core.ValueState.Error);
                         this.getView().byId("inputCustomerEmail").setValueStateText(this.getResourceBundle().getText("pleaseEnterCustomerEMailFormat"));
                     } else {
