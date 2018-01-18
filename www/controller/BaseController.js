@@ -45,6 +45,29 @@ sap.ui.define([
             xhr.send(data);
         },
 
+        handleGoogleData: function(){
+
+        },
+
+        doLinkedIN: function(){
+            var xhr = new XMLHttpRequest();
+            var data;
+            var id = "78ee1msmy8l0qi";
+            var	secret = "wEbSPMyWmE3PvuI9";
+            xhr.addEventListener("readystatechange", function(){
+                if (this.readyState === this.DONE) {
+                    MessageBox.alert(
+                        this.response,
+                        {
+                            styleClass: bCompact ? "sapUiSizeCompact" : ""
+                        }
+                    );
+	            }
+            });
+            xhr.send(data);
+
+        },
+
         getEMail: function(oResponse){
             var oJSONResponse = new JSONModel();
             oJSONResponse.getJSON(oResponse);
