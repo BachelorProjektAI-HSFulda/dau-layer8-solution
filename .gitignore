@@ -3,3 +3,7 @@ bin/
 vs/
 package-lock.json
 config.xml
+/platforms/
+/platforms
+/bin/
+/bin
