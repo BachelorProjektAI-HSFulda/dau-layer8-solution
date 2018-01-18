@@ -44,14 +44,6 @@ sap.ui.define([
             // Send data to the google vision api
             xhr.send(data);
         },
-
-        onTestJSONResponse: function(){
-            var oResponse = new JSONModel();
-            oResponse.loadData("data/response.json", "", false);
-
-            console.log(oResponse);
-
-<<<<<<< HEAD
         doLinkedIN: function(){
             var xhr = new XMLHttpRequest();
             var data;
@@ -70,11 +62,12 @@ sap.ui.define([
             xhr.open("GET", "https://api.linkedin.com/v2/people/(id:{person ID}")
 
             xhr.send(data);
-=======
-            var sText = oResponse.getProperty("/responses/0/fullTextAnnotation/text");
->>>>>>> BusinessCardApp/master
+        },
+        onTestJSONResponse: function(){
+            var oResponse = new JSONModel();
+            oResponse.loadData("data/response.json", "", false);
 
-            console.log(sText);
+            var sText = oResponse.getProperty("/responses/0/fullTextAnnotation/text");
 
             if(sText.include("@") === true){
 
