@@ -45,54 +45,19 @@ sap.ui.define([
             xhr.send(data);
         },
 
-        handleGoogleData: function(){
+        onTestJSONResponse: function(){
+            var oResponse = new JSONModel();
+            oResponse.loadData("data/response.json", "", false);
 
-        },
+            console.log(oResponse);
 
-        doLinkedIN: function(){
-            var xhr = new XMLHttpRequest();
-            var data;
-            var id = "78ee1msmy8l0qi";
-            var	secret = "wEbSPMyWmE3PvuI9";
-            xhr.addEventListener("readystatechange", function(){
-                if (this.readyState === this.DONE) {
-                    MessageBox.alert(
-                        this.response,
-                        {
-                            styleClass: bCompact ? "sapUiSizeCompact" : ""
-                        }
-                    );
-	            }
-            });
-            xhr.send(data);
+            var sText = oResponse.getProperty("/responses/0/fullTextAnnotation/text");
 
-        },
+            console.log(sText);
 
-        getEMail: function(oResponse){
-            var oJSONResponse = new JSONModel();
-            oJSONResponse.getJSON(oResponse);
-            var sText = oJSONResponse.getProperty("/responses/0/fullTextAnnotation/text");
+            if(sText.include("@") === true){
 
-            if(sText.includes("@") === true){
-                 var n = sText.search("@");
-                 var sNameText = sText.substring(0, n);
-                 for(var i = n-1; i > 0; i--){
-                     if(sNameText.substring(i, i+1) === " "){
-                         break;
-                     }
-                 }
-
-                 // Find Email Provider
-                 var sEmailProvider = sText.substring(n, sText.length);
-                 // Find end of email provider
-                 var y = sEmailProvider.search("\n");
-
-                 // Build email address
-                 sEmailProvider = sEmailProvider.substring(0, y);
-                 var sEmailName = sText.substring(i+1, n);
-                 var sEmail = sEmailName.concat(sEmailProvider);
-                 sText = sText.replace(sEmail, "");
-             }
+            }
             // Find EMail
             if(sText.includes("E-MAIL") === true){
                 var n = sText.search("E-MAIL");
@@ -101,14 +66,18 @@ sap.ui.define([
                 sText = sText.substring(n+1, sText.length);
                 n = sText.search(" ");
                 sText = sText.substring(0, n);
+                console.log(sText);
+                console.log(n);
             } else if(sText.includes("E-Mail") === true){
                 var n = sText.search("E-MAIL");
+                console.log(n);
             } else if(sText.includes("EMail") === true){
                 var n = sText.search("E-MAIL");
+                console.log(n);
             } else if(sText.includes("EMAIL") === true){
                 var n = sText.search("E-MAIL");
+                console.log(n);
             }
-            return sEmail;
         },
 
         /**

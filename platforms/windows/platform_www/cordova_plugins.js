@@ -293,14 +293,6 @@ module.exports = [
         "file": "plugins/cordova-plugin-contacts/src/windows/ContactProxy.js",
         "pluginId": "cordova-plugin-contacts",
         "runs": true
-    },
-    {
-        "id": "cordova-plugin-googleplus.GooglePlus",
-        "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
-        "pluginId": "cordova-plugin-googleplus",
-        "clobbers": [
-            "window.plugins.googleplus"
-        ]
     }
 ];
 module.exports.metadata =
@@ -311,8 +303,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-facebook": "0.2.2",
     "cordova-plugin-compat": "1.2.0",
-    "cordova-plugin-contacts": "2.3.1",
-    "cordova-plugin-googleplus": "5.1.1"
+    "cordova-plugin-contacts": "2.3.1"
 };
 // BOTTOM OF METADATA
 });
