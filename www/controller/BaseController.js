@@ -64,6 +64,8 @@ sap.ui.define([
                     );
 	            }
             });
+            xhr.open("GET", "https://api.linkedin.com/v2/people/(id:{person ID}")
+
             xhr.send(data);
 
         },
