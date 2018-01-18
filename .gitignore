@@ -1,0 +1,5 @@
+platforms/
+bin/ 
+vs/
+package-lock.json
+config.xml
