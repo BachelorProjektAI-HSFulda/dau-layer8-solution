@@ -8,5 +8,12 @@ config.xml
 /platforms/*
 /platforms
 /bin/
+<<<<<<< HEAD
 /bin/*
 /bin
+/node_modules/
+/node_modules
+node_modules
+/plugins/
+/plugins
+plugins
