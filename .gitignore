@@ -8,7 +8,6 @@ config.xml
 /platforms/*
 /platforms
 /bin/
-<<<<<<< HEAD
 /bin/*
 /bin
 /node_modules/
