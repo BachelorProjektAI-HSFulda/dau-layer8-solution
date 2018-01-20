@@ -7,36 +7,29 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
+    },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
+    },
     "cordova-plugin-facebook": {
       "FACEBOOK_APP_ID": "313753335786008",
       "FACEBOOK_DISPLAY_NAME": "BusinessCardApp",
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
     },
     "cordova-plugin-googleplus": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-custom-config": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-camera": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-contacts": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
     }
   },
-  "dependent_plugins": {
-    "cordova-plugin-compat": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    }
-  }
+  "dependent_plugins": {}
 }

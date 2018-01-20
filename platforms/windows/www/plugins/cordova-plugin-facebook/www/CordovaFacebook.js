@@ -1,4 +1,4 @@
-cordova.define("cordova-plugin-facebook.CordovaFacebook", function(require, exports, module) {
+﻿cordova.define("cordova-plugin-facebook.CordovaFacebook", function(require, exports, module) {
 var CordovaFacebook = (function() {
     var SERVICE = "CordovaFacebook";
     var EVENT = "event";

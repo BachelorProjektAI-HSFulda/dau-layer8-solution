@@ -38,6 +38,9 @@
     <feature name="Contacts">
         <param name="ios-package" value="CDVContacts" />
     </feature>
+    <feature name="Capture">
+        <param name="ios-package" value="CDVCapture" />
+    </feature>
     <name>BusinessCardApp</name>
     <description>
         Business Card App

@@ -12,24 +12,17 @@ sap.ui.define([
         /**
          * Init Google Vision api
          */
-        sendDataToGoogleVisionAPI: function(imageData){
+        sendDataToGoogleVisionAPI: function(imageData, fnRequestLinkedInData){
             // Init
             var xhr = new XMLHttpRequest();
-            var token = "AIzaSyAr5pmJ22gDjoall0ffQAxKlM28gNXR4kw";
+            var token = "AIzaSyBfMfxZyVWNNNk2T8WO8tn4Ss7_9GDo3eM";
             var n = imageData.search(",");
             imageData = imageData.substring(n+1, imageData.length);
             imageData = imageData.trim();
 
             xhr.addEventListener("readystatechange", function(){
                 if (this.readyState === this.DONE) {
-                    var oJSONRequestObject = new JSONModel();
-                    oJSONResponseObject.setData(this.response);
-                    MessageBox.alert(
-                        this.response,
-                        {
-                            styleClass: bCompact ? "sapUiSizeCompact" : ""
-                        }
-                    );
+                    fnRequestLinkedInData(this.response);
 	            }
             });
             // Build request data
@@ -45,39 +38,112 @@ sap.ui.define([
             xhr.send(data);
         },
 
-        onTestJSONResponse: function(){
-            var oResponse = new JSONModel();
-            oResponse.loadData("data/response.json", "", false);
-
-            console.log(oResponse);
-
-            var sText = oResponse.getProperty("/responses/0/fullTextAnnotation/text");
-
-            console.log(sText);
-
-            if(sText.include("@") === true){
-
+        /**
+         *
+         */
+        requestLinkedInData: function(oResponse){
+            var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+            var xhr = new XMLHttpRequest();
+            var data;
+            var id = "78ee1msmy8l0qi";
+            var	secret = "wEbSPMyWmE3PvuI9";
+            MessageBox.alert(
+                oResponse,
+                    {
+                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+                    }
+            );
+            var sEmail = this.getEmail(oResponse);
+            MessageBox.alert(
+                sEmail,
+                    {
+                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+                    }
+            );
+            if(sEmail !== "" || sEmail !== undefined || sEmail !== null){
+                MessageBox.alert(
+                    sEmail,
+                    {
+                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+                    }
+                );
+            } else {
+                MessageBox.alert(
+                    "No Email was found!",
+                    {
+                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+                    }
+                );
             }
-            // Find EMail
-            if(sText.includes("E-MAIL") === true){
-                var n = sText.search("E-MAIL");
-                sText = sText.substring(n, sText.length);
-                n = sText.search(" ");
-                sText = sText.substring(n+1, sText.length);
-                n = sText.search(" ");
-                sText = sText.substring(0, n);
-                console.log(sText);
-                console.log(n);
-            } else if(sText.includes("E-Mail") === true){
-                var n = sText.search("E-MAIL");
-                console.log(n);
-            } else if(sText.includes("EMail") === true){
-                var n = sText.search("E-MAIL");
-                console.log(n);
-            } else if(sText.includes("EMAIL") === true){
-                var n = sText.search("E-MAIL");
-                console.log(n);
+
+//            xhr.addEventListener("readystatechange", function(){
+//                if (this.readyState === this.DONE) {
+//                    MessageBox.alert(
+//                        this.response,
+//                        {
+//                            styleClass: bCompact ? "sapUiSizeCompact" : ""
+//                        }
+//                    );
+//	            }
+//            });
+//            xhr.open("GET", "https://api.linkedin.com/v2/people/(id:{person ID}")
+//
+//            xhr.send(data);
+        },
+
+        /**
+         *
+         */
+        getEmail: function(oResponse){
+            var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+            var oJSONResponse = new JSONModel();
+            oJSONResponse.setJSON(oResponse);
+
+            var sText = oJSONResponse.getProperty("/responses/0/fullTextAnnotation/text");
+            
+            MessageBox.alert(
+                sText,
+                    {
+                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+                    }
+            );
+            var testBitch = sText.includes("@");
+            MessageBox.alert(
+                testBitch,
+                    {
+                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+                    }
+            );
+            if(sText.includes("@") === true){
+                 var n = sText.search("@");
+                 var sNameText = sText.substring(0, n);
+                 for(var i = n-1; i > 0; i--){
+                     if(sNameText.substring(i, i+1) === " "){
+                         break;
+                     }
+                 }
+
+                 // Find Email Provider
+                 var sEmailProvider = sText.substring(n, sText.length);
+                 // Find end of email provider
+                 var y = sEmailProvider.search("\n");
+
+                 // Build email address
+                 sEmailProvider = sEmailProvider.substring(0, y);
+                 var sEmailName = sText.substring(i+1, n);
+                 var sEmail = sEmailName.concat(sEmailProvider);
+                 sText = sText.replace(sEmail, "");
             }
+            
+            
+            MessageBox.alert(
+                    sEmail,
+                    {
+                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+                    }
+                );
+            
+            return sEmail;
         },
 
         /**
@@ -330,8 +396,7 @@ sap.ui.define([
                 MessageToast.show('FileReader Error: ',oError.target.result);
             };
             reader.onloadend = function(fileObject) {
-                MessageToast.show(fileObject.target._result);
-                that.sendDataToGoogleVisionAPI(fileObject.target._result);
+                that.sendDataToGoogleVisionAPI(fileObject.target._result, $.proxy(that.requestLinkedInData, that));
             };
             reader.readAsDataURL(file);
         },

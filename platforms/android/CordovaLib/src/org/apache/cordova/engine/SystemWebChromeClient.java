@@ -26,7 +26,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -254,7 +253,7 @@ public class SystemWebChromeClient extends WebChromeClient {
             @Override
             public void onActivityResult(int requestCode, int resultCode, Intent intent) {
                 Uri result = intent == null || resultCode != Activity.RESULT_OK ? null : intent.getData();
-                Log.d(LOG_TAG, "Receive file chooser URL: " + result);
+                LOG.d(LOG_TAG, "Receive file chooser URL: " + result);
                 uploadMsg.onReceiveValue(result);
             }
         }, intent, FILECHOOSER_RESULTCODE);
@@ -269,12 +268,12 @@ public class SystemWebChromeClient extends WebChromeClient {
                 @Override
                 public void onActivityResult(int requestCode, int resultCode, Intent intent) {
                     Uri[] result = WebChromeClient.FileChooserParams.parseResult(resultCode, intent);
-                    Log.d(LOG_TAG, "Receive file chooser URL: " + result);
+                    LOG.d(LOG_TAG, "Receive file chooser URL: " + result);
                     filePathsCallback.onReceiveValue(result);
                 }
             }, intent, FILECHOOSER_RESULTCODE);
         } catch (ActivityNotFoundException e) {
-            Log.w("No activity found to handle file chooser intent.", e);
+            LOG.w("No activity found to handle file chooser intent.", e);
             filePathsCallback.onReceiveValue(null);
         }
         return true;
@@ -283,7 +282,7 @@ public class SystemWebChromeClient extends WebChromeClient {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onPermissionRequest(final PermissionRequest request) {
-        Log.d(LOG_TAG, "onPermissionRequest: " + Arrays.toString(request.getResources()));
+        LOG.d(LOG_TAG, "onPermissionRequest: " + Arrays.toString(request.getResources()));
         request.grant(request.getResources());
     }
 

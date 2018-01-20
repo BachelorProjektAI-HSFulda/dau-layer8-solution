@@ -78,10 +78,10 @@
     </plugin>
     <plugin name="cordova-custom-config" spec="^5.0.2" />
     <plugin name="cordova-plugin-camera" spec="^4.0.1" />
-    <plugin name="cordova-plugin-media-capture" spec="^3.0.1" />
     <plugin name="cordova-plugin-contacts" spec="^2.3.1">
         <variable name="CONTACTS_USAGE_DESCRIPTION" value=" " />
     </plugin>
+    <plugin name="cordova-plugin-media-capture" spec="^3.0.1" />
     <engine name="windows" spec="4.4.2" />
     <engine name="android" spec="^7.0.0" />
 </widget>

@@ -15,7 +15,7 @@ sap.ui.define([
         sendDataToGoogleVisionAPI: function(imageData, fnRequestLinkedInData){
             // Init
             var xhr = new XMLHttpRequest();
-            var token = "AIzaSyAr5pmJ22gDjoall0ffQAxKlM28gNXR4kw";
+            var token = "AIzaSyBfMfxZyVWNNNk2T8WO8tn4Ss7_9GDo3eM";
             var n = imageData.search(",");
             imageData = imageData.substring(n+1, imageData.length);
             imageData = imageData.trim();
@@ -47,9 +47,13 @@ sap.ui.define([
             var data;
             var id = "78ee1msmy8l0qi";
             var	secret = "wEbSPMyWmE3PvuI9";
-
+            MessageBox.alert(
+                oResponse,
+                    {
+                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+                    }
+            );
             var sEmail = this.getEmail(oResponse);
-
             if(sEmail !== "" || sEmail !== undefined || sEmail !== null){
                 MessageBox.alert(
                     sEmail,
@@ -85,11 +89,12 @@ sap.ui.define([
          *
          */
         getEmail: function(oResponse){
+            var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
             var oJSONResponse = new JSONModel();
-            oJSONResponse.setData(oResponse);
+            oJSONResponse.setJSON(oResponse);
 
             var sText = oJSONResponse.getProperty("/responses/0/fullTextAnnotation/text");
-
+         
             if(sText.includes("@") === true){
                  var n = sText.search("@");
                  var sNameText = sText.substring(0, n);
@@ -102,7 +107,7 @@ sap.ui.define([
                  // Find Email Provider
                  var sEmailProvider = sText.substring(n, sText.length);
                  // Find end of email provider
-                 var y = sEmailProvider.search(" ");
+                 var y = sEmailProvider.search("\n");
 
                  // Build email address
                  sEmailProvider = sEmailProvider.substring(0, y);
@@ -110,6 +115,14 @@ sap.ui.define([
                  var sEmail = sEmailName.concat(sEmailProvider);
                  sText = sText.replace(sEmail, "");
             }
+            
+//            MessageBox.alert(
+//                    sEmail,
+//                    {
+//                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+//                    }
+//            );
+            
             return sEmail;
         },
 

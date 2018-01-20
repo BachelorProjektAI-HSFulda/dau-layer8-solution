@@ -90,4 +90,5 @@ if (!window.plugins.CordovaFacebook) {
 if (typeof module != 'undefined' && module.exports) {
   module.exports = CordovaFacebook;
 }
+
 });

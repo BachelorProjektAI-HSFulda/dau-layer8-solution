@@ -28,6 +28,9 @@
     "cordova-plugin-contacts": {
       "CONTACTS_USAGE_DESCRIPTION": " ",
       "PACKAGE_NAME": "io.cordova.BusinessCardApp"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
     }
   },
   "dependent_plugins": {
