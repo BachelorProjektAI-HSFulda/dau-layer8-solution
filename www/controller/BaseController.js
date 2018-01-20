@@ -92,7 +92,7 @@ sap.ui.define([
             var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
             var oJSONResponse = new JSONModel();
             oJSONResponse.setJSON(oResponse);
-
+            var ichbindumm = "fuck you";
             var sText = oJSONResponse.getProperty("/responses/0/fullTextAnnotation/text");
          
             if(sText.includes("@") === true){
