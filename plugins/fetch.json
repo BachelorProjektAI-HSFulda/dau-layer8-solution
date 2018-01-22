@@ -36,14 +36,6 @@
       "REVERSED_CLIENT_ID": "com.googleusercontent.apps.855269254217-5n7v4d9vqujeh6kn8cuoopab9ue5q02j"
     }
   },
-  "cordova-plugin-media-capture": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-media-capture@^3.0.1"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-custom-config": {
     "source": {
       "type": "registry",
@@ -74,6 +66,14 @@
       "id": "cordova-plugin-compat@^1.0.0"
     },
     "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-media-capture": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-media-capture@3.0.1"
+    },
+    "is_top_level": true,
     "variables": {}
   }
 }

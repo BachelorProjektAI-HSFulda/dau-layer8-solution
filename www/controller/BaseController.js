@@ -69,20 +69,25 @@ sap.ui.define([
                     }
                 );
             }
+            //
+            var data = new FormData();
+            data.append("Client Secret", "wEbSPMyWmE3PvuI9");
 
-//            xhr.addEventListener("readystatechange", function(){
-//                if (this.readyState === this.DONE) {
-//                    MessageBox.alert(
-//                        this.response,
-//                        {
-//                            styleClass: bCompact ? "sapUiSizeCompact" : ""
-//                        }
-//                    );
-//	            }
-//            });
-//            xhr.open("GET", "https://api.linkedin.com/v2/people/(id:{person ID}")
-//
-//            xhr.send(data);
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+              if (this.readyState === 4) {
+                console.log(this.responseText);
+              }
+            });
+
+            xhr.open("POST", "https://api.linkedin.com/v2/clientAwareMemberHandles?q=handleString&handleString={tizian.cockx@gmail.com}");
+            xhr.setRequestHeader("Authorization", "Bearer AQVaOYViHbyYO8K6HN_D_1lY4aIqlFO7u7WRIMzDWRLd6F53aJ7F6utDk6ZgMjlxBB6aKKgoRkOHcbENsIcM4KdEfkhDcREkAOklRtY1t7vCLOfDK_-4kID4yBMlEagn4JzQD3BMGVY5S7jONHQ_sMjyrfRYCudzJFHhYfDHZAagRNODZyx-iCJvyd8-DLzQi3RVXCdWA0Stl-tsph8QUsHtyo1EK8gg8oYxvOiZTYd4Jbg4yUfMUEfTGubOZERa8BmMpdJIe5HNm8xUVcX9umwI2fJRnxVJuPKDoqqJhMoR6Y4rHmGmdnRpKOj6jjCVTayOE1HIl_DkyGIcbPpQGnkQHuC7EA");
+            xhr.setRequestHeader("Cache-Control", "no-cache");
+            xhr.setRequestHeader("Postman-Token", "7b436958-f103-5c86-b5db-3b83be1a0b99");
+
+            xhr.send(data);
         },
 
         /**

@@ -34,12 +34,12 @@
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.855269254217-5n7v4d9vqujeh6kn8cuoopab9ue5q02j"
       },
-      "cordova-plugin-media-capture": {},
       "cordova-custom-config": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-contacts": {
         "CONTACTS_USAGE_DESCRIPTION": " "
-      }
+      },
+      "cordova-plugin-media-capture": {}
     },
     "platforms": [
       "windows",

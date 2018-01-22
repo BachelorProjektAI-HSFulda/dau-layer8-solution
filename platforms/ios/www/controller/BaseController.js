@@ -54,12 +54,6 @@ sap.ui.define([
                     }
             );
             var sEmail = this.getEmail(oResponse);
-            MessageBox.alert(
-                sEmail,
-                    {
-                        styleClass: bCompact ? "sapUiSizeCompact" : ""
-                    }
-            );
             if(sEmail !== "" || sEmail !== undefined || sEmail !== null){
                 MessageBox.alert(
                     sEmail,
@@ -98,22 +92,9 @@ sap.ui.define([
             var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
             var oJSONResponse = new JSONModel();
             oJSONResponse.setJSON(oResponse);
-
+            var ichbindumm = "fuck you";
             var sText = oJSONResponse.getProperty("/responses/0/fullTextAnnotation/text");
-            
-            MessageBox.alert(
-                sText,
-                    {
-                        styleClass: bCompact ? "sapUiSizeCompact" : ""
-                    }
-            );
-            var testBitch = sText.includes("@");
-            MessageBox.alert(
-                testBitch,
-                    {
-                        styleClass: bCompact ? "sapUiSizeCompact" : ""
-                    }
-            );
+
             if(sText.includes("@") === true){
                  var n = sText.search("@");
                  var sNameText = sText.substring(0, n);
@@ -135,13 +116,12 @@ sap.ui.define([
                  sText = sText.replace(sEmail, "");
             }
             
-            
-            MessageBox.alert(
-                    sEmail,
-                    {
-                        styleClass: bCompact ? "sapUiSizeCompact" : ""
-                    }
-                );
+//            MessageBox.alert(
+//                    sEmail,
+//                    {
+//                        styleClass: bCompact ? "sapUiSizeCompact" : ""
+//                    }
+//            );
             
             return sEmail;
         },

@@ -29,6 +29,9 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.BusinessCardApp"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "io.cordova.BusinessCardApp"
     }
   },
   "dependent_plugins": {}

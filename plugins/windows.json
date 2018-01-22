@@ -15,9 +15,6 @@
     "cordova-plugin-googleplus": {
       "PACKAGE_NAME": "HelloCordova"
     },
-    "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
     "cordova-custom-config": {
       "PACKAGE_NAME": "HelloCordova"
     },
@@ -26,14 +23,17 @@
     },
     "cordova-plugin-contacts": {
       "PACKAGE_NAME": "HelloCordova"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "BusinessCardApp"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
     "cordova-plugin-compat": {
       "PACKAGE_NAME": "HelloCordova"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "BusinessCardApp"
     }
   }
 }
