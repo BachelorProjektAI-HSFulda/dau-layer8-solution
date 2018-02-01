@@ -16,9 +16,11 @@
                   showNavButton="true"
                   navButtonPress="onNavBack">
                 <headerContent>
+<!--
                     <Button
                         icon="sap-icon://mirrored-task-circle"
                         press="onTestJSONResponse" />
+-->
                     <Button
                         icon="sap-icon://settings"
                         press="handleSettingsPressed" />
