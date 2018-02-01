@@ -1,11 +1,12 @@
 sap.ui.define([
     "hs/fulda/customer/management/controller/BaseController",
     "jquery.sap.global",
+    "sap/ui/model/json/JSONModel",
     "sap/m/Button",
 	"sap/m/Dialog",
 	"sap/m/Text",
     "sap/m/MessageToast"
-], function (BaseController, JQuery, Button, Dialog, Text, MessageToast) {
+], function (BaseController, JQuery, JSONModel, Button, Dialog, Text, MessageToast) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.CustomerDetail", {
@@ -157,6 +158,11 @@ sap.ui.define([
          * @public
          */
         saveCustomer: function(oEvent){
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
+            this.getOwnerComponent().getModel().refresh(true);
+            // Destroy form
             this.oFormFragment.destroy(true);
             // Enable export Button
             this.getView().byId("btnExportCustomer").setVisible(true);
@@ -180,30 +186,6 @@ sap.ui.define([
             oSmartFormCustomerDetail.bindElement({
                 path: this.sItemBindingPath
             });
-            // Save Customer Data
-//             var oList = oEvent.getSource().getParent();
-//            this.editDialog = this.getView().byId("");
-//            // Read actual campaign object
-//            var oCampaign = this.getView().getModel().getProperty(oList.getSwipedItem().getBindingContextPath());
-//            console.log(oCampaign);
-//            var oCampaignData = new JSONModel(oCampaign);
-//            // Set binding mode
-//            oCampaignData.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-//
-//            if (!this.editDialog) {
-//				this.editDialog = sap.ui.xmlfragment("hs.fulda.customer.management.fragment.EditCampaign", this);
-//
-//				//to get access to the global model
-//				this.getView().addDependent(this.editDialog);
-//			}
-//            this.editDialog.setModel(oCampaignData);
-//            this.editDialog.bindElement("/");
-//            // toggle compact style
-//			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this.editDialog);
-//			this.editDialog.open();
-
-
-
         }
 	});
 });
