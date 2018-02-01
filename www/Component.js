@@ -28,8 +28,7 @@ sap.ui.define([
          * The app must exist in the memory on the phone
          */
         onResume: function(){
-            MessageToast.show("onResume");
-            console.log("onResume");
+
         },
         /**
          *
