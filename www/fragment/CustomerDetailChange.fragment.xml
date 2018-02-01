@@ -23,27 +23,24 @@
 			singleContainerFullSize="true" >
 			<f:content>
 				<Label text="{i18n>customerDetailCustomerName}" />
-				<Text id="idCustDtlCustomerNameChange" text="{CustomerName}" />
+				<Input id="idCustDtlCustomerNameChange" value="{CustomerName}" />
                 <Label text="{i18n>customerDetailCompany}" />
-				<Text id="idCustDtlCompanyChange" text="{Company}" />
+				<Input id="idCustDtlCompanyChange" value="{Company}" />
                 <Label text="{i18n>textCustomerDetailTelephone}" />
-				<Text id="idCustDtlTelephoneChange" text="{Telephone}" />
+				<Input id="idCustDtlTelephoneChange" value="{Telephone}" />
                 <Label text="{i18n>textCustomerDetailEMail}" />
-				<Text id="idCustDtlEMailChange" text="{EMail}" />
-<!--
+				<Input id="idCustDtlEMailChange" value="{EMail}" />
                 <RatingIndicator
                     id="customerDtlRatingChange"
                     maxValue="5"
-                    displayOnly="true"
                     value="{Rating}"
                     class="sapUiSmallMarginBottom"
                     tooltip="{i18n>customerRating}" />
                 <TextArea id="textAreaCustomerDtlNotesChange"
-                    enabled="false"
+                    enabled="true"
                     width="100%"
                     rows="4"
                     value="{Notes}" />
--->
 			</f:content>
 		</f:SimpleForm>
 	</VBox>

@@ -37,7 +37,8 @@
                     value="{Rating}"
                     class="sapUiSmallMarginBottom"
                     tooltip="{i18n>customerRating}" />
-                <TextArea id="textAreaCustomerDtlNotes"
+                <TextArea
+                    id="textAreaCustomerDtlNotes"
                     enabled="false"
                     width="100%"
                     rows="4"
