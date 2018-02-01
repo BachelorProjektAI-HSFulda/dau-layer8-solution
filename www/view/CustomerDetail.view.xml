@@ -19,6 +19,7 @@
                         press="editCustomerData" />
                 </headerContent>
                 <content>
+<!--
                     <ObjectHeader
                         id="objHeaderCustomerDetail"
                         responsive="true"
@@ -58,6 +59,7 @@
                               width="100%"
                               rows="4"
                               value="{Notes}" />
+-->
                 </content>
                 <footer>
                 <Toolbar>

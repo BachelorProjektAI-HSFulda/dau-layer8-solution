@@ -35,14 +35,14 @@ sap.ui.define([
             this.iCustomerId = oEvent.getParameter("arguments").CustomerId;
             this.sItemBindingPath = "/Campaigns/"+this.iCampaignId+"/Customer/"+this.iCustomerId;
             // Set Binding
-            var oObjectHeaderCustomerDetail = this.getView().byId("objHeaderCustomerDetail");
-            oObjectHeaderCustomerDetail.bindElement({
-                path: this.sItemBindingPath
-            });
-            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
-            oTextAreaCustomerDetailNotes.bindElement({
-                path: this.sItemBindingPath
-            });
+//            var oObjectHeaderCustomerDetail = this.getView().byId("objHeaderCustomerDetail");
+//            oObjectHeaderCustomerDetail.bindElement({
+//                path: this.sItemBindingPath
+//            });
+//            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
+//            oTextAreaCustomerDetailNotes.bindElement({
+//                path: this.sItemBindingPath
+//            });
 
             var oSmartFormCustomerDetail = this.getView().byId("formDisplayCustomerDetail");
             oSmartFormCustomerDetail.bindElement({
@@ -143,10 +143,10 @@ sap.ui.define([
 			oPage.insertContent(this.oFormFragment);
             oPage.setShowNavButton(true);
             // Bind data
-            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
-            oTextAreaCustomerDetailNotes.bindElement({
-                path: this.sItemBindingPath
-            });
+//            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
+//            oTextAreaCustomerDetailNotes.bindElement({
+//                path: this.sItemBindingPath
+//            });
 
             var oSmartFormCustomerDetail = this.getView().byId("formDisplayCustomerDetail");
             oSmartFormCustomerDetail.bindElement({
@@ -177,10 +177,10 @@ sap.ui.define([
 			oPage.insertContent(this.oFormFragment);
             oPage.setShowNavButton(true);
             // Bind data
-            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
-            oTextAreaCustomerDetailNotes.bindElement({
-                path: this.sItemBindingPath
-            });
+//            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
+//            oTextAreaCustomerDetailNotes.bindElement({
+//                path: this.sItemBindingPath
+//            });
 
             var oSmartFormCustomerDetail = this.getView().byId("formDisplayCustomerDetail");
             oSmartFormCustomerDetail.bindElement({
