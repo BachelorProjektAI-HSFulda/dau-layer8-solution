@@ -14,10 +14,12 @@
                 class="sapUiContentPadding" >
                 <headerContent>
                     <Button
+                        id="btnEditCustomer"
                         icon="sap-icon://edit"
                         press="editCustomerData" />
                 </headerContent>
                 <content>
+<!--
                     <ObjectHeader
                         id="objHeaderCustomerDetail"
                         responsive="true"
@@ -57,11 +59,14 @@
                               width="100%"
                               rows="4"
                               value="{Notes}" />
+-->
                 </content>
                 <footer>
                 <Toolbar>
                     <ToolbarSpacer/>
-                    <Button icon="sap-icon://upload" type="Accept" press="exportCustomer" />
+                    <Button id="btnExportCustomer" icon="sap-icon://upload" type="Accept" press="exportCustomer" />
+                    <Button id="btnSaveCustomer" visible="false" icon="sap-icon://save" text="{i18n>customerDetailBtnSave}" press="saveCustomer" />
+                    <Button id="btnCancelEditCustomer" visible="false" icon="sap-icon://sys-cancel" text="{i18n>customerDetailBtnCancel}" press="cancelEditCustomerData" />
                 </Toolbar>
             </footer>
         </Page>

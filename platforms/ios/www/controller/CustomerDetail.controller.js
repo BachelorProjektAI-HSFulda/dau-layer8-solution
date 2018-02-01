@@ -1,11 +1,12 @@
 sap.ui.define([
     "hs/fulda/customer/management/controller/BaseController",
     "jquery.sap.global",
+    "sap/ui/model/json/JSONModel",
     "sap/m/Button",
 	"sap/m/Dialog",
 	"sap/m/Text",
     "sap/m/MessageToast"
-], function (BaseController, JQuery, Button, Dialog, Text, MessageToast) {
+], function (BaseController, JQuery, JSONModel, Button, Dialog, Text, MessageToast) {
     "use strict";
 
     return BaseController.extend("hs.fulda.customer.management.controller.CustomerDetail", {
@@ -19,7 +20,10 @@ sap.ui.define([
 
             var oRouter = this.getRouter();
             oRouter.getRoute("CustomerDetail").attachPatternMatched(this._onObjectMatched, this);
-
+            // Set the initial form to be the display one
+            var oPage = this.getView().byId("pageShowCustomerDetail");
+            this.oFormFragment = sap.ui.xmlfragment(this.getView().getId(), "hs.fulda.customer.management.fragment.CustomerDetailDisplay");
+			oPage.insertContent(this.oFormFragment);
         },
 
         /**
@@ -29,16 +33,20 @@ sap.ui.define([
         _onObjectMatched: function(oEvent){
             this.iCampaignId = oEvent.getParameter("arguments").CampaignId;
             this.iCustomerId = oEvent.getParameter("arguments").CustomerId;
-            var sItemBindingPath = "/Campaigns/"+this.iCampaignId+"/Customer/"+this.iCustomerId;
-            console.log(sItemBindingPath);
+            this.sItemBindingPath = "/Campaigns/"+this.iCampaignId+"/Customer/"+this.iCustomerId;
             // Set Binding
-            var oObjectHeaderCustomerDetail = this.getView().byId("objHeaderCustomerDetail");
-            oObjectHeaderCustomerDetail.bindElement({
-                path: sItemBindingPath
-            });
-            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
-            oTextAreaCustomerDetailNotes.bindElement({
-                path: sItemBindingPath
+//            var oObjectHeaderCustomerDetail = this.getView().byId("objHeaderCustomerDetail");
+//            oObjectHeaderCustomerDetail.bindElement({
+//                path: this.sItemBindingPath
+//            });
+//            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
+//            oTextAreaCustomerDetailNotes.bindElement({
+//                path: this.sItemBindingPath
+//            });
+
+            var oSmartFormCustomerDetail = this.getView().byId("formDisplayCustomerDetail");
+            oSmartFormCustomerDetail.bindElement({
+                path: this.sItemBindingPath
             });
         },
         /**
@@ -94,8 +102,90 @@ sap.ui.define([
          * Edit Customer Data
          * @public
          */
-        editCustomerData: function(){
-            MessageToast.show(this.getResourceBundle().getText("contactExportError"));
+        editCustomerData: function(oEvent){
+            this.oFormFragment.destroy(true);
+
+            // Disable export Button
+            this.getView().byId("btnExportCustomer").setVisible(false);
+            this.getView().byId("btnEditCustomer").setVisible(false);
+            // ENable edit Buttons
+            this.getView().byId("btnSaveCustomer").setVisible(true);
+            this.getView().byId("btnCancelEditCustomer").setVisible(true);
+            // Show edit view
+            var oPage = this.getView().byId("pageShowCustomerDetail");
+            this.oFormFragment = sap.ui.xmlfragment(this.getView().getId(), "hs.fulda.customer.management.fragment.CustomerDetailChange");
+			oPage.removeAllContent();
+			oPage.insertContent(this.oFormFragment);
+            oPage.setShowNavButton(false);
+            var oSmartFormCustomerDetailChange = this.getView().byId("formDisplayCustomerDetailChange");
+            oSmartFormCustomerDetailChange.bindElement({
+                path: this.sItemBindingPath
+            });
+        },
+        /**
+         * Edit Customer Data
+         * @public
+         */
+        cancelEditCustomerData: function(oEvent){
+            this.oFormFragment.destroy(true);
+            var oSource = oEvent.getSource();
+
+            // Enable export Button
+            this.getView().byId("btnExportCustomer").setVisible(true);
+            this.getView().byId("btnEditCustomer").setVisible(true);
+            // Disable edit Buttons
+            this.getView().byId("btnSaveCustomer").setVisible(false);
+            this.getView().byId("btnCancelEditCustomer").setVisible(false);
+            // Show display view
+            var oPage = this.getView().byId("pageShowCustomerDetail");
+            this.oFormFragment = sap.ui.xmlfragment(this.getView().getId(), "hs.fulda.customer.management.fragment.CustomerDetailDisplay");
+			oPage.removeAllContent();
+			oPage.insertContent(this.oFormFragment);
+            oPage.setShowNavButton(true);
+            // Bind data
+//            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
+//            oTextAreaCustomerDetailNotes.bindElement({
+//                path: this.sItemBindingPath
+//            });
+
+            var oSmartFormCustomerDetail = this.getView().byId("formDisplayCustomerDetail");
+            oSmartFormCustomerDetail.bindElement({
+                path: this.sItemBindingPath
+            });
+        },
+        /**
+         * Save Customer Data
+         * @public
+         */
+        saveCustomer: function(oEvent){
+            // Save Data persistent
+            var JSONData = this.getView().getModel().getJSON();
+            this.saveData(JSONData);
+            this.getOwnerComponent().getModel().refresh(true);
+            // Destroy form
+            this.oFormFragment.destroy(true);
+            // Enable export Button
+            this.getView().byId("btnExportCustomer").setVisible(true);
+            this.getView().byId("btnEditCustomer").setVisible(true);
+            // Disable edit Buttons
+            this.getView().byId("btnSaveCustomer").setVisible(false);
+            this.getView().byId("btnCancelEditCustomer").setVisible(false);
+            // Show display view
+            var oPage = this.getView().byId("pageShowCustomerDetail");
+            this.oFormFragment = sap.ui.xmlfragment(this.getView().getId(), "hs.fulda.customer.management.fragment.CustomerDetailDisplay");
+			oPage.removeAllContent();
+			oPage.insertContent(this.oFormFragment);
+            oPage.setShowNavButton(true);
+            // Bind data
+//            var oTextAreaCustomerDetailNotes = this.getView().byId("textAreaCustomerDetailNotes");
+//            oTextAreaCustomerDetailNotes.bindElement({
+//                path: this.sItemBindingPath
+//            });
+
+            var oSmartFormCustomerDetail = this.getView().byId("formDisplayCustomerDetail");
+            oSmartFormCustomerDetail.bindElement({
+                path: this.sItemBindingPath
+            });
         }
 	});
 });

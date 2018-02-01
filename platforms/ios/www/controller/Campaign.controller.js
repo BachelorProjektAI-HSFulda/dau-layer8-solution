@@ -248,9 +248,7 @@ sap.ui.define([
                 oNewCampaignData.Description = sCampaignDesc;
 
                 if(iCampaignId === 1){
-                    console.log(this.getView().getModel());
                     var bValueSet = oModel.setProperty("/Campaigns");
-                      console.log(this.getView().getModel());
                     //if(bValueSet === true){
                         var aCampaigns = [];
                     //}
@@ -259,7 +257,6 @@ sap.ui.define([
                 }
                 // Push data to array
                 aCampaigns.push(oNewCampaignData);
-                console.log(this.getView().getModel());
                 // Check status
                 var bResponse = oModel.setProperty("/Campaigns", aCampaigns);
                 // Error handling

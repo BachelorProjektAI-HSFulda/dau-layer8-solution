@@ -37,7 +37,7 @@ sap.ui.define([
 
         DataManager.getFile = function(fileSystem, fnSuccess, fnError, mParameters){
             // BusinessCardAppData6
-            fileSystem.root.getFile("BusinessCardAppData.txt", mParameters, fnSuccess, fnError);
+            fileSystem.root.getFile("BusinessCardAppDataPersistent.txt", mParameters, fnSuccess, fnError);
         };
 
         DataManager.getImageFile = function(fnSuccess, fnError, sPath){
