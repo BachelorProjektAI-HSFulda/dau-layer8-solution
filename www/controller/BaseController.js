@@ -97,7 +97,7 @@ sap.ui.define([
             var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
             var oJSONResponse = new JSONModel();
             oJSONResponse.setJSON(oResponse);
-            var ichbindumm = "fuck you";
+
             var sText = oJSONResponse.getProperty("/responses/0/fullTextAnnotation/text");
          
             if(sText.includes("@") === true){
@@ -368,14 +368,14 @@ sap.ui.define([
          * @public
          */
         getImageFileSuccess: function(fileEntry){
-            MessageToast.show("getImageFileSuccess");
+            //MessageToast.show("getImageFileSuccess");
             fileEntry.file($.proxy(this.readFile, this), $.proxy(this.getFileError, this));
         },
 
         readFile: function(file){
             var that = this;
 
-            MessageToast.show('got file...',file);
+            //MessageToast.show('got file...',file);
             var reader = new window.FileReader();
             reader.oneerror = function(oError){
                 MessageToast.show('FileReader Error: ',oError.target.result);

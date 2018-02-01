@@ -288,7 +288,7 @@ sap.ui.define([
         },
 
         _refresh: function(sChannelId, sEventId, json){
-            MessageToast.show("_refresh");
+            //MessageToast.show("_refresh");
             var oModel = new JSONModel();
             // Set data to the model
             oModel.setData(json);
