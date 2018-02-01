@@ -40,6 +40,11 @@ sap.ui.define([
             oTextAreaCustomerDetailNotes.bindElement({
                 path: sItemBindingPath
             });
+
+            var oSmartFormCustomerDetail = this.getView().byId("formDisplayCustomerDetail");
+            oSmartFormCustomerDetail.bindElement({
+                path: sItemBindingPath
+            });
         },
         /**
          * This method exports the customer data to the file System as a contact
@@ -95,7 +100,10 @@ sap.ui.define([
          * @public
          */
         editCustomerData: function(){
-            MessageToast.show(this.getResourceBundle().getText("contactExportError"));
+            var oPage = this.getView().byId("pageShowCustomerDetail");
+            var oFormFragment = sap.ui.xmlfragment(this.getView().getId(), "hs.fulda.customer.management.fragment.CustomerDetailChange");
+			oPage.removeAllContent();
+			oPage.insertContent(oFormFragment);
         }
 	});
 });

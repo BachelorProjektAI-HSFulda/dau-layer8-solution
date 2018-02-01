@@ -1,0 +1,50 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="formDisplayCustomerDetailChange"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="{i18n>customerDetailHeaderTitle}"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="true" >
+			<f:content>
+				<Label text="{i18n>customerDetailCustomerName}" />
+				<Text id="idCustDtlCustomerNameChange" text="{CustomerName}" />
+                <Label text="{i18n>customerDetailCompany}" />
+				<Text id="idCustDtlCompanyChange" text="{Company}" />
+                <Label text="{i18n>textCustomerDetailTelephone}" />
+				<Text id="idCustDtlTelephoneChange" text="{Telephone}" />
+                <Label text="{i18n>textCustomerDetailEMail}" />
+				<Text id="idCustDtlEMailChange" text="{EMail}" />
+<!--
+                <RatingIndicator
+                    id="customerDtlRatingChange"
+                    maxValue="5"
+                    displayOnly="true"
+                    value="{Rating}"
+                    class="sapUiSmallMarginBottom"
+                    tooltip="{i18n>customerRating}" />
+                <TextArea id="textAreaCustomerDtlNotesChange"
+                    enabled="false"
+                    width="100%"
+                    rows="4"
+                    value="{Notes}" />
+-->
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</core:FragmentDefinition>

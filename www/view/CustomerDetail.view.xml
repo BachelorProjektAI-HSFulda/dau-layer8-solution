@@ -18,6 +18,7 @@
                         press="editCustomerData" />
                 </headerContent>
                 <content>
+                    <core:Fragment fragmentName="hs.fulda.customer.management.fragment.CustomerDetailDisplay" type="XML" />
                     <ObjectHeader
                         id="objHeaderCustomerDetail"
                         responsive="true"
